@@ -1,0 +1,24 @@
+schema_version: 1
+status: awaiting_training_and_freeze
+frozen: false
+supervisor_approval:
+  approved: false
+  confirmed_by: null
+  confirmed_at: null
+  evidence: null
+base_config: 01_configs/01_base.yaml
+selected_lambda: null
+baseline_run: null
+models: []
+detectors: []
+thresholds: []
+evaluation:
+  bootstrap_iterations: 1000
+  bootstrap_seed: 20261024
+  bootstrap_samples_per_intent: 30
+  case_seed: 20261024
+  cases_per_category: 5
+optional_analyses:
+  domain_head_score: false
+  representation_visualization: false
+  oos_false_acceptance_destinations: true

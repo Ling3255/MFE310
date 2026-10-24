@@ -1,0 +1,37 @@
+normalization,category,split_a,split_b,unique_text_count,sample_pair_count,definition
+exact,all_duplicates,,,5,5,unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs.
+exact,cross_split,,,5,5,unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs.
+exact,label_conflicts,,,4,4,unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs.
+exact,cross_split_pair,train,val,3,3,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,train,test,2,2,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,train,oos_train,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,train,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,train,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,val,test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,val,oos_train,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,val,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,val,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,test,oos_train,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,test,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,test,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,oos_train,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,oos_train,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+exact,cross_split_pair,oos_val,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,all_duplicates,,,5,5,unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs.
+normalized,cross_split,,,5,5,unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs.
+normalized,label_conflicts,,,4,4,unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs.
+normalized,cross_split_pair,train,val,3,3,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,train,test,2,2,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,train,oos_train,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,train,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,train,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,val,test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,val,oos_train,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,val,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,val,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,test,oos_train,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,test,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,test,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,oos_train,oos_val,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,oos_train,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.
+normalized,cross_split_pair,oos_val,oos_test,0,0,Unique normalized keys and cross-split sample pairs for this split pair.

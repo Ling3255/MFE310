@@ -1,0 +1,7 @@
+split,count,max_length,tokenizer,word_mean,word_median,word_min,word_p95,word_max,bert_token_mean,bert_token_median,bert_token_min,bert_token_p95,bert_token_max,truncated_count,truncated_rate
+train,15000,64,google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594,8.379533333333333,8.0,1,14.0,28,11.0378,11.0,3,18.0,33,0,0.0
+val,3000,64,google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594,8.353666666666667,8.0,1,15.0,24,10.968333333333334,11.0,3,18.0,29,0,0.0
+test,4500,64,google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594,8.254444444444445,8.0,0,14.0,26,10.875777777777778,10.0,3,17.0,30,0,0.0
+oos_train,100,64,google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594,7.16,7.0,3,11.0,13,9.69,9.0,5,15.0,17,0,0.0
+oos_val,100,64,google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594,7.15,7.0,1,11.0,21,9.8,10.0,5,14.0,25,0,0.0
+oos_test,1000,64,google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594,8.831,8.5,1,14.0,20,11.47,11.0,3,17.0,23,0,0.0

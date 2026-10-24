@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "created_at": "2026-10-24T05:20:20.600678+00:00",
+  "model": "B0",
+  "selected_c": 100.0,
+  "best_val_macro_f1": 0.9045304077057987,
+  "config_hash": "8a06222d73a3ae51b0d393e7fcedef90ac963da7777b81906ae8b5e9c573376c",
+  "data_hash": "6e20f708ceca216962eb553aaadf9eb4fa815470699f959bdea23e6cf320fb2e",
+  "checkpoint_hash": "e58cb9542b9018c4c5cd4586696d56e56a8e4c22b553b068bb2376cbda5d4382",
+  "convergence": {
+    "0.1": [],
+    "1.0": [],
+    "10.0": [],
+    "100.0": []
+  },
+  "run_dir": "G:\\MFE310\\mfe310code\\08_runs\\baseline_tfidf_lr",
+  "domain_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}

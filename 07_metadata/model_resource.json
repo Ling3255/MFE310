@@ -1,0 +1,10 @@
+{
+  "model_id": "google-bert/bert-base-uncased",
+  "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+  "source": "https://huggingface.co/google-bert/bert-base-uncased",
+  "license": "Apache-2.0",
+  "license_url": "https://www.apache.org/licenses/LICENSE-2.0",
+  "metadata_verified_at": "2026-10-24",
+  "local_resource_status": "Tokenizer files acquired at the pinned revision; formal pretrained weights have not been used for training in this implementation pass.",
+  "note": "Model licensing is recorded separately from the CLINC150 CC BY 3.0 data license. Checkpoint redistribution requires a separate review."
+}

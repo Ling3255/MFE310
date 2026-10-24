@@ -1,0 +1,19 @@
+base_config: 01_configs/01_base.yaml
+lambda_grid: [0.0, 0.1, 0.3, 0.5, 1.0]
+seeds: [0, 1, 2]
+selection:
+  tolerance: 0.002
+  metric: macro_f1
+runs_dir: 08_runs
+validation_results_dir: 09_results/01_validation
+frozen_config: 01_configs/04_frozen.yaml
+freeze_record: 00_docs/01_freeze_record.md
+supervisor_approval:
+  approved: false
+  confirmed_by: null
+  confirmed_at: null
+  evidence: null
+optional_analyses:
+  domain_head_score: false
+  representation_visualization: false
+  oos_false_acceptance_destinations: true

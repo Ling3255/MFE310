@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-24T05:19:20.589368+00:00",
+  "imports": {
+    "numpy": "ok",
+    "pandas": "ok",
+    "sklearn": "ok",
+    "torch": "ok",
+    "transformers": "ok",
+    "yaml": "ok",
+    "matplotlib": "ok",
+    "seaborn": "ok",
+    "joblib": "ok"
+  },
+  "data_files": {
+    "data_full.json": true,
+    "domains.json": true
+  },
+  "output_writable": true,
+  "environment": {
+    "created_at": "2026-10-24T05:19:20.597515+00:00",
+    "python": "3.11.15 (main, Apr 14 2026, 14:31:26) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "torch": "2.14.1",
+      "transformers": "4.57.6",
+      "scikit-learn": "1.9.1",
+      "numpy": "2.4.6",
+      "pandas": "2.3.3",
+      "scipy": "1.17.1",
+      "matplotlib": "3.11.2",
+      "seaborn": "0.13.2",
+      "PyYAML": "6.0.3",
+      "pytest": "8.4.2",
+      "joblib": "1.6.0"
+    },
+    "torch": {
+      "cuda_available": false,
+      "cuda_version": null,
+      "cudnn_version": null,
+      "devices": []
+    }
+  }
+}

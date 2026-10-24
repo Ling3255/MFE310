@@ -1,0 +1,570 @@
+{
+  "duplicate_policy": "Official splits and text remain unchanged; overlap removal is sensitivity analysis only.",
+  "duplicates": [
+    {
+      "normalization": "exact",
+      "category": "all_duplicates",
+      "split_a": "",
+      "split_b": "",
+      "unique_text_count": 5,
+      "sample_pair_count": 5,
+      "definition": "unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split",
+      "split_a": "",
+      "split_b": "",
+      "unique_text_count": 5,
+      "sample_pair_count": 5,
+      "definition": "unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs."
+    },
+    {
+      "normalization": "exact",
+      "category": "label_conflicts",
+      "split_a": "",
+      "split_b": "",
+      "unique_text_count": 4,
+      "sample_pair_count": 4,
+      "definition": "unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "val",
+      "unique_text_count": 3,
+      "sample_pair_count": 3,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "test",
+      "unique_text_count": 2,
+      "sample_pair_count": 2,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "oos_train",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "oos_train",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "test",
+      "split_b": "oos_train",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "test",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "test",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "oos_train",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "oos_train",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "exact",
+      "category": "cross_split_pair",
+      "split_a": "oos_val",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "all_duplicates",
+      "split_a": "",
+      "split_b": "",
+      "unique_text_count": 5,
+      "sample_pair_count": 5,
+      "definition": "unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split",
+      "split_a": "",
+      "split_b": "",
+      "unique_text_count": 5,
+      "sample_pair_count": 5,
+      "definition": "unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs."
+    },
+    {
+      "normalization": "normalized",
+      "category": "label_conflicts",
+      "split_a": "",
+      "split_b": "",
+      "unique_text_count": 4,
+      "sample_pair_count": 4,
+      "definition": "unique_text_count counts duplicated text keys; sample_pair_count counts unordered sample pairs."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "val",
+      "unique_text_count": 3,
+      "sample_pair_count": 3,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "test",
+      "unique_text_count": 2,
+      "sample_pair_count": 2,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "oos_train",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "train",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "oos_train",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "val",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "test",
+      "split_b": "oos_train",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "test",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "test",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "oos_train",
+      "split_b": "oos_val",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "oos_train",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    },
+    {
+      "normalization": "normalized",
+      "category": "cross_split_pair",
+      "split_a": "oos_val",
+      "split_b": "oos_test",
+      "unique_text_count": 0,
+      "sample_pair_count": 0,
+      "definition": "Unique normalized keys and cross-split sample pairs for this split pair."
+    }
+  ],
+  "length_stats": [
+    {
+      "split": "train",
+      "count": 15000,
+      "max_length": 64,
+      "tokenizer": "google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594",
+      "word_mean": 8.379533333333333,
+      "word_median": 8.0,
+      "word_min": 1,
+      "word_p95": 14.0,
+      "word_max": 28,
+      "bert_token_mean": 11.0378,
+      "bert_token_median": 11.0,
+      "bert_token_min": 3,
+      "bert_token_p95": 18.0,
+      "bert_token_max": 33,
+      "truncated_count": 0,
+      "truncated_rate": 0.0
+    },
+    {
+      "split": "val",
+      "count": 3000,
+      "max_length": 64,
+      "tokenizer": "google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594",
+      "word_mean": 8.353666666666667,
+      "word_median": 8.0,
+      "word_min": 1,
+      "word_p95": 15.0,
+      "word_max": 24,
+      "bert_token_mean": 10.968333333333334,
+      "bert_token_median": 11.0,
+      "bert_token_min": 3,
+      "bert_token_p95": 18.0,
+      "bert_token_max": 29,
+      "truncated_count": 0,
+      "truncated_rate": 0.0
+    },
+    {
+      "split": "test",
+      "count": 4500,
+      "max_length": 64,
+      "tokenizer": "google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594",
+      "word_mean": 8.254444444444445,
+      "word_median": 8.0,
+      "word_min": 0,
+      "word_p95": 14.0,
+      "word_max": 26,
+      "bert_token_mean": 10.875777777777778,
+      "bert_token_median": 10.0,
+      "bert_token_min": 3,
+      "bert_token_p95": 17.0,
+      "bert_token_max": 30,
+      "truncated_count": 0,
+      "truncated_rate": 0.0
+    },
+    {
+      "split": "oos_train",
+      "count": 100,
+      "max_length": 64,
+      "tokenizer": "google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594",
+      "word_mean": 7.16,
+      "word_median": 7.0,
+      "word_min": 3,
+      "word_p95": 11.0,
+      "word_max": 13,
+      "bert_token_mean": 9.69,
+      "bert_token_median": 9.0,
+      "bert_token_min": 5,
+      "bert_token_p95": 15.0,
+      "bert_token_max": 17,
+      "truncated_count": 0,
+      "truncated_rate": 0.0
+    },
+    {
+      "split": "oos_val",
+      "count": 100,
+      "max_length": 64,
+      "tokenizer": "google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594",
+      "word_mean": 7.15,
+      "word_median": 7.0,
+      "word_min": 1,
+      "word_p95": 11.0,
+      "word_max": 21,
+      "bert_token_mean": 9.8,
+      "bert_token_median": 10.0,
+      "bert_token_min": 5,
+      "bert_token_p95": 14.0,
+      "bert_token_max": 25,
+      "truncated_count": 0,
+      "truncated_rate": 0.0
+    },
+    {
+      "split": "oos_test",
+      "count": 1000,
+      "max_length": 64,
+      "tokenizer": "google-bert/bert-base-uncased@86b5e0934494bd15c9632b12f734a8a67f723594",
+      "word_mean": 8.831,
+      "word_median": 8.5,
+      "word_min": 1,
+      "word_p95": 14.0,
+      "word_max": 20,
+      "bert_token_mean": 11.47,
+      "bert_token_median": 11.0,
+      "bert_token_min": 3,
+      "bert_token_p95": 17.0,
+      "bert_token_max": 23,
+      "truncated_count": 0,
+      "truncated_rate": 0.0
+    }
+  ],
+  "candidate_confusion_count": 16,
+  "candidate_confusion_basis": "Predeclared label semantics with train/val presence checks; no test predictions or examples used.",
+  "word_rule": "Lowercase contiguous English letter sequences: [a-z]+ after case folding.",
+  "jaccard_definition": "Train-only domain word sets; J(A,B)=|A intersection B|/|A union B|.",
+  "domain_jaccard": {
+    "auto_and_commute": {
+      "auto_and_commute": 1.0,
+      "banking": 0.22320819112627988,
+      "credit_cards": 0.21031207598371776,
+      "home": 0.17799158147925437,
+      "kitchen_and_dining": 0.1841680129240711,
+      "meta": 0.15384615384615385,
+      "small_talk": 0.1617946974847043,
+      "travel": 0.22287735849056603,
+      "utility": 0.16934487021013597,
+      "work": 0.2243542435424354
+    },
+    "banking": {
+      "auto_and_commute": 0.22320819112627988,
+      "banking": 1.0,
+      "credit_cards": 0.27232142857142855,
+      "home": 0.1885245901639344,
+      "kitchen_and_dining": 0.13758029978586725,
+      "meta": 0.16767371601208458,
+      "small_talk": 0.16785714285714284,
+      "travel": 0.17647058823529413,
+      "utility": 0.16389244558258642,
+      "work": 0.2460691823899371
+    },
+    "credit_cards": {
+      "auto_and_commute": 0.21031207598371776,
+      "banking": 0.27232142857142855,
+      "credit_cards": 1.0,
+      "home": 0.17092950717404864,
+      "kitchen_and_dining": 0.14742547425474256,
+      "meta": 0.16515151515151516,
+      "small_talk": 0.16214285714285714,
+      "travel": 0.2007233273056058,
+      "utility": 0.15286624203821655,
+      "work": 0.24271079590228525
+    },
+    "home": {
+      "auto_and_commute": 0.17799158147925437,
+      "banking": 0.1885245901639344,
+      "credit_cards": 0.17092950717404864,
+      "home": 1.0,
+      "kitchen_and_dining": 0.1628614916286149,
+      "meta": 0.15665091154625252,
+      "small_talk": 0.15661103979460847,
+      "travel": 0.14899257688229056,
+      "utility": 0.16014026884862653,
+      "work": 0.20578114246386786
+    },
+    "kitchen_and_dining": {
+      "auto_and_commute": 0.1841680129240711,
+      "banking": 0.13758029978586725,
+      "credit_cards": 0.14742547425474256,
+      "home": 0.1628614916286149,
+      "kitchen_and_dining": 1.0,
+      "meta": 0.12305922944220817,
+      "small_talk": 0.12013165112452003,
+      "travel": 0.17128953771289537,
+      "utility": 0.13927291346646187,
+      "work": 0.16151603498542275
+    },
+    "meta": {
+      "auto_and_commute": 0.15384615384615385,
+      "banking": 0.16767371601208458,
+      "credit_cards": 0.16515151515151516,
+      "home": 0.15665091154625252,
+      "kitchen_and_dining": 0.12305922944220817,
+      "meta": 1.0,
+      "small_talk": 0.19233903830480847,
+      "travel": 0.13610938471100062,
+      "utility": 0.15266106442577032,
+      "work": 0.18540268456375839
+    },
+    "small_talk": {
+      "auto_and_commute": 0.1617946974847043,
+      "banking": 0.16785714285714284,
+      "credit_cards": 0.16214285714285714,
+      "home": 0.15661103979460847,
+      "kitchen_and_dining": 0.12013165112452003,
+      "meta": 0.19233903830480847,
+      "small_talk": 1.0,
+      "travel": 0.15412402167369055,
+      "utility": 0.14672835426305353,
+      "work": 0.17619420516836334
+    },
+    "travel": {
+      "auto_and_commute": 0.22287735849056603,
+      "banking": 0.17647058823529413,
+      "credit_cards": 0.2007233273056058,
+      "home": 0.14899257688229056,
+      "kitchen_and_dining": 0.17128953771289537,
+      "meta": 0.13610938471100062,
+      "small_talk": 0.15412402167369055,
+      "travel": 1.0,
+      "utility": 0.15894039735099338,
+      "work": 0.19068877551020408
+    },
+    "utility": {
+      "auto_and_commute": 0.16934487021013597,
+      "banking": 0.16389244558258642,
+      "credit_cards": 0.15286624203821655,
+      "home": 0.16014026884862653,
+      "kitchen_and_dining": 0.13927291346646187,
+      "meta": 0.15266106442577032,
+      "small_talk": 0.14672835426305353,
+      "travel": 0.15894039735099338,
+      "utility": 1.0,
+      "work": 0.18829337094499296
+    },
+    "work": {
+      "auto_and_commute": 0.2243542435424354,
+      "banking": 0.2460691823899371,
+      "credit_cards": 0.24271079590228525,
+      "home": 0.20578114246386786,
+      "kitchen_and_dining": 0.16151603498542275,
+      "meta": 0.18540268456375839,
+      "small_talk": 0.17619420516836334,
+      "travel": 0.19068877551020408,
+      "utility": 0.18829337094499296,
+      "work": 1.0
+    }
+  },
+  "limitations": [
+    "English, crowdsourced, single-intent queries do not represent all languages, dialects, or multi-intent requests.",
+    "Domain vocabulary overlap is descriptive lexical similarity, not a direct measure of semantic similarity.",
+    "Examples were not exported in audit tables; review any future qualitative examples before public release."
+  ]
+}
