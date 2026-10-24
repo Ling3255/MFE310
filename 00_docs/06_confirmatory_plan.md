@@ -76,7 +76,7 @@
 
 1. **种子层面**：对每个种子 s 在完整 test 上计算 Δ_s = Dom_s − CE_s，然后报告：
    - 均值、标准差、中位数、Δ>0 的种子个数；
-   - Wilcoxon 符号秩检验（双侧，精确 p 值）；
+   - Wilcoxon 符号秩检验（双侧，精确 p 值）：通过枚举全部 2^n 种符号组合计算，零差值剔除，并列取平均秩，结果不受 SciPy 版本影响；
    - 单样本 t 检验（双侧），作为补充。
 2. **两层 bootstrap**（共 2000 次，种子 `20261025`）：每次先有放回地重抽 10 对种子，再在每个意图内部有放回地重抽 test 样本，保持各意图的原样本数；然后计算重抽后的平均 Δ。区间取 2.5% 和 97.5% 分位数。这个区间**同时包含了训练随机性和 test 抽样波动**。
 3. **判定规则**（H1：越高越好；H2：越低越好）：
@@ -99,7 +99,7 @@
 | 2 | `bash 05_jobs/03_train_confirmatory.sh all`（J03） | 学生 | 完成后自动对 val 做健全性检查（S12 `--split val`） |
 | 3 | 推送 `08_runs/**`（不含 checkpoint）、`07_metadata/massive_en/`、`09_results/07_confirmatory/*/val/` | 学生 | — |
 | 4 | 审查训练产物；在 05/06 两个配置中设置 `frozen: true` 并填写 `supervisor_approval` | 导师 | **未批准时 S11 拒绝运行** |
-| 5 | **先做 E10**：`python 04_steps/11_predict_confirmatory.py --config 01_configs/06_confirm_massive.yaml`，然后运行 `12_confirmatory_statistics.py --config 01_configs/06_confirm_massive.yaml --split test` | 学生 | 每个 study 只能运行一次 S11 |
+| 5 | **先做 E10**：`python 04_steps/11_predict_confirmatory.py --config 01_configs/06_confirm_massive.yaml`，然后运行 `12_confirmatory_statistics.py --config 01_configs/06_confirm_massive.yaml --split test` | 学生 | 每个 study 只能运行一次 S11：只要该 study 的输出目录里已有完成记录就拒绝再跑，改动配置文件也绕不过去；S12 会核对 S11 之后 study 配置和预测文件是否被修改 |
 | 6 | 再做 E9：对 `05_confirm_clinc.yaml` 执行同样的两条命令 | 学生 | 同上 |
 | 7 | 推送 `09_results/07_confirmatory/**` | 学生 | 导师复核 |
 | 可选 | `bash 05_jobs/04_explore_clinc.sh`（J04，E11） | 学生 | 只看 val；S11 和 S12 都拒绝对 exploratory 做 test 评估 |
@@ -121,13 +121,13 @@
 
 | 编号 | 文件 | 作用 |
 |---|---|---|
-| M12 | `03_src/clinc_domain_aux/confirmatory.py` | 运行校验（含配置哈希）、MASSIVE 转换、按出现意图计算的 macro-F1、快速的 AUROC 和 FPR95、种子层面检验、两层 bootstrap、判定规则、批准门控 |
+| M12 | `03_src/clinc_domain_aux/confirmatory.py` | 运行校验（含配置哈希）、MASSIVE 转换、按出现意图计算的 macro-F1、快速的 AUROC 和 FPR95、精确 Wilcoxon 与种子层面检验、两层 bootstrap、判定规则、批准门控 |
 | S10 | `04_steps/10_prepare_massive.py` | 校验 MASSIVE 版本，转换数据，生成标签映射和 manifest |
-| S11 | `04_steps/11_predict_confirmatory.py` | 校验批准后，对 test 做一次推理，保存逐样本预测 |
+| S11 | `04_steps/11_predict_confirmatory.py` | 校验批准、各次运行的配置哈希，以及当前数据与训练时的数据是否一致，然后对 test 做一次推理，保存逐样本预测 |
 | S12 | `04_steps/12_confirmatory_statistics.py` | `--split val` 读取已保存的 val 特征；`--split test` 读取 S11 的输出；输出统计结果和判定 |
 | J03 | `05_jobs/03_train_confirmatory.sh` | 训练 E9 和 E10，并做 val 健全性检查 |
 | J04 | `05_jobs/04_explore_clinc.sh` | E11 探索（可选） |
-| T04 | `06_tests/test_04_confirmatory.py` | 8 项单元测试 |
+| T04 | `06_tests/test_04_confirmatory.py` | 10 项单元测试 |
 | 配置 | `01_configs/05`–`09` | 两个 study 配置、MASSIVE 基础配置、探索用的基础配置和 study 配置 |
 
 另有一处小改动：S03 读取 `data.strict_counts`，默认值为 true。CLINC 的行为和配置哈希都保持不变，已有运行仍然可以通过校验。

@@ -132,4 +132,4 @@
 | S12 | `04_steps/12_confirmatory_statistics.py` | val 健全性检查 / test 统计与判定 |
 | J03 | `05_jobs/03_train_confirmatory.sh` | E9（CLINC 种子 3–9）与 E10（MASSIVE 种子 0–9）训练 |
 | J04 | `05_jobs/04_explore_clinc.sh` | E11 可选探索，仅 val |
-| T04 | `06_tests/test_04_confirmatory.py` | 第二阶段单元测试 |
+| T04 | `06_tests/test_04_confirmatory.py` | 第二阶段单元测试（10 项） |

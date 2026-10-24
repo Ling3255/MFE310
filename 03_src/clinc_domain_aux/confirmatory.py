@@ -149,6 +149,27 @@ def intent_groups(gold: np.ndarray) -> list[np.ndarray]:
     return [np.flatnonzero(gold == label) for label in np.unique(gold)]
 
 
+def wilcoxon_exact(values: Sequence[float]) -> float:
+    """Two-sided exact Wilcoxon signed-rank p-value by enumerating all sign flips.
+
+    Zeros are dropped and tied |d| get average ranks; independent of SciPy's version-specific
+    choice between exact and normal-approximation methods.
+    """
+    nonzero = np.asarray(values, dtype=np.float64)
+    nonzero = nonzero[nonzero != 0]
+    m = len(nonzero)
+    if m == 0:
+        return 1.0
+    if m > 20:
+        raise ValueError("Exact enumeration supports at most 20 non-zero paired differences")
+    ranks = stats.rankdata(np.abs(nonzero))
+    observed = ranks[nonzero > 0].sum()
+    signs = (np.arange(2 ** m)[:, None] >> np.arange(m)[None, :]) & 1
+    null = signs @ ranks
+    center = ranks.sum() / 2.0
+    return float(np.mean(np.abs(null - center) >= abs(observed - center) - 1e-9))
+
+
 def seed_level_tests(deltas: Sequence[float]) -> dict[str, Any]:
     values = np.asarray(deltas, dtype=np.float64)
     if len(values) < 3:
@@ -158,10 +179,7 @@ def seed_level_tests(deltas: Sequence[float]) -> dict[str, Any]:
     else:
         t_result = stats.ttest_1samp(values, 0.0)
         t_statistic, t_pvalue = float(t_result.statistic), float(t_result.pvalue)
-    if np.all(values == 0):
-        wilcoxon_p = 1.0
-    else:
-        wilcoxon_p = float(stats.wilcoxon(values, alternative="two-sided").pvalue)
+    wilcoxon_p = wilcoxon_exact(values)
     return {
         "n_seeds": int(len(values)),
         "mean": float(values.mean()),
@@ -171,6 +189,7 @@ def seed_level_tests(deltas: Sequence[float]) -> dict[str, Any]:
         "t_statistic": t_statistic,
         "t_pvalue_two_sided": t_pvalue,
         "wilcoxon_pvalue_two_sided": wilcoxon_p,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked",
     }
 
 

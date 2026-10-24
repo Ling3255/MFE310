@@ -122,3 +122,23 @@ def test_verify_run_rejects_runs_trained_with_a_different_config(tmp_path):
     (run_dir / "best.pt").write_bytes(b"tampered")
     with pytest.raises(ValueError):
         verify_run(base, 0.1, 3)
+
+
+def test_exact_wilcoxon_matches_scipy_without_ties_and_handles_ties_and_zeros():
+    from scipy import stats
+    from clinc_domain_aux.confirmatory import wilcoxon_exact
+
+    values = np.array([0.3, -0.1, 0.5, 0.2, 0.9, -0.4, 0.7, 0.6, 0.8, 1.1])
+    assert wilcoxon_exact(values) == pytest.approx(stats.wilcoxon(values, method="exact").pvalue)
+    assert wilcoxon_exact(np.ones(10)) == pytest.approx(2 / 1024)
+    tied = np.array([-2, -1, -1, 0, -3, -1, -2, 1, -1, -2]) / 4500  # cross-domain deltas are multiples of 1/N
+    assert 0 < wilcoxon_exact(tied) < 0.05
+    assert wilcoxon_exact(np.zeros(5)) == 1.0
+
+
+def test_fpr95_matches_evaluation_module_at_real_test_sizes():
+    rng = np.random.default_rng(5)
+    for n_is in (4500, 2974):
+        is_scores = np.round(rng.normal(0, 1, n_is), 2)
+        oos_scores = np.round(rng.normal(1, 1, 1000), 2)
+        assert fpr95_is_positive(is_scores, oos_scores) == oos_metrics(is_scores, oos_scores)["fpr95_is_positive"]

@@ -11,7 +11,7 @@ import numpy as np
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "03_src"))
 
-from clinc_domain_aux.common import read_csv, read_json, resolve_path, sha256_file, utc_now, write_csv, write_json
+from clinc_domain_aux.common import content_sha256, read_csv, read_json, resolve_path, utc_now, write_csv, write_json
 from clinc_domain_aux.confirmatory import (
     auroc_oos, cross_domain_error, decide, fpr95_is_positive, load_study, macro_f1_present, output_root,
     seed_level_tests, study_arms, two_level_bootstrap, two_level_oos_bootstrap, verify_run, within_domain_error,
@@ -53,15 +53,22 @@ def resolve_test_run(study: dict, value: str | None) -> Path:
     return runs[0]
 
 
-def load_test(study: dict, arms: list[dict], seeds: list[int], test_run: Path) -> dict:
+def load_test(study_path: Path, arms: list[dict], seeds: list[int], test_run: Path) -> dict:
     manifest = read_json(test_run / "evaluation_manifest.json")
-    gold, preds, scores = None, {}, {}
+    if content_sha256(study_path) != manifest["study_config_content_sha256"]:
+        raise ValueError("Study config changed after the S11 test evaluation")
+    gold, preds, scores, order = None, {}, {}, None
     for arm in arms:
         for seed in seeds:
             name = f"{arm['name']}_seed{seed}_predictions.csv"
-            if sha256_file(test_run / name) != manifest["files"][name]["sha256"]:
+            if content_sha256(test_run / name) != manifest["files"][name]["content_sha256"]:
                 raise ValueError(f"Prediction file changed after evaluation: {name}")
             rows = read_csv(test_run / name)
+            ids = [row["sample_id"] for row in rows]
+            if order is None:
+                order = ids
+            elif ids != order:
+                raise ValueError(f"Sample order differs between prediction files: {name}")
             in_scope = [row for row in rows if row["split"] == "test"]
             oos = [row for row in rows if row["split"] == "oos_test"]
             labels = np.asarray([int(row["gold_intent"]) for row in in_scope], dtype=np.int64)
@@ -94,7 +101,7 @@ def main() -> None:
     seeds = [int(seed) for seed in study["seeds"]]
     analysis = study["analysis"]
     alpha, n_boot, boot_seed = float(analysis["alpha"]), int(analysis["bootstrap_iterations"]), int(analysis["bootstrap_seed"])
-    data = load_val(base, arms, seeds) if args.split == "val" else load_test(study, arms, seeds, resolve_test_run(study, args.test_run))
+    data = load_val(base, arms, seeds) if args.split == "val" else load_test(resolve_path(args.config), arms, seeds, resolve_test_run(study, args.test_run))
     gold, preds = data["gold"], data["preds"]
     num_labels = int(base["model"]["num_intents"])
     domains = intent_domain_array(base)

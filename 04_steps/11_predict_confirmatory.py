@@ -12,21 +12,20 @@ import numpy as np
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "03_src"))
 
-from clinc_domain_aux.common import make_run_id, read_json, resolve_path, sha256_file, utc_now, write_csv, write_json
+from clinc_domain_aux.common import content_sha256, make_run_id, resolve_path, sha256_file, utc_now, write_csv, write_json
 from clinc_domain_aux.confirmatory import load_study, output_root, require_approval, study_arms, verify_run
 from clinc_domain_aux.data import load_datasets
 from clinc_domain_aux.detectors import MahalanobisDetector
 from clinc_domain_aux.evaluation import msp_scores
-from clinc_domain_aux.training import predict_records
+from clinc_domain_aux.training import _data_hashes, predict_records
 
 FIELDS = ["sample_id", "split", "gold_intent", "pred_intent", "msp_score", "mahalanobis_score"]
 
 
-def refuse_repeat(study_path: Path, root: Path) -> None:
-    digest = sha256_file(study_path)
+def refuse_repeat(root: Path) -> None:
+    """One test evaluation per study output directory, even if the study config is edited afterwards."""
     for manifest in (root / "test").glob("*/evaluation_manifest.json"):
-        if read_json(manifest).get("study_config_sha256") == digest:
-            raise ValueError(f"This study was already evaluated on test: {manifest.parent}")
+        raise ValueError(f"This study was already evaluated on test: {manifest.parent}")
 
 
 def main() -> None:
@@ -38,7 +37,7 @@ def main() -> None:
     study, base = load_study(args.config)
     require_approval(study)
     root = output_root(study)
-    refuse_repeat(study_path, root)
+    refuse_repeat(root)
 
     seeds = [int(seed) for seed in study["seeds"]]
     arms = study_arms(study)
@@ -48,6 +47,8 @@ def main() -> None:
         raise ValueError("Runs in one study must share the same data hash")
 
     datasets = load_datasets(base["data"]["root"], strict_counts=bool(base["data"].get("strict_counts", True)))
+    if _data_hashes(datasets)["combined"] != data_hashes.pop():
+        raise ValueError("Current data files differ from the data used in training")
     has_oos = len(datasets["oos_test"]) > 0
     records = [*datasets["test"], *datasets["oos_test"]]
     train_labels = np.asarray([row["intent_id"] for row in datasets["train"]])
@@ -81,7 +82,7 @@ def main() -> None:
         name = f"{arm_name}_seed{seed}_predictions.csv"
         write_csv(output / name, rows, fieldnames=FIELDS)
         files[name] = {
-            "sha256": sha256_file(output / name),
+            "content_sha256": content_sha256(output / name),
             "run_dir": run["run_dir"].relative_to(PROJECT_ROOT).as_posix(),
             "best_checkpoint_sha256": sha256_file(run["run_dir"] / "best.pt"),
         }
@@ -91,7 +92,7 @@ def main() -> None:
         "status": "completed",
         "study": study["study"],
         "role": study["role"],
-        "study_config_sha256": sha256_file(study_path),
+        "study_config_content_sha256": content_sha256(study_path),
         "supervisor_approval": study["supervisor_approval"],
         "test_reuse_disclosure": study.get("test_reuse_disclosure"),
         "has_oos": has_oos,
