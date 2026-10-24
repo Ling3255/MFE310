@@ -98,3 +98,9 @@
 3. E9 CLINC 10 种子复现：macro-F1 平均差 +0.000155（+0.016 pp），区间 [−0.001041, 0.001377]（[−0.104, +0.138] pp），Wilcoxon p=1.0；跨领域错误率差 −0.000644（−0.064 pp），区间跨 0且 p=0.0547，均为 inconclusive。第一阶段的小幅提升未在 10 种子复现中得到确认。
 4. H3 仅作描述：MSP AUROC 和 MSP FPR95 方向不利，Mahalanobis AUROC 方向有利，Mahalanobis FPR95 区间跨 0；这些次级 OOS 结果不改变 H1/H2 的 inconclusive 判定。
 5. 两个 study 的 evaluation manifest 均为 completed，test 预测和统计已推送。E11 可选探索未运行，不追加种子或分析以改变结论。
+
+## 2026-10-25 第三阶段计划草案（导师）
+
+1. 新增 `00_docs/07_phase3_plan.md`（草案，导师确认后冻结）：检验文献中已证实的 OOS 打分方法（Energy、MaxLogit、KNN）、OOS 训练方法（OE、K+1）与多种子集成；开发阶段只用 CLINC 的 train 和 val，确认阶段使用 BANKING77-OOS。
+2. 审查中核实：BANKING77-OOS 的 OOD-OOS test 与 CLINC `oos_test` 完全相同（1000/1000），OOD-OOS valid 由 CLINC 的 `oos_val` 与 `oos_train` 组成。因此确认性检验只使用 BANKING77 的 in-scope test 和 ID-OOS test；OOD-OOS 只作为次级结果，并披露重复使用。
+3. 第三阶段不再使用 CLINC 的 test 或 oos_test。本次只提交计划，代码在计划确认后另开 PR。
