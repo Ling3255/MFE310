@@ -33,7 +33,8 @@ def main() -> None:
     config = load_config(args.config)
     if args.data_root:
         config["data"]["root"] = args.data_root
-    datasets = load_datasets(config["data"]["root"], strict_counts=not args.smoke)
+    strict = bool(config["data"].get("strict_counts", True))  # MASSIVE config sets false; CLINC keeps the official checks
+    datasets = load_datasets(config["data"]["root"], strict_counts=strict and not args.smoke)
     metadata = resolve_path(config["metadata_dir"])
     label_to_id, domain_to_id, _ = load_label_maps(metadata)
     if len(label_to_id) != int(config["model"]["num_intents"]) or len(domain_to_id) != int(config["model"]["num_domains"]):

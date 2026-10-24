@@ -1,0 +1,18 @@
+schema_version: 1
+study: clinc_explore_small_lambda_longer_training   # E11, optional
+role: exploratory                # validation only; S11 refuses to run
+base_config: 01_configs/08_explore_clinc_base.yaml
+output_dir: 09_results/07_confirmatory/explore_clinc
+seeds: [0, 1, 2]
+reference: {name: bert_ce, lambda_domain: 0.0}
+treatments:
+- {name: dom_lam0p02, lambda_domain: 0.02}
+- {name: dom_lam0p05, lambda_domain: 0.05}
+- {name: dom_lam0p1, lambda_domain: 0.1}
+analysis:
+  alpha: 0.05
+  sesoi_macro_f1: 0.002
+  bootstrap_iterations: 1000
+  oos_bootstrap_iterations: 1000
+  bootstrap_seed: 20261026
+frozen: false

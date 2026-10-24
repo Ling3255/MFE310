@@ -1,0 +1,22 @@
+schema_version: 1
+study: massive_en_external_replication   # E10, primary confirmatory test
+role: primary_confirmation
+base_config: 01_configs/07_massive_base.yaml
+output_dir: 09_results/07_confirmatory/massive_en
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+reference: {name: bert_ce, lambda_domain: 0.0}
+treatments:
+- {name: bert_dom, lambda_domain: 0.1}  # transferred from CLINC E4; no lambda search on MASSIVE
+test_reuse_disclosure: null             # MASSIVE test has not been used by this project
+analysis:
+  alpha: 0.05
+  sesoi_macro_f1: 0.002          # smallest effect of interest: 0.2 percentage points
+  bootstrap_iterations: 2000
+  oos_bootstrap_iterations: 1000
+  bootstrap_seed: 20261025
+frozen: false                    # supervisor sets true together with approval before S11
+supervisor_approval:
+  approved: false
+  confirmed_by: null
+  confirmed_at: null
+  evidence: null
