@@ -24,3 +24,13 @@
 5. 真实 E2 仅使用 train/val 完成。选择 C=100，IS val macro-F1=0.9045304077、accuracy=0.905；四个 C 均无收敛警告。保存 pipeline 重载后的 3,000 条 val 概率与归档逐值完全一致。这些数字只用于开发选择，不是 test 结果。
 6. 未冻结配置调用 S06 已验证会被拒绝。15 次正式训练、λ 实际选择、真实 Mahalanobis 冻结、导师确认、E6–E8 正式预测/统计/图表和单句冻结演示仍待执行，不能由本轮代码完成推定完成。
 7. 开发中修正 NumPy 2.x 标量 `nextafter` 边界拼接，并修正三个测试夹具的手算预期/梯度捕获方式；未改变主计划的指标方向、选择规则或实验协议。
+8. 新增 `02_environment/03_environment.yml`，供 Windows CMD 创建 `mfe310` Conda 环境；Conda 只负责 Python 3.11/pip，其余依赖仍使用已验证锁文件。本机没有 Conda，因此该入口未在本机执行，uv 环境的 16 项测试保持通过。
+
+## 2026-10-24 E3–E5 正式训练与冻结
+
+1. 用户报告导师已批准本地 GPU 例外，依据记录在 `07_metadata/local_gpu_approval.md`。正式运行复用现有 `trans` 环境：Python 3.10.20、PyTorch 2.6.0+cu124、Transformers 5.13.0、RTX 4090；补装 pytest 8.4.2 后 16 项测试全部通过，`pip check` 无冲突。
+2. 完成 5 个 λ × 3 个种子的全部 15 次正式训练，每份运行保存配置、日志、样本顺序、最佳/最后 checkpoint 和 train/val 特征。GPU 非确定性警告如实记录在 `07_metadata/gpu_determinism.md`，不声称逐位可复现。
+3. S04 按预设规则选择 λ=0.1。三种子验证 macro-F1 均值为 CE 0.9657015880、λ0.1 0.9655910100、λ0.3 0.9648791503、λ0.5 0.9637161571、λ1.0 0.9634291159；λ0.1 是正 λ 最高均值及 0.002 容差集合中的最小值，不声称其验证性能优于 CE。
+4. S05 为 6 个正式 BERT 模型分别拟合 train-only 类内残差 Ledoit–Wolf Mahalanobis，并用 IS val+OOS val 选择 MSP/Mahalanobis 阈值；B0 只使用 MSP。所有阈值满足 IS acceptance≥0.95。冻结文件为 `01_configs/04_frozen.yaml`，状态 `awaiting_supervisor_approval`，未批准时 S06 已实测拒绝执行。
+5. λ 曲线首次生成时发现 `best_val_macro_f1` 字段别名缺失；已在 M10 修正并单独重跑 S04，未重训模型。批量脚本曾因等价相对/绝对数据路径产生不同配置哈希而在训练前停止；后续保持原始相对路径配置完成矩阵，未覆盖旧结果。该路径规范化问题留待后续修正，不影响本次数据和模型内容。
+6. 正式 test、bootstrap、领域错误分析和单句冻结演示仍未运行，等待导师对 E5 冻结记录的明确确认。本地 GPU 批准不代替 E5 确认。

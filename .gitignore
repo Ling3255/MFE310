@@ -16,3 +16,4 @@ __pycache__/
 08_runs/job_logs/
 09_results/job_logs/
 10_exports/*.zip
+10_exports/check_tmp_*/

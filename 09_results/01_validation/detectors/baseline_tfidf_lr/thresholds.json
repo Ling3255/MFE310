@@ -1,0 +1,18 @@
+{
+  "source": "IS val + OOS val only",
+  "msp": {
+    "threshold": 0.7028839068389203,
+    "tau": 0.7028839068389203,
+    "is_acceptance": 0.95,
+    "oos_recall": 0.61,
+    "oos_false_acceptance": 0.39,
+    "min_is_acceptance": 0.95,
+    "n_is": 3000,
+    "n_oos": 100,
+    "n_candidates": 6133,
+    "n_tied_optimal_thresholds": 10,
+    "threshold_rule": "reject iff score >= tau; accept iff score < tau",
+    "selection_rule": "maximize OOS recall, then choose smallest feasible tau"
+  },
+  "mahalanobis": null
+}

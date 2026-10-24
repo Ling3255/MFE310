@@ -12,7 +12,7 @@
 
 已实现 M01–M11、S00–S09、T01–T03、J01–J02，共 27 个物理代码文件。16 个单元测试、真实数据审计、E2 基线及模型重载一致性已执行；具体结果见变更记录和产物。
 
-**尚未执行 15 次正式 BERT 训练、真实 E5 冻结、导师确认或正式 test 评估。** 当前 `04_frozen.yaml` 是不可评估的占位配置。验证集结果仅用于开发选择，不是最终泛化性能证据。
+**15 次正式 BERT 训练、λ 选择和 E5 检测器冻结已完成。** 选定 λ=0.1；`04_frozen.yaml` 记录真实 checkpoint、检测器和验证阈值，当前状态为 `awaiting_supervisor_approval`。导师冻结确认和正式 test 评估尚未执行，E6 门禁已验证有效。验证集结果仅用于开发选择，不是最终泛化性能证据。
 
 ## 环境与复现
 
@@ -24,6 +24,21 @@ uv pip install --python .venv/Scripts/python.exe -r 02_environment/02_requiremen
 export PYTHONPATH=03_src
 export PYTHONUTF8=1
 ```
+
+也可以使用 Conda。在 **CMD** 中执行（路径按实际位置调整）：
+
+```bat
+cd /d G:\MFE310\mfe310code
+conda env create -f 02_environment\03_environment.yml
+conda activate mfe310
+python -m pip install -r 02_environment\02_requirements-lock.txt
+set DATA_ROOT=G:\MFE310\dataset\data
+set PYTHONPATH=%CD%\03_src
+python 04_steps\00_check_environment.py --data-root "%DATA_ROOT%"
+python -m pytest 06_tests -q
+```
+
+`03_environment.yml` 创建 Python 3.11 和 pip；锁文件安装其余固定版本依赖。每次新开 CMD 后需重新执行 `conda activate mfe310` 和两个 `set` 命令。
 
 Linux 使用 `python` 和 `PYTHONPATH=03_src`，并设置：
 

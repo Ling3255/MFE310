@@ -46,6 +46,7 @@ training:
   deterministic: true
   amp: false
   device: auto
+  local_gpu_approval_record: 07_metadata/local_gpu_approval.md
 selection:
   metric: macro_f1
   tolerance: 0.002

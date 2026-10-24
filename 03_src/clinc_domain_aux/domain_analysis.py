@@ -39,6 +39,8 @@ def _seed(value: Any) -> int:
 def _metric_value(row: Mapping[str, Any], metric: str) -> float:
     if metric in row:
         value = row[metric]
+    elif metric == "val_macro_f1" and "best_val_macro_f1" in row:
+        value = row["best_val_macro_f1"]
     elif metric == "val_macro_f1" and "macro_f1" in row:
         value = row["macro_f1"]
     else:

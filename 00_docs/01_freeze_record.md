@@ -1,20 +1,24 @@
-# E5 冻结记录
+# E5 freeze record
 
-当前状态：**尚未生成冻结配置，等待 15 次正式 BERT 训练、λ 选择和检测器拟合。**
+Created: 2026-10-24T08:00:43.391001+00:00
 
-`01_configs/04_frozen.yaml` 当前只是 `frozen: false` 的占位模板，不含模型、检测器或阈值结果。S05 完成真实 E5 后会重写配置和本文件；仅有文件不代表已经冻结或获导师确认。
+Status: **awaiting supervisor approval; test evaluation is blocked**.
 
-## 测试历史
+Selected lambda: `0.1` (validation only).
 
-领域辅助模型的设计未使用 test 结果。小组其他成员此前查看过该 benchmark 的 test；最终结果只能表述为冻结协议下的一次性评估，不声称完全独立确认。
+The domain-auxiliary design did not use test results. Other group members had previously inspected this benchmark's test set. Final results must be described as a one-time evaluation under a frozen protocol, not fully independent confirmation.
 
-## 导师确认
+## Model and detector hashes
 
-当前未确认。S06 和 J02 要求冻结配置同时包含：
+- `bert_ce` seed `0`: checkpoint SHA-256 `c7ea329ae1ba7399065427cf9a48e1ce2fc3cb65f7073d6a2949e3d26e472dc2`, detector SHA-256 `46449f749135394c6b93712df48d004ff11530d4bf0ca843e2a0e85de0953d73`.
+- `bert_ce` seed `1`: checkpoint SHA-256 `089a4ef6890bdd7f124d4c0bb832208633663eec349353ca9eb028addf5aab8b`, detector SHA-256 `a2877ee67f9a041c1e9540736d23037145ec7c63f5b6cb1243ce7ced981d5c20`.
+- `bert_ce` seed `2`: checkpoint SHA-256 `fbf351c77575df787952900b001dcf9ebf75e6eb971e748e8136cbf508e90619`, detector SHA-256 `513a3696d14f1c5114aeb8cf8ad65d52e97311d2ad6e650bc9539c08d9e31d68`.
+- `bert_dom` seed `0`: checkpoint SHA-256 `5b8d627a65859a5ef161121f0954defb470bb56ef3d214977df760a43ccae81b`, detector SHA-256 `c030663da090dd2bc803481c40270c3b5c8dacbf5a269707f61656bd70ace221`.
+- `bert_dom` seed `1`: checkpoint SHA-256 `5dfcfd503f9ffd73777129b96f18688b8e5b31f3711aee4409dffcc62471e9a2`, detector SHA-256 `5b4ba58a8e5d82e0ee7031df3e07074bc84fd821ffcabf36e558fd59bd48a0dd`.
+- `bert_dom` seed `2`: checkpoint SHA-256 `499ea4821450e6ce672d8772f22f566b7eecf2b9b86d407d5c0ea57e9693bbc0`, detector SHA-256 `903ee1914f28b57957b5163707605c23106d7402e437042945d013d01a7bc5cb`.
 
-- `supervisor_approval.approved: true`
-- 非空 `confirmed_by`
-- 有效 ISO 格式 `confirmed_at`
-- 非空确认依据 `evidence`
+## Supervisor confirmation
 
-确认前不得运行正式 E6。任何查看 test 后的协议变更须另建修订记录，不覆盖旧冻结证据。
+Set `supervisor_approval.approved: true` in `01_configs/04_frozen.yaml` only after actual confirmation, and fill in `confirmed_by`, ISO `confirmed_at`, and `evidence`. S06 checks all four fields and all artifact hashes.
+
+Any protocol change after test inspection requires a new recorded revision and disclosure; do not overwrite this record.

@@ -1,0 +1,19 @@
+{
+  "selected_lambda": 0.1,
+  "lambda_means": {
+    "0.0": 0.9657015879748573,
+    "0.1": 0.9655910100305075,
+    "0.3": 0.9648791502513877,
+    "0.5": 0.9637161570982352,
+    "1.0": 0.963429115923318
+  },
+  "best_positive_mean": 0.9655910100305075,
+  "eligible_lambdas": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "tolerance": 0.002,
+  "selection_rule": "maximum three-seed positive-lambda mean, then smallest lambda within tolerance",
+  "created_at": "2026-10-24T07:59:49.555547+00:00"
+}

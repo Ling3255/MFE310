@@ -1,24 +1,287 @@
 schema_version: 1
-status: awaiting_training_and_freeze
-frozen: false
+status: awaiting_supervisor_approval
+frozen: true
+created_at: '2026-10-24T08:00:43.391001+00:00'
+base_config: 01_configs/01_base.yaml
+base_config_content_hash: b55ebce965a3995af6e4955b192f83e1af02b65be8ebbdffd9cc148d9058fd44
+data_manifest: 07_metadata\data_manifest.json
+data_manifest_sha256: fdbf8c48dc271ccac9abbad8257d3c9d7a33a910bec12da0bc385e3a9a7e554d
+selected_lambda: 0.1
+selected_lambda_record: 09_results\01_validation\selected_lambda.json
+baseline:
+  run_dir: 08_runs\baseline_tfidf_lr
+  checkpoint_sha256: e58cb9542b9018c4c5cd4586696d56e56a8e4c22b553b068bb2376cbda5d4382
+  thresholds:
+    source: IS val + OOS val only
+    msp:
+      threshold: 0.7028839068389203
+      tau: 0.7028839068389203
+      is_acceptance: 0.95
+      oos_recall: 0.61
+      oos_false_acceptance: 0.39
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6133
+      n_tied_optimal_thresholds: 10
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+    mahalanobis: null
+models:
+- model: bert_ce
+  lambda_domain: 0.0
+  seed: 0
+  run_dir: 08_runs\ce_seed0
+  detector_path: 09_results\01_validation\detectors\ce_seed0\mahalanobis.npz
+  detector_sha256: 46449f749135394c6b93712df48d004ff11530d4bf0ca843e2a0e85de0953d73
+  detector_fit_sample_hash: ef7473fa1875aa7d9eaeb1ccd883d15953485f246925a69c64ca4c27e943c6df
+  oos_val_features_sha256: 6a96dd2b7ca51efac5e794f6c1d502ed33f4a63288398df67d8d5b8256a31bf5
+  thresholds:
+    msp:
+      threshold: 0.20394531432958898
+      tau: 0.20394531432958898
+      is_acceptance: 0.95
+      oos_recall: 0.88
+      oos_false_acceptance: 0.12
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 38
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+    mahalanobis:
+      threshold: 4321.547646377475
+      tau: 4321.547646377475
+      is_acceptance: 0.95
+      oos_recall: 0.93
+      oos_false_acceptance: 0.06999999999999995
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 6
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+  best_checkpoint_sha256: c7ea329ae1ba7399065427cf9a48e1ce2fc3cb65f7073d6a2949e3d26e472dc2
+  best_checkpoint_state_hash: 276bdfdd8160b9e925aa5095f1227b164575daf8d8ab60d0600e8d254e2933f3
+  config_hash: 6138d9e915d7a83d7b17b584c084f6828d4353bc77c116f569b469e2c23f0736
+  initialization_hash: a4a034a203b61653a85f8dcffd25e418a4dc0668bc98856257a0f3bc8c112ec3
+- model: bert_ce
+  lambda_domain: 0.0
+  seed: 1
+  run_dir: 08_runs\ce_seed1
+  detector_path: 09_results\01_validation\detectors\ce_seed1\mahalanobis.npz
+  detector_sha256: a2877ee67f9a041c1e9540736d23037145ec7c63f5b6cb1243ce7ced981d5c20
+  detector_fit_sample_hash: 0b45a34a444234aae9f66ae342b56374cc8166f4657b6887081fc4c5a4fbcd30
+  oos_val_features_sha256: 9c64730c3b3e91c41962931872a8fb1b94bbb90bba9d6581b0ae6b8569cae3be
+  thresholds:
+    msp:
+      threshold: 0.16556867094209218
+      tau: 0.16556867094209218
+      is_acceptance: 0.95
+      oos_recall: 0.87
+      oos_false_acceptance: 0.13
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 28
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+    mahalanobis:
+      threshold: 4773.014615376006
+      tau: 4773.014615376006
+      is_acceptance: 0.95
+      oos_recall: 0.92
+      oos_false_acceptance: 0.07999999999999996
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 2
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+  best_checkpoint_sha256: 089a4ef6890bdd7f124d4c0bb832208633663eec349353ca9eb028addf5aab8b
+  best_checkpoint_state_hash: 212c99b4a114c5de07502abc767368cae30240117225373de3cb47ca28649bee
+  config_hash: d23c667fb417a147ae63882d9acc805441fb57fb31042c83d7b3f683a3579b79
+  initialization_hash: 52f21ed06a84760858cb2fd59b030b066437fd60b4f68e97fd7398c7884878a4
+- model: bert_ce
+  lambda_domain: 0.0
+  seed: 2
+  run_dir: 08_runs\ce_seed2
+  detector_path: 09_results\01_validation\detectors\ce_seed2\mahalanobis.npz
+  detector_sha256: 513a3696d14f1c5114aeb8cf8ad65d52e97311d2ad6e650bc9539c08d9e31d68
+  detector_fit_sample_hash: 08403a05350c990b701919187736829d42bf7a5583402c25b83b1c90414ed912
+  oos_val_features_sha256: 375d4dd5138a8df1b2a5e3d43a0124b0d2b3d14131afde84fca4f4e3a563919c
+  thresholds:
+    msp:
+      threshold: 0.20290780287107738
+      tau: 0.20290780287107738
+      is_acceptance: 0.95
+      oos_recall: 0.89
+      oos_false_acceptance: 0.10999999999999999
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 34
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+    mahalanobis:
+      threshold: 4255.60044212258
+      tau: 4255.60044212258
+      is_acceptance: 0.95
+      oos_recall: 0.94
+      oos_false_acceptance: 0.06000000000000005
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 18
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+  best_checkpoint_sha256: fbf351c77575df787952900b001dcf9ebf75e6eb971e748e8136cbf508e90619
+  best_checkpoint_state_hash: f83e5363229b0cef33462d917f3f4c2abd0d3f2be9bf74affae880187bb9bbdb
+  config_hash: 9de009021d604fa79d779d8e9445560f85dec650093d4d7d7098b23c02e331f8
+  initialization_hash: 86ee408646c70d194423c31ca4be8013a545b8fea7f491bfc606d540a86efaea
+- model: bert_dom
+  lambda_domain: 0.1
+  seed: 0
+  run_dir: 08_runs\dom_lam0p1_seed0
+  detector_path: 09_results\01_validation\detectors\dom_lam0p1_seed0\mahalanobis.npz
+  detector_sha256: c030663da090dd2bc803481c40270c3b5c8dacbf5a269707f61656bd70ace221
+  detector_fit_sample_hash: 3209245b3bbdb4da95be0b418d77dc7f849809b81aedac055f30863a63337528
+  oos_val_features_sha256: 9e3c54a8b3e0979c51e7866b339afa96042f8922d8d6cafaac27726b5b603c02
+  thresholds:
+    msp:
+      threshold: 0.24109197376609495
+      tau: 0.24109197376609495
+      is_acceptance: 0.95
+      oos_recall: 0.88
+      oos_false_acceptance: 0.12
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 6
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+    mahalanobis:
+      threshold: 4317.494385995017
+      tau: 4317.494385995017
+      is_acceptance: 0.95
+      oos_recall: 0.92
+      oos_false_acceptance: 0.07999999999999996
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 4
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+  best_checkpoint_sha256: 5b8d627a65859a5ef161121f0954defb470bb56ef3d214977df760a43ccae81b
+  best_checkpoint_state_hash: 0cef428375de0c5b9c5a6c1e7d69c6271797ad3bc00d10b69f61933d1c4354c8
+  config_hash: 62ce42c1b2ee4b36046c5a1393a76b7e3de560f7a597ed479bd213c44e3bd4bc
+  initialization_hash: a4a034a203b61653a85f8dcffd25e418a4dc0668bc98856257a0f3bc8c112ec3
+- model: bert_dom
+  lambda_domain: 0.1
+  seed: 1
+  run_dir: 08_runs\dom_lam0p1_seed1
+  detector_path: 09_results\01_validation\detectors\dom_lam0p1_seed1\mahalanobis.npz
+  detector_sha256: 5b4ba58a8e5d82e0ee7031df3e07074bc84fd821ffcabf36e558fd59bd48a0dd
+  detector_fit_sample_hash: d92a52047ab0e9bcaf39b23c937b1459f40410129d9ddcd0d326250042e1033e
+  oos_val_features_sha256: 6a90798390fce4b0b76ab1cd14d7ff886154e05a5b82f807b7affb495c9f56a6
+  thresholds:
+    msp:
+      threshold: 0.19148655827069652
+      tau: 0.19148655827069652
+      is_acceptance: 0.95
+      oos_recall: 0.87
+      oos_false_acceptance: 0.13
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 22
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+    mahalanobis:
+      threshold: 4698.902857535563
+      tau: 4698.902857535563
+      is_acceptance: 0.95
+      oos_recall: 0.93
+      oos_false_acceptance: 0.06999999999999995
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 4
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+  best_checkpoint_sha256: 5dfcfd503f9ffd73777129b96f18688b8e5b31f3711aee4409dffcc62471e9a2
+  best_checkpoint_state_hash: b8754e56b6aae78c2fa506904961c7487700db19c5b41f27e447db641a802e5e
+  config_hash: eb5dddcf9856ebf86e687c7ba81ee54d78d3d9a027343277136505ae87944ca8
+  initialization_hash: 52f21ed06a84760858cb2fd59b030b066437fd60b4f68e97fd7398c7884878a4
+- model: bert_dom
+  lambda_domain: 0.1
+  seed: 2
+  run_dir: 08_runs\dom_lam0p1_seed2
+  detector_path: 09_results\01_validation\detectors\dom_lam0p1_seed2\mahalanobis.npz
+  detector_sha256: 903ee1914f28b57957b5163707605c23106d7402e437042945d013d01a7bc5cb
+  detector_fit_sample_hash: 2c5fa15c0528f7eaaaf7f7acb8df7da0246872fc0e3dd86ad162c49687237918
+  oos_val_features_sha256: 31f327d36283ed5df6d8a300a8eef85fdde21ab7e8ae6a67b535cba13c247014
+  thresholds:
+    msp:
+      threshold: 0.20503613604306295
+      tau: 0.20503613604306295
+      is_acceptance: 0.95
+      oos_recall: 0.9
+      oos_false_acceptance: 0.09999999999999998
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 14
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+    mahalanobis:
+      threshold: 4590.851898388203
+      tau: 4590.851898388203
+      is_acceptance: 0.95
+      oos_recall: 0.94
+      oos_false_acceptance: 0.06000000000000005
+      min_is_acceptance: 0.95
+      n_is: 3000
+      n_oos: 100
+      n_candidates: 6201
+      n_tied_optimal_thresholds: 32
+      threshold_rule: reject iff score >= tau; accept iff score < tau
+      selection_rule: maximize OOS recall, then choose smallest feasible tau
+  best_checkpoint_sha256: 499ea4821450e6ce672d8772f22f566b7eecf2b9b86d407d5c0ea57e9693bbc0
+  best_checkpoint_state_hash: 9a5f604fecbe9f2e0b72b5b0d14c5b2fa841e0610283ba0090f4062762f733c1
+  config_hash: 28e90701c85cbb11e168ecec4e8472d71e7d69cc70bcc759c880f6002bdae83b
+  initialization_hash: 86ee408646c70d194423c31ca4be8013a545b8fea7f491bfc606d540a86efaea
+evaluation:
+  metric: macro_f1
+  tolerance: 0.002
+  bootstrap_iterations: 1000
+  bootstrap_seed: 20261024
+  bootstrap_samples_per_intent: 30
+  cases_per_category: 5
+  case_seed: 20261024
+optional_analyses:
+  domain_head_score: false
+  representation_visualization: false
+  oos_false_acceptance_destinations: true
 supervisor_approval:
   approved: false
   confirmed_by: null
   confirmed_at: null
   evidence: null
-base_config: 01_configs/01_base.yaml
-selected_lambda: null
-baseline_run: null
-models: []
-detectors: []
-thresholds: []
-evaluation:
-  bootstrap_iterations: 1000
-  bootstrap_seed: 20261024
-  bootstrap_samples_per_intent: 30
-  case_seed: 20261024
-  cases_per_category: 5
-optional_analyses:
-  domain_head_score: false
-  representation_visualization: false
-  oos_false_acceptance_destinations: true
+test_history:
+  domain_aux_design_used_test_results: false
+  other_group_members_previously_inspected_test: true
+  evaluation_wording: one-time evaluation under a frozen protocol; not fully independent
+    confirmation
+metric_protocol: 00_docs/03_metric_definitions.md
