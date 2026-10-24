@@ -16,9 +16,9 @@ analysis:
   bootstrap_iterations: 2000
   oos_bootstrap_iterations: 1000
   bootstrap_seed: 20261025
-frozen: false                    # supervisor sets true together with approval before S11
+frozen: true                     # supervisor approved before S11
 supervisor_approval:
-  approved: false
-  confirmed_by: null
-  confirmed_at: null
-  evidence: null
+  approved: true
+  confirmed_by: Supervisor (instructions relayed by the student)
+  confirmed_at: '2026-10-24T16:34:15Z'
+  evidence: The supervisor's instructions relayed in the project conversation on 2026-10-24 explicitly approve freezing both studies and running MASSIVE S11/S12 once, followed by CLINC S11/S12 once.
