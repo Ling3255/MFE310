@@ -3,14 +3,16 @@
   "dataset": "CLINC150 (CLINC OOS-Eval data_full)",
   "source": "https://github.com/clinc/oos-eval",
   "git_commit": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
-  "generated_at": "2026-10-24T05:20:25.069972+00:00",
+  "generated_at": "2026-10-24T08:45:15.836776+00:00",
   "strict_counts": true,
   "files": {
     "data_full.json": {
-      "sha256": "1e53b1322dac050a0a601e4ec5157d510633202de752a747dfd9d4f7cf9c1d5c"
+      "sha256": "1e53b1322dac050a0a601e4ec5157d510633202de752a747dfd9d4f7cf9c1d5c",
+      "content_sha256": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0"
     },
     "domains.json": {
-      "sha256": "4a180afbc94ff63ca913cd35a100e36ac449f824a92ff6b5413031a6d6a59d79"
+      "sha256": "4a180afbc94ff63ca913cd35a100e36ac449f824a92ff6b5413031a6d6a59d79",
+      "content_sha256": "b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a"
     }
   },
   "license": {

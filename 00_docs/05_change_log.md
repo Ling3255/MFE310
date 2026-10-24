@@ -47,3 +47,12 @@
 6. S02 支持 `--data-root`；S03 未加 `--allow-download` 时设置 `HF_HUB_OFFLINE=1`，同时阻止权重下载（不改变 config_hash）。
 7. B0 的 `pipeline.joblib` 由 scikit-learn 1.9.1 保存，而正式 `trans` 环境为 1.7.2，跨版本反序列化不受支持；须在 `trans` 环境重跑 S02，再重跑 S05。
 8. 旧冻结文件改名保留为 `01_configs/04_frozen_r1_superseded.yaml`，不得删除；修订原因即本节。
+
+## 2026-10-24 导师修订重跑完成
+
+1. PR #2 已以合并提交合入 main，保留 r1 冻结。未运行 S03、J01、S04，15 个 BERT 训练目录未改变。
+2. S01 已重新生成 manifest，两个原始数据文件均包含 `content_sha256`，23,700 条计数和映射断言保持通过。S02 已在 trans/sklearn 1.7.2 下重训，仍选择 C=100，val macro-F1 约 0.904530，pipeline 重载概率逐值一致。
+3. S05 已用现有 checkpoint 重新生成检测器与阈值，平局规则改为最高 IS acceptance 后，各阈值仍满足约束且不再全部压在 0.95；冻结路径均为 `/`。新冻结仍未获批准，S06 门禁实测拒绝执行。
+4. E6 前已确定主指标为 `fpr95_is_positive`，补充 `fpr95_oos_positive`，已写入冻结配置、冻结记录、指标文档和仓库主计划。
+5. 逐份复核 15 个 checkpoint_selection：实际有 **9 次**最佳 epoch 为最后一个 epoch，并非审查建议中的 8 次。CE 验证均值高于所有正 λ；λ=0.1 只表示正 λ 中最佳及容差规则下的选择。
+6. 已提交仓库主计划、`02_environment/04_trans_freeze.txt` 和基于实际沟通记录的本地 GPU 批准说明。trans 环境完整测试为 **19 passed**，`pip check` 无冲突。正式 test、bootstrap、领域分析和演示仍未运行。

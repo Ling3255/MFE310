@@ -2,7 +2,7 @@
 
 本目录包含 TF-IDF + LR、BERT-CE 与 BERT-Dom 的完整实验框架。正式代码只放在本目录；原始数据保留在 `../dataset/`，通过配置或 `DATA_ROOT` 读取。
 
-- [完整实验实施计划](../CLINC150_domain_auxiliary_implementation_plan.md)
+- [完整实验实施计划](CLINC150_domain_auxiliary_implementation_plan.md)
 - [代码结构与职责](00_docs/00_code_structure.md)
 - [指标定义](00_docs/03_metric_definitions.md)
 - [冻结状态](00_docs/01_freeze_record.md)
@@ -10,9 +10,9 @@
 
 ## 当前状态
 
-已实现 M01–M11、S00–S09、T01–T03、J01–J02，共 27 个物理代码文件。16 个单元测试、真实数据审计、E2 基线及模型重载一致性已执行；具体结果见变更记录和产物。
+已实现 M01–M11、S00–S09、T01–T03、J01–J02，共 27 个物理代码文件。导师 PR #2 已合并，trans 环境下 19 个单元测试、真实数据审计、E2 基线及模型重载一致性均已通过；具体结果见变更记录和产物。
 
-**15 次正式 BERT 训练、λ 选择和 E5 检测器冻结已完成。** 选定 λ=0.1；`04_frozen.yaml` 记录真实 checkpoint、检测器和验证阈值，当前状态为 `awaiting_supervisor_approval`。导师冻结确认和正式 test 评估尚未执行，E6 门禁已验证有效。验证集结果仅用于开发选择，不是最终泛化性能证据。
+**15 次正式 BERT 训练、λ 选择和修订后的 E5 检测器冻结已完成。** 选定 λ=0.1；新 `04_frozen.yaml` 记录真实 checkpoint、检测器、修订阈值和 IS 正类主 FPR95，当前状态为 `awaiting_supervisor_approval`。旧冻结以 `*_r1_superseded` 保留。导师冻结确认和正式 test 评估尚未执行，E6 门禁已验证有效。验证集结果仅用于开发选择，不是最终泛化性能证据。
 
 ## 环境与复现
 

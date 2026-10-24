@@ -20,7 +20,7 @@
 | Test IS acceptance@val95 | `is_acceptance_at_val95` | 直接按样本计数 | 同一冻结 tau | test 上接纳的 IS / 全部 test IS |
 | OOS recall@val95 | `oos_recall_at_val95` | OOS | 同一冻结 tau | test 上拒绝的 OOS / 全部 test OOS |
 
-在 IS 为正类的 ROC 上：TPR=IS acceptance，FPR=OOS false acceptance。因此 FPR95 与“检出 95% OOS 时的 IS 误拒率”是两个不同方向的工作点。2026-10-24 导师审查后两者都输出：`fpr95_is_positive`（文献常用方向）与 `fpr95_oos_positive`（原课题计划方向）。报告以哪一个为主指标须在 E6 之前与导师确认并写入冻结记录，另一个作为补充；不得在看到 test 结果后再选择。
+在 IS 为正类的 ROC 上：TPR=IS acceptance，FPR=OOS false acceptance。因此 FPR95 与“检出 95% OOS 时的 IS 误拒率”是两个不同方向的工作点。2026-10-24 导师审查后两者都输出：`fpr95_is_positive`（文献常用方向）与 `fpr95_oos_positive`（原课题计划方向）。用户已在 E6 前选择 IS 正类为主指标，OOS 正类作为补充；该选择须写入新冻结记录，不得在看到 test 结果后再更改。
 
 AUROC 使用 OOS 正类与 OOS 分数；FPR95 同时反转标签与分数。不要只反转标签，也不要用 AUROC 的正类约定直接计算 FPR95。
 

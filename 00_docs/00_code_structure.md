@@ -87,8 +87,9 @@
 | `02_environment` | `01_requirements.in` | 直接依赖及版本约束 |
 | `02_environment` | `02_requirements-lock.txt` | 经真实环境验证后锁定的依赖版本 |
 | `02_environment` | `03_environment.yml` | Conda 的 Python 3.11 与 pip 基础环境；其余依赖从锁文件安装 |
+| `02_environment` | `04_trans_freeze.txt` | 正式本地 GPU 运行所用 trans 环境的真实 pip freeze |
 
-实施计划主文件位于上一级：[完整实验计划](../../CLINC150_domain_auxiliary_implementation_plan.md)。只有这份作为实施计划主版本，避免另建内容冲突的副本。
+实施计划主文件位于仓库根目录：[完整实验计划](../CLINC150_domain_auxiliary_implementation_plan.md)。仓库内只维护这一份主版本，避免另建内容冲突的副本。
 
 ## 6. 元信息和产物归档
 

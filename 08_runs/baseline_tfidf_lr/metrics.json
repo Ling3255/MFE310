@@ -5,6 +5,6 @@
   "macro_f1": 0.9045304077057987,
   "accuracy": 0.905,
   "cross_domain_error_rate": 0.044,
-  "within_domain_error_rate": 0.050999999999999976,
+  "within_domain_error_rate": 0.051,
   "domain_macro_f1": 0.9559359108136898
 }

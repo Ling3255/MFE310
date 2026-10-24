@@ -1,9 +1,9 @@
 {
   "source": "IS val + OOS val only",
   "msp": {
-    "threshold": 0.20503613604306295,
-    "tau": 0.20503613604306295,
-    "is_acceptance": 0.95,
+    "threshold": 0.21128418979421262,
+    "tau": 0.21128418979421262,
+    "is_acceptance": 0.952,
     "oos_recall": 0.9,
     "oos_false_acceptance": 0.09999999999999998,
     "min_is_acceptance": 0.95,
@@ -12,12 +12,12 @@
     "n_candidates": 6201,
     "n_tied_optimal_thresholds": 14,
     "threshold_rule": "reject iff score >= tau; accept iff score < tau",
-    "selection_rule": "maximize OOS recall, then choose smallest feasible tau"
+    "selection_rule": "maximize OOS recall, then maximize IS acceptance, then choose smallest tau"
   },
   "mahalanobis": {
-    "threshold": 4590.851898388203,
-    "tau": 4590.851898388203,
-    "is_acceptance": 0.95,
+    "threshold": 4851.325043123473,
+    "tau": 4851.325043123473,
+    "is_acceptance": 0.955,
     "oos_recall": 0.94,
     "oos_false_acceptance": 0.06000000000000005,
     "min_is_acceptance": 0.95,
@@ -26,6 +26,6 @@
     "n_candidates": 6201,
     "n_tied_optimal_thresholds": 32,
     "threshold_rule": "reject iff score >= tau; accept iff score < tau",
-    "selection_rule": "maximize OOS recall, then choose smallest feasible tau"
+    "selection_rule": "maximize OOS recall, then maximize IS acceptance, then choose smallest tau"
   }
 }
