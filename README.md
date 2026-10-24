@@ -16,7 +16,7 @@
 
 ## 第二阶段（E9–E11）
 
-预注册计划见 [`00_docs/06_confirmatory_plan.md`](00_docs/06_confirmatory_plan.md)。简要流程：S10 准备 MASSIVE → `bash 05_jobs/03_train_confirmatory.sh all` → 导师批准 `01_configs/05/06_confirm_*.yaml` → 每个 study 各运行一次 S11 与 S12 `--split test`（先 MASSIVE 后 CLINC）。
+预注册计划见 [`00_docs/06_confirmatory_plan.md`](00_docs/06_confirmatory_plan.md)。E9/E10 训练及获批后的单次 S11/S12 已完成。主检验 MASSIVE H1 为 inconclusive：Dom−CE macro-F1 平均差 −0.295 pp，95% 区间 [−0.941, +0.275] pp，Wilcoxon p=0.1934；H2 也为 inconclusive。CLINC 10 种子复现同样为 inconclusive：平均差 +0.016 pp，区间 [−0.104, +0.138] pp，p=1.0。完整结果在 `09_results/07_confirmatory/*/test/`；E11 可选探索未运行。
 
 ## 环境与复现
 

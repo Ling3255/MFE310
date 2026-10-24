@@ -1,0 +1,122 @@
+{
+  "created_at": "2026-10-24T16:42:11.072152+00:00",
+  "status": "completed",
+  "study": "clinc_seed_replication",
+  "role": "secondary_replication",
+  "study_config_content_sha256": "372880f299717e6b9ca5721692be4aba1fd6de772db0777560c606673157757f",
+  "supervisor_approval": {
+    "approved": true,
+    "confirmed_by": "Supervisor (instructions relayed by the student)",
+    "confirmed_at": "2026-10-24T16:34:15Z",
+    "evidence": "The supervisor's instructions relayed in the project conversation on 2026-10-24 explicitly approve freezing both studies and running MASSIVE S11/S12 once, followed by CLINC S11/S12 once."
+  },
+  "test_reuse_disclosure": "Second use of the CLINC150 test split after the frozen E6 evaluation (seeds 0-2). Hypotheses, lambda, seeds and analysis were fixed before this evaluation; reported as a replication, not independent confirmation.",
+  "has_oos": true,
+  "sample_counts": {
+    "test": 4500,
+    "oos_test": 1000
+  },
+  "mahalanobis": "refit from each run's train_features.npz (train in-scope only); threshold-free metrics only",
+  "files": {
+    "bert_ce_seed0_predictions.csv": {
+      "content_sha256": "c666c6630589838f58babc21d16b6ff4345b2644228f858c606ad784e14ef30c",
+      "run_dir": "08_runs/ce_seed0",
+      "best_checkpoint_sha256": "c7ea329ae1ba7399065427cf9a48e1ce2fc3cb65f7073d6a2949e3d26e472dc2"
+    },
+    "bert_ce_seed1_predictions.csv": {
+      "content_sha256": "ee90f10bb2f172c6b41979f0cd2132775d03ce2b8094883d389e4977ab181de9",
+      "run_dir": "08_runs/ce_seed1",
+      "best_checkpoint_sha256": "089a4ef6890bdd7f124d4c0bb832208633663eec349353ca9eb028addf5aab8b"
+    },
+    "bert_ce_seed2_predictions.csv": {
+      "content_sha256": "8fbb41010ab79ddba304ae81e4cb84516ee32bd1d3449677c5ec8cc487695526",
+      "run_dir": "08_runs/ce_seed2",
+      "best_checkpoint_sha256": "fbf351c77575df787952900b001dcf9ebf75e6eb971e748e8136cbf508e90619"
+    },
+    "bert_ce_seed3_predictions.csv": {
+      "content_sha256": "696c19e9ca2ad02e31dc0197858cea4b49edda8fd9a1c3f738512cedca557ac5",
+      "run_dir": "08_runs/ce_seed3",
+      "best_checkpoint_sha256": "045dd9cefd3c4689a8952437e09cacbf86f88697d57e3f86356abcae0f18278f"
+    },
+    "bert_ce_seed4_predictions.csv": {
+      "content_sha256": "ac23fc6b6cff1989d6ca7d500ecb61fde0c0f4609ac3e8614ce38490d646190e",
+      "run_dir": "08_runs/ce_seed4",
+      "best_checkpoint_sha256": "126bdc9face815bd42292690dec2ada83cb325e08afb933cdb9a5f5c3d0a5242"
+    },
+    "bert_ce_seed5_predictions.csv": {
+      "content_sha256": "d3525cf5a5a22ec7bf80c41d137f90a1a48270f3decc7af3335d85ea5810ce67",
+      "run_dir": "08_runs/ce_seed5",
+      "best_checkpoint_sha256": "80f56e68d8c0e2fd3edf40dbfd7b4f57f52776aa231aef1fb69f0796599d7c12"
+    },
+    "bert_ce_seed6_predictions.csv": {
+      "content_sha256": "a34f3bad18128b53e77d33f3dcfa2c107daa8508d5fe0dff080973edce64b8f8",
+      "run_dir": "08_runs/ce_seed6",
+      "best_checkpoint_sha256": "36a710b3e58a8afe48822f626029d13043347c302a1b8632a3e779727d7d81d2"
+    },
+    "bert_ce_seed7_predictions.csv": {
+      "content_sha256": "9b1009c6694003b6ff80c344bc9d1e66c49655a510c26f3afe4b659e5be784da",
+      "run_dir": "08_runs/ce_seed7",
+      "best_checkpoint_sha256": "3246e9e96de35a6193e82e43d3db96e2a0a081b42f52ef31e801893a5322065c"
+    },
+    "bert_ce_seed8_predictions.csv": {
+      "content_sha256": "ab9abd64e8fe82f8cc6c501926d92b15fc0b8c499a2e90de74f45ed0e642c8fa",
+      "run_dir": "08_runs/ce_seed8",
+      "best_checkpoint_sha256": "1dbfa4bc6d5dfbf56790a61bb11c3305c6021af36b3eb77f05d5441e5b026545"
+    },
+    "bert_ce_seed9_predictions.csv": {
+      "content_sha256": "5e8ec0cf21d3a702fcb03112c97ed2494013c11f9d78040c04b5ba1ac23ed85e",
+      "run_dir": "08_runs/ce_seed9",
+      "best_checkpoint_sha256": "f61a4ec686b5ca1f610960907deee5c345bf037e25545d2e66aef70cf21f2ec2"
+    },
+    "bert_dom_seed0_predictions.csv": {
+      "content_sha256": "b7a19003e0094f91cc9e51a7550b4627f0caef9c7ee802fdb03d3a2dafc20560",
+      "run_dir": "08_runs/dom_lam0p1_seed0",
+      "best_checkpoint_sha256": "5b8d627a65859a5ef161121f0954defb470bb56ef3d214977df760a43ccae81b"
+    },
+    "bert_dom_seed1_predictions.csv": {
+      "content_sha256": "080bc9d00bbd30c8cdadd08eb2dbc48e881c4811540f0abbda0e3cc4c3603604",
+      "run_dir": "08_runs/dom_lam0p1_seed1",
+      "best_checkpoint_sha256": "5dfcfd503f9ffd73777129b96f18688b8e5b31f3711aee4409dffcc62471e9a2"
+    },
+    "bert_dom_seed2_predictions.csv": {
+      "content_sha256": "b1a2c1103291c4d3905e9edeb89e3dcdecadf2d7645b5d37414801922659cbce",
+      "run_dir": "08_runs/dom_lam0p1_seed2",
+      "best_checkpoint_sha256": "499ea4821450e6ce672d8772f22f566b7eecf2b9b86d407d5c0ea57e9693bbc0"
+    },
+    "bert_dom_seed3_predictions.csv": {
+      "content_sha256": "7f4e496b6e9f7f7a9986319f568a92fd12590eae8d8a8bfab4d1cb8ad6083a4d",
+      "run_dir": "08_runs/dom_lam0p1_seed3",
+      "best_checkpoint_sha256": "93ffc2b7639c683d5f3efa4f4a689633cd0cbba2112ccaa2f3c86bcebff50353"
+    },
+    "bert_dom_seed4_predictions.csv": {
+      "content_sha256": "97ed96c584d965f7db7a37c165f8edb847f5eae7b4c516790797f3dfd2fb0621",
+      "run_dir": "08_runs/dom_lam0p1_seed4",
+      "best_checkpoint_sha256": "fc8146cf3631c1064bc62c10356e4ed5f2020cad808468dd434c611986e2b5bf"
+    },
+    "bert_dom_seed5_predictions.csv": {
+      "content_sha256": "b59db70ca0c5febec9a6eacb67d0ee2120c773e523afadf623ddfe33e3ddba45",
+      "run_dir": "08_runs/dom_lam0p1_seed5",
+      "best_checkpoint_sha256": "83132514d72f0821d40cf7db6d39fb092b4e256f3fda659733b664bb97b8c51e"
+    },
+    "bert_dom_seed6_predictions.csv": {
+      "content_sha256": "716f51aeac53647b54e89234d98cdfa00124d0904939571d0cecaf715267cb16",
+      "run_dir": "08_runs/dom_lam0p1_seed6",
+      "best_checkpoint_sha256": "355a4b1a9cade61331aa02cd230628f19aafce92b80becc3eba53102152a4553"
+    },
+    "bert_dom_seed7_predictions.csv": {
+      "content_sha256": "cddcbde650fe2af948015f20ffe0f3d51443831d33f722af2da4332ad2e13e91",
+      "run_dir": "08_runs/dom_lam0p1_seed7",
+      "best_checkpoint_sha256": "3dd0aacc430e1bc588531213e122fc89bf29df4f626b9516e1c4adbf88e08764"
+    },
+    "bert_dom_seed8_predictions.csv": {
+      "content_sha256": "7f5cd67900106d83748e70f354b6ed4b683357489a3ffaf9b03034fb475cddf0",
+      "run_dir": "08_runs/dom_lam0p1_seed8",
+      "best_checkpoint_sha256": "15ebfbd902c3778ede36f813e607cc442a70cff92ba673d0a7ee634766be1458"
+    },
+    "bert_dom_seed9_predictions.csv": {
+      "content_sha256": "f045f484aa371833f61b827a6072b284582257d5f71e515287ae6beef28d5db6",
+      "run_dir": "08_runs/dom_lam0p1_seed9",
+      "best_checkpoint_sha256": "8dd0799effdcdae828e469daec512f34c5f9c82dc508c7dcd5c15670c525896d"
+    }
+  }
+}

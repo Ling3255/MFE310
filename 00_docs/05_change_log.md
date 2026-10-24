@@ -90,3 +90,11 @@
 2. J03 已在同一 RTX 4090/trans 环境完成 E9 新训 14 次和 E10 新训 20 次，共 34 个有效 completed 标记。未传 `--data-root`，未修改基础配置，未删除或替换任何种子。
 3. CLINC val 的 Dom−CE macro-F1 平均差为 −0.000131（−0.013 pp），95% 区间 [−0.001158, 0.000825]，Wilcoxon p=0.5566；MASSIVE val 平均差为 −0.002126（−0.213 pp），区间 [−0.007341, 0.002189]，p=0.2324。两项均为 inconclusive，只作健全性检查，不用于选择设置或决定是否继续。
 4. 训练记录、`07_metadata/massive_en/` 和 `09_results/07_confirmatory/*/val/` 已提交。S11 尚未运行，等待导师审查和批准；E11 可选探索未运行。
+
+## 2026-10-25 E9–E10 获批 test 评估完成
+
+1. 两个 study 配置已记录导师批准并冻结。严格按 MASSIVE S11→S12、CLINC S11→S12 顺序各执行一次，未修改预注册假设、λ、种子或判定规则。
+2. E10 主检验 H1：Dom−CE macro-F1 平均差 −0.002946（−0.295 pp），两层 bootstrap 95% 区间 [−0.009410, 0.002749]（[−0.941, +0.275] pp），Wilcoxon p=0.1934，判定 **inconclusive**。H2 跨领域错误率差 +0.000336（+0.034 pp），也为 inconclusive。外部数据未提供足够证据支持领域辅助提升。
+3. E9 CLINC 10 种子复现：macro-F1 平均差 +0.000155（+0.016 pp），区间 [−0.001041, 0.001377]（[−0.104, +0.138] pp），Wilcoxon p=1.0；跨领域错误率差 −0.000644（−0.064 pp），区间跨 0且 p=0.0547，均为 inconclusive。第一阶段的小幅提升未在 10 种子复现中得到确认。
+4. H3 仅作描述：MSP AUROC 和 MSP FPR95 方向不利，Mahalanobis AUROC 方向有利，Mahalanobis FPR95 区间跨 0；这些次级 OOS 结果不改变 H1/H2 的 inconclusive 判定。
+5. 两个 study 的 evaluation manifest 均为 completed，test 预测和统计已推送。E11 可选探索未运行，不追加种子或分析以改变结论。
