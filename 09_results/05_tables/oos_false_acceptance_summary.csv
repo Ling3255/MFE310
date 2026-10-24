@@ -1,0 +1,15 @@
+model,seed,detector,n_all_oos,n_false_accepted_oos,oos_false_acceptance_rate
+B0,0,msp,1000,419,0.419
+B0,0,mahalanobis,1000,0,0.0
+bert_ce,0,msp,1000,173,0.173
+bert_ce,0,mahalanobis,1000,101,0.101
+bert_ce,1,msp,1000,160,0.16
+bert_ce,1,mahalanobis,1000,115,0.115
+bert_ce,2,msp,1000,165,0.165
+bert_ce,2,mahalanobis,1000,98,0.098
+bert_dom,0,msp,1000,165,0.165
+bert_dom,0,mahalanobis,1000,93,0.093
+bert_dom,1,msp,1000,172,0.172
+bert_dom,1,mahalanobis,1000,114,0.114
+bert_dom,2,msp,1000,165,0.165
+bert_dom,2,mahalanobis,1000,99,0.099

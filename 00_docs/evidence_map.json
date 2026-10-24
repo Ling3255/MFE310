@@ -1,5 +1,190 @@
 {
   "schema_version": 1,
-  "claims": [],
+  "claims": [
+    {
+      "claim_id": "domain_confusion_counts",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_confusion_counts.csv"
+    },
+    {
+      "claim_id": "domain_confusion_row_normalized",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_confusion_row_normalized.csv"
+    },
+    {
+      "claim_id": "domain_confusion_dom_minus_ce",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_confusion_dom_minus_ce.csv"
+    },
+    {
+      "claim_id": "domain_confusion_ce_counts",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_ce_counts.png"
+    },
+    {
+      "claim_id": "domain_confusion_ce_row_normalized",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_ce_row_normalized.png"
+    },
+    {
+      "claim_id": "domain_confusion_dom_counts",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_counts.png"
+    },
+    {
+      "claim_id": "domain_confusion_dom_row_normalized",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_row_normalized.png"
+    },
+    {
+      "claim_id": "domain_confusion_dom_minus_ce_counts",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_minus_ce_counts.png"
+    },
+    {
+      "claim_id": "domain_confusion_dom_minus_ce_row_normalized",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_minus_ce_row_normalized.png"
+    },
+    {
+      "claim_id": "mutually_exclusive_outcomes",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\mutually_exclusive_outcomes.csv"
+    },
+    {
+      "claim_id": "per_domain_intent_f1",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\per_domain_intent_f1.csv"
+    },
+    {
+      "claim_id": "domain_f1",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_f1.csv"
+    },
+    {
+      "claim_id": "mutually_exclusive_outcomes_figure",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\mutually_exclusive_outcomes.png"
+    },
+    {
+      "claim_id": "per_domain_intent_f1_figure",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\per_domain_intent_f1.png"
+    },
+    {
+      "claim_id": "domain_f1_figure",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_f1.png"
+    },
+    {
+      "claim_id": "top_intent_confusions",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\top_intent_confusions.csv"
+    },
+    {
+      "claim_id": "top_intent_confusions_figure",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\top_intent_confusions.png"
+    },
+    {
+      "claim_id": "top_intent_confusions_ce_plus_dom_ranked",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\top_intent_confusions_ce_plus_dom_ranked.csv"
+    },
+    {
+      "claim_id": "error_cases_json",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\06_cases\\error_cases.json"
+    },
+    {
+      "claim_id": "error_cases_table",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\06_cases\\error_cases.csv"
+    },
+    {
+      "claim_id": "oos_false_acceptance_destinations",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\oos_false_acceptance_destinations.csv"
+    },
+    {
+      "claim_id": "oos_false_acceptance_summary",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\oos_false_acceptance_summary.csv"
+    },
+    {
+      "claim_id": "oos_false_acceptance_destinations_figure",
+      "source_prediction": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544\\predictions.csv",
+      "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+      "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+      "script": "04_steps/08_analyze_domains.py",
+      "output_path": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\oos_false_acceptance_destinations.png"
+    }
+  ],
   "note": "No formal test evidence has been generated. S08 appends traceable claims after an approved frozen evaluation."
 }

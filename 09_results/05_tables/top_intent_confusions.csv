@@ -1,0 +1,16 @@
+rank,gold_intent_id,gold_intent,pred_intent_id,pred_intent,gold_domain,pred_domain,same_domain,ce_seed0_errors,ce_seed1_errors,ce_seed2_errors,ce_mean_errors,dom_seed0_errors,dom_seed1_errors,dom_seed2_errors,dom_mean_errors
+1,93,redeem_rewards,104,rewards_balance,credit_cards,credit_cards,True,7,6,6,6.333333333333333,8,6,5,6.333333333333333
+2,85,pin_change,21,change_ai_name,banking,meta,False,5,5,5,5.0,5,5,5,5.0
+3,56,ingredients_list,92,recipe,kitchen_and_dining,kitchen_and_dining,True,5,4,3,4.0,3,3,3,3.0
+4,129,transactions,115,spending_history,banking,banking,True,4,4,4,4.0,4,4,4,4.0
+5,67,meal_suggestion,22,change_language,kitchen_and_dining,meta,False,3,4,3,3.3333333333333335,3,3,3,3.0
+6,0,accept_reservations,101,restaurant_reservation,kitchen_and_dining,kitchen_and_dining,True,3,3,3,3.0,3,3,3,3.0
+7,84,payday,8,bill_due,work,banking,False,3,3,3,3.0,3,3,3,3.0
+8,95,reminder_update,65,make_call,home,utility,False,3,3,3,3.0,3,3,3,3.0
+9,108,schedule_maintenance,79,oil_change_when,auto_and_commute,auto_and_commute,True,3,3,3,3.0,3,3,3,3.0
+10,25,change_volume,146,whisper_mode,meta,meta,True,2,2,4,2.6666666666666665,2,2,3,2.3333333333333335
+11,18,card_declined,32,damaged_card,credit_cards,credit_cards,True,4,2,1,2.3333333333333335,4,2,2,2.6666666666666665
+12,91,pto_used,88,pto_balance,work,work,True,2,2,3,2.3333333333333335,2,2,2,2.0
+13,147,who_do_you_work_for,148,who_made_you,small_talk,small_talk,True,2,2,3,2.3333333333333335,2,2,4,2.6666666666666665
+14,69,measurement_conversion,11,calculator,utility,utility,True,2,2,2,2.0,2,2,2,2.0
+15,79,oil_change_when,78,oil_change_how,auto_and_commute,auto_and_commute,True,2,2,2,2.0,2,2,2,2.0

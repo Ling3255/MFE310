@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-10-24T10:03:21.563639+00:00",
+  "status": "completed",
+  "frozen_config_sha256": "57fb7ffa63e51705cf706ddb33015d7b85c169664630cc4797de14e46f5171a4",
+  "supervisor_approval": {
+    "approved": true,
+    "confirmed_by": "Supervisor (instructions relayed by the student)",
+    "confirmed_at": "2026-10-24T10:00:05Z",
+    "evidence": "The supervisor's stepwise instructions relayed in the project conversation on 2026-10-24 explicitly approve completing the freeze information and running J02 once, followed by S07 and S08."
+  },
+  "sample_counts": {
+    "test": 4500,
+    "oos_test": 1000
+  },
+  "sample_set_hash": "afc33a70b41f0ad2ac5d28b41d329b1c7ae4ec131be1bb46e7aa07baf191bb70",
+  "predictions_sha256": "b5cfee3314d30948f0ae2092069cf3c36cd837abc3c02ee5d174b8352aed8a4b",
+  "protocol": "Frozen artifacts and thresholds only; no test-based selection."
+}

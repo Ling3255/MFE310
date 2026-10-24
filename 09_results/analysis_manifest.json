@@ -1,0 +1,57 @@
+{
+  "created_at": "2026-10-24T10:04:02.563366+00:00",
+  "source_test_run": "G:\\MFE310\\mfe310code\\09_results\\02_test\\frozen_test_20261024T100232031680Z_21544",
+  "domain_files": {
+    "domain_confusion_counts": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_confusion_counts.csv",
+    "domain_confusion_row_normalized": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_confusion_row_normalized.csv",
+    "domain_confusion_dom_minus_ce": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_confusion_dom_minus_ce.csv",
+    "domain_confusion_ce_counts": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_ce_counts.png",
+    "domain_confusion_ce_row_normalized": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_ce_row_normalized.png",
+    "domain_confusion_dom_counts": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_counts.png",
+    "domain_confusion_dom_row_normalized": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_row_normalized.png",
+    "domain_confusion_dom_minus_ce_counts": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_minus_ce_counts.png",
+    "domain_confusion_dom_minus_ce_row_normalized": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_confusion_dom_minus_ce_row_normalized.png",
+    "mutually_exclusive_outcomes": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\mutually_exclusive_outcomes.csv",
+    "per_domain_intent_f1": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\per_domain_intent_f1.csv",
+    "domain_f1": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\domain_f1.csv",
+    "mutually_exclusive_outcomes_figure": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\mutually_exclusive_outcomes.png",
+    "per_domain_intent_f1_figure": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\per_domain_intent_f1.png",
+    "domain_f1_figure": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\domain_f1.png",
+    "top_intent_confusions": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\top_intent_confusions.csv",
+    "top_intent_confusions_figure": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\top_intent_confusions.png",
+    "top_intent_confusions_ce_plus_dom_ranked": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\top_intent_confusions_ce_plus_dom_ranked.csv",
+    "error_cases_json": "G:\\MFE310\\mfe310code\\09_results\\06_cases\\error_cases.json",
+    "error_cases_table": "G:\\MFE310\\mfe310code\\09_results\\06_cases\\error_cases.csv"
+  },
+  "domain_summary": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "n_samples_per_seed": {
+      "0": 4500,
+      "1": 4500,
+      "2": 4500
+    },
+    "n_domains": 10,
+    "n_intents": 150,
+    "top_confusions": 15,
+    "top_order": "CE three-seed mean errors, descending; Dom reuses this order",
+    "outcome_denominator": "all IS test samples",
+    "cases": {
+      "model_seed": 0,
+      "analysis_seed": 20261024,
+      "pool_sizes": {
+        "ce_error_dom_correct": 17,
+        "ce_correct_dom_error": 4
+      },
+      "n_cases": 9
+    }
+  },
+  "oos_files": {
+    "oos_false_acceptance_destinations": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\oos_false_acceptance_destinations.csv",
+    "oos_false_acceptance_summary": "G:\\MFE310\\mfe310code\\09_results\\05_tables\\oos_false_acceptance_summary.csv",
+    "oos_false_acceptance_destinations_figure": "G:\\MFE310\\mfe310code\\09_results\\04_figures\\oos_false_acceptance_destinations.png"
+  }
+}
