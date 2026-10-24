@@ -1,0 +1,94 @@
+experiment: clinc150_domain_auxiliary
+seed_analysis: 20261024
+data:
+  root: ../dataset/massive_en
+  strict_counts: false
+  full_file: data_full.json
+  domains_file: domains.json
+  splits:
+  - train
+  - val
+  - test
+  - oos_train
+  - oos_val
+  - oos_test
+  in_scope_splits:
+  - train
+  - val
+  - test
+  oos_splits:
+  - oos_train
+  - oos_val
+  - oos_test
+  train_split: train
+  validation_split: val
+  test_split: test
+  oos_validation_split: oos_val
+  oos_test_split: oos_test
+  expected_counts:
+    train: 11514
+    val: 2033
+    test: 2974
+    oos_train: 0
+    oos_val: 0
+    oos_test: 0
+  expected_per_intent: null
+metadata_dir: 07_metadata/massive_en
+runs_dir: 08_runs/massive_en
+results_dir: 09_results/massive_en
+model:
+  name: google-bert/bert-base-uncased
+  revision: 86b5e0934494bd15c9632b12f734a8a67f723594
+  num_intents: 60
+  num_domains: 18
+  dropout: 0.1
+  max_length: 64
+  inference_dtype: float32
+training:
+  seeds:
+  - 0
+  - 1
+  - 2
+  learning_rate: 2.0e-05
+  weight_decay: 0.01
+  epochs: 5
+  patience: 2
+  effective_batch_size: 32
+  micro_batch_size: 16
+  gradient_accumulation: 2
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+  num_workers: 0
+  deterministic: true
+  amp: false
+  device: auto
+  local_gpu_approval_record: 07_metadata/local_gpu_approval.md
+selection:
+  metric: macro_f1
+  tolerance: 0.002
+  bootstrap_iterations: 1000
+  bootstrap_seed: 20261024
+  bootstrap_samples_per_intent: 30
+  cases_per_category: 5
+  case_seed: 20261024
+optional_analyses:
+  domain_head_score: false
+  representation_visualization: false
+  oos_false_acceptance_destinations: true
+lambda_domain: 0.0
+seed: 2
+smoke: false
+config_hash: 1181bb5e44ca32fcb0412898b5b3765a266a4b5eafddfacc15ba3c7155521435
+data_hash: 4448cdae1792c359ed05a2ce726591d0d5ae4888633d4dc324415d88583f5a93
+data_hashes:
+  splits:
+    oos_test: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+    oos_train: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+    oos_val: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+    test: b0a146196b43ddc5b3d70989c6cdeeddeb42509725c055bd3ff30537041addd8
+    train: c8c1dcbeaa13c3f1d1e9971e298e48193e75d2e41d34dc49dd81cf0316604c67
+    val: 82b5cdf08dde9951cdaa7c90ef4e09a43a236606415870f0d255ed8ba74058ee
+  combined: 4448cdae1792c359ed05a2ce726591d0d5ae4888633d4dc324415d88583f5a93
+initialization_path: G:\MFE310\mfe310code\08_runs\massive_en\common_initialization_seed2.pt
+initialization_hash: 880830cbfa656918cbd3197ee7ba063fc78fe017e7aee9a65cd419094292db5c
+initialization_file_hash: 358ca6b10518897a592ae9db6beb0f5fd7a7d7e1397449f5d91ec44def576f94

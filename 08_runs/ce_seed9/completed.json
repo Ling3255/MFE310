@@ -1,0 +1,38 @@
+{
+  "status": "completed",
+  "created_at": "2026-10-24T15:03:20.573662+00:00",
+  "lambda_domain": 0.0,
+  "seed": 9,
+  "smoke": false,
+  "best_epoch": 5,
+  "best_val_macro_f1": 0.9685400951647779,
+  "epochs_completed": 5,
+  "config_hash": "72a3bae03c7897e1f2f80e8a8d5b6c0343aa2acc95fa98f629eafee05666b913",
+  "data_hash": "0d3a8580ce116d338a5f530f7662d49a2769cd33f302808d6593a01a444c58c8",
+  "data_hashes": {
+    "splits": {
+      "oos_test": "b831d9d87e7ca6a7bf94bf66cd0fc199fcd5e578e9fb22e73bfdbb9486a6f680",
+      "oos_train": "f76b0d2ad7fb584a0911822b1c2e293ad34095b7ea0dcf874a9a997cb2e9ea88",
+      "oos_val": "ed45f25b33dcbb3202293a0df18c24609403db9112c24e634c6bb5e0e9ca1d88",
+      "test": "4bedc5304ac86e5d301e5c2e31190d07ee3f41f0a52d2e3fc95a03455b7cdb18",
+      "train": "851b95370279aa660c4fdd3a4ee7416d3a9bdb3ef82814cebc905469fa459adb",
+      "val": "57bf6e413dc205132eefa78eaeebe3a81c76736b43ceb61e0dc91a46249ea168"
+    },
+    "combined": "0d3a8580ce116d338a5f530f7662d49a2769cd33f302808d6593a01a444c58c8"
+  },
+  "initialization_hash": "938d41a09f92637c173b2aef1b0f76de58a26f296294c09c412d068d25d71aa3",
+  "initialization_file_hash": "84b2b440564cd84f2892925cabde843d0bb22edb05e8e4c967f6bed8460bd8d5",
+  "best_checkpoint_hash": "825a1f97218f63b9aa29db25bce489b6a9e65e2e198765aa94ada19d3eea05a2",
+  "artifacts": {
+    "config.yaml": "11a87f012be4813436bfd7211f2f8adbeda5e9b4d7efc00e0cc0c32da3e71a08",
+    "environment.json": "ea7f4dcf304bce5cae7ebef4621fdbae1a97c033716d4d57caeb259a2c75bae3",
+    "train_log.jsonl": "0dc44d97a8d599bba391abb8750d204d38f9d33c5eed46154483966898bca2e0",
+    "checkpoint_selection.json": "3523882b8cf1302dc02c16cbad246237030d5f127933be3cf25a97511f14c15e",
+    "sample_order.json": "52723ce2dfa98f2b352d099e4f1ad620dbf5244a6dbe3818b8cd434c9f7cf9a6",
+    "best.pt": "f61a4ec686b5ca1f610960907deee5c345bf037e25545d2e66aef70cf21f2ec2",
+    "last.pt": "c081974af0d958e5845e7af3a2010184fdf1e7fc25ae7c5a4151b9da24291ce6",
+    "train_features.npz": "468b5a91d347766e753db9b6f002eab1b42d0c4723b629273bba9009ba3affaf",
+    "val_features.npz": "b682a2ba18887037773edaa04008c8a8406beec4ed63793ac5dce92bdd5125c1"
+  },
+  "run_dir": "G:\\MFE310\\mfe310code\\08_runs\\ce_seed9"
+}

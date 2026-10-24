@@ -83,3 +83,10 @@
 1. 新增 `00_docs/06_confirmatory_plan.md`：E9 CLINC 10 种子复现、E10 MASSIVE en-US 外部确认（主检验）、E11 可选探索；预注册假设、判定规则（两层 bootstrap 95% CI 与种子层 Wilcoxon 同时满足）、SESOI 0.2 pp 与报告口径。
 2. 新增 M12、S10–S12、J03–J04、T04 与 `01_configs/05`–`09`。S03 改为读取 `data.strict_counts`（默认 true），CLINC 行为与 config_hash 不变，第一阶段运行全部保持有效。
 3. 第一阶段的冻结、E6 预测与统计不受影响；E9 对 CLINC test 的第二次使用已在 `05_confirm_clinc.yaml` 中预先披露。
+
+## 2026-10-25 E9–E10 训练与 val 健全性检查完成
+
+1. PR #4 已合并，预注册方案未修改；trans 环境测试为 **30 passed**。MASSIVE 1.1 的压缩包和内容哈希通过 S10 校验，转换为 train 11,514、val 2,033、test 2,974，18 个场景。
+2. J03 已在同一 RTX 4090/trans 环境完成 E9 新训 14 次和 E10 新训 20 次，共 34 个有效 completed 标记。未传 `--data-root`，未修改基础配置，未删除或替换任何种子。
+3. CLINC val 的 Dom−CE macro-F1 平均差为 −0.000131（−0.013 pp），95% 区间 [−0.001158, 0.000825]，Wilcoxon p=0.5566；MASSIVE val 平均差为 −0.002126（−0.213 pp），区间 [−0.007341, 0.002189]，p=0.2324。两项均为 inconclusive，只作健全性检查，不用于选择设置或决定是否继续。
+4. 训练记录、`07_metadata/massive_en/` 和 `09_results/07_confirmatory/*/val/` 已提交。S11 尚未运行，等待导师审查和批准；E11 可选探索未运行。

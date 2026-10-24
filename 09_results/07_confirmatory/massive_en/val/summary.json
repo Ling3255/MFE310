@@ -1,0 +1,158 @@
+{
+  "created_at": "2026-10-24T15:51:24.360452+00:00",
+  "study": "massive_en_external_replication",
+  "role": "primary_confirmation",
+  "split": "val",
+  "source": "08_runs/*/val_features.npz",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "n_rows": 2033,
+  "n_intents_present": 59,
+  "macro_f1_rule": "average over intents present in gold",
+  "analysis": {
+    "alpha": 0.05,
+    "sesoi_macro_f1": 0.002,
+    "bootstrap_iterations": 2000,
+    "oos_bootstrap_iterations": 1000,
+    "bootstrap_seed": 20261025
+  },
+  "note": "Validation sanity check from saved val features. Not used to choose any setting in a confirmatory study.",
+  "comparisons": [
+    {
+      "treatment": "bert_dom",
+      "lambda_domain": 0.1,
+      "reference": "bert_ce",
+      "metrics": {
+        "macro_f1": {
+          "seed_deltas": {
+            "0": -0.005003616325767624,
+            "1": -0.001349411741223272,
+            "2": 0.007889092433952971,
+            "3": 0.001898029528625167,
+            "4": -0.005261807745622016,
+            "5": -0.00461366669412866,
+            "6": -0.001838307954913354,
+            "7": -0.007209557340539852,
+            "8": 0.0006440328522173688,
+            "9": -0.006414461633177604
+          },
+          "seed_tests": {
+            "n_seeds": 10,
+            "mean": -0.0021259674620576876,
+            "std": 0.004635487965046506,
+            "median": -0.003225987324521007,
+            "n_positive": 3,
+            "t_statistic": -1.450311048632491,
+            "t_pvalue_two_sided": 0.18091171350111437,
+            "wilcoxon_pvalue_two_sided": 0.232421875,
+            "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+          },
+          "bootstrap": {
+            "observed": -0.0021259674620576876,
+            "ci95": [
+              -0.007341200839188553,
+              0.0021890505045689666
+            ],
+            "n_boot": 2000,
+            "seed": 20261025
+          },
+          "decision": {
+            "verdict": "inconclusive",
+            "alpha": 0.05,
+            "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha",
+            "sesoi": 0.002,
+            "meets_sesoi": false
+          }
+        },
+        "cross_domain_error_rate": {
+          "seed_deltas": {
+            "0": 0.0,
+            "1": 0.0004918839153959659,
+            "2": 0.0009837678307919318,
+            "3": -0.0004918839153959659,
+            "4": -0.0004918839153959659,
+            "5": -0.0014756517461878976,
+            "6": -0.0014756517461878976,
+            "7": 0.0024594195769798433,
+            "8": -0.0019675356615838635,
+            "9": 0.0
+          },
+          "seed_tests": {
+            "n_seeds": 10,
+            "mean": -0.00019675356615838496,
+            "std": 0.0013157830888826955,
+            "median": -0.00024594195769798294,
+            "n_positive": 3,
+            "t_statistic": -0.4728662437434559,
+            "t_pvalue_two_sided": 0.6475660533771004,
+            "wilcoxon_pvalue_two_sided": 0.609375,
+            "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+          },
+          "bootstrap": {
+            "observed": -0.00019675356615838496,
+            "ci95": [
+              -0.0019183472700442683,
+              0.0014756517461878976
+            ],
+            "n_boot": 2000,
+            "seed": 20261026
+          },
+          "decision": {
+            "verdict": "inconclusive",
+            "alpha": 0.05,
+            "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+          }
+        },
+        "within_domain_error_rate": {
+          "seed_deltas": {
+            "0": 0.0009837678307919352,
+            "1": 0.001475651746187901,
+            "2": 0.0004918839153959693,
+            "3": 0.0,
+            "4": 0.0004918839153959659,
+            "5": 0.001475651746187901,
+            "6": 0.0009837678307919352,
+            "7": 0.0014756517461878976,
+            "8": 0.0009837678307919318,
+            "9": 0.0
+          },
+          "seed_tests": {
+            "n_seeds": 10,
+            "mean": 0.0008362026561731437,
+            "std": 0.0005703402895860333,
+            "median": 0.0009837678307919335,
+            "n_positive": 8,
+            "t_statistic": 4.6363636363636385,
+            "t_pvalue_two_sided": 0.0012255637610538155,
+            "wilcoxon_pvalue_two_sided": 0.0078125,
+            "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+          },
+          "bootstrap": {
+            "observed": 0.0008362026561731437,
+            "ci95": [
+              -0.00024594195769798364,
+              0.00191834727004427
+            ],
+            "n_boot": 2000,
+            "seed": 20261027
+          },
+          "decision": {
+            "verdict": "inconclusive",
+            "alpha": 0.05,
+            "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+          }
+        }
+      }
+    }
+  ]
+}
