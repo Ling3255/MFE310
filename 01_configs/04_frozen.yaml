@@ -1,5 +1,5 @@
 schema_version: 1
-status: awaiting_supervisor_approval
+status: approved_for_single_test_evaluation
 frozen: true
 created_at: '2026-10-24T08:47:19.810539+00:00'
 base_config: 01_configs/01_base.yaml
@@ -291,10 +291,10 @@ optional_analyses:
   representation_visualization: false
   oos_false_acceptance_destinations: true
 supervisor_approval:
-  approved: false
-  confirmed_by: null
-  confirmed_at: null
-  evidence: null
+  approved: true
+  confirmed_by: Supervisor (instructions relayed by the student)
+  confirmed_at: '2026-10-24T10:00:05Z'
+  evidence: The supervisor's stepwise instructions relayed in the project conversation on 2026-10-24 explicitly approve completing the freeze information and running J02 once, followed by S07 and S08.
 test_history:
   domain_aux_design_used_test_results: false
   other_group_members_previously_inspected_test: true

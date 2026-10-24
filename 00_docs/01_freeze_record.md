@@ -2,7 +2,7 @@
 
 Created: 2026-10-24T08:47:19.810539+00:00
 
-Status: **awaiting supervisor approval; test evaluation is blocked**.
+Status: **approved by the supervisor for one frozen test evaluation**.
 
 Selected lambda: `0.1` (validation only).
 
@@ -23,6 +23,6 @@ The primary report metric is `fpr95_is_positive`: OOS false acceptance when IS a
 
 ## Supervisor confirmation
 
-Set `supervisor_approval.approved: true` in `01_configs/04_frozen.yaml` only after actual confirmation, and fill in `confirmed_by`, ISO `confirmed_at`, and `evidence`. S06 checks all four fields and all artifact hashes.
+Approved at `2026-10-24T10:00:05Z` by the supervisor through instructions relayed by the student in the project conversation. The instructions explicitly direct the student to complete the approval fields, run J02 once, then run S07 and S08. No external approval document is claimed. S06 checks all approval fields and artifact hashes and permits only one evaluation of this frozen configuration.
 
 Any protocol change after test inspection requires a new recorded revision and disclosure; do not overwrite this record.

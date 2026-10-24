@@ -1,3 +1,5 @@
+# Formal local GPU runs use the existing trans environment; see 04_trans_freeze.txt
+# for the actual package versions, which take precedence over these development bounds.
 torch>=2.2,<3
 transformers>=4.40,<5
 scikit-learn>=1.4,<2

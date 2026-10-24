@@ -56,3 +56,9 @@
 4. E6 前已确定主指标为 `fpr95_is_positive`，补充 `fpr95_oos_positive`，已写入冻结配置、冻结记录、指标文档和仓库主计划。
 5. 逐份复核 15 个 checkpoint_selection：实际有 **9 次**最佳 epoch 为最后一个 epoch，并非审查建议中的 8 次。CE 验证均值高于所有正 λ；λ=0.1 只表示正 λ 中最佳及容差规则下的选择。
 6. 已提交仓库主计划、`02_environment/04_trans_freeze.txt` 和基于实际沟通记录的本地 GPU 批准说明。trans 环境完整测试为 **19 passed**，`pip check` 无冲突。正式 test、bootstrap、领域分析和演示仍未运行。
+
+## 2026-10-24 E5 批准与单次 test 许可
+
+1. 导师通过学生转达明确下一步指示，批准填写冻结信息并依次运行 J02、S07、S08。`04_frozen.yaml` 已如实记录 confirmed_by、confirmed_at 和证据；证据是项目对话中的导师指示转述，不虚构外部审批文件。
+2. `evaluation.primary_fpr95` 和 `secondary_fpr95` 是在 S05 生成冻结配置后手工加入的字段，用于落实 E6 前的 IS 正类主指标决定；检测器、阈值和模型未因此改变。
+3. `01_requirements.in` 已注明正式本地 GPU 运行的实际包版本以 `04_trans_freeze.txt` 为准。
