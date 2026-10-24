@@ -9,16 +9,6 @@ B0,0,msp,6,small_talk,65,0.065,0.15513126491646778,1000,419
 B0,0,msp,7,travel,27,0.027,0.06443914081145585,1000,419
 B0,0,msp,8,utility,80,0.08,0.1909307875894988,1000,419
 B0,0,msp,9,work,54,0.054,0.1288782816229117,1000,419
-B0,0,mahalanobis,0,auto_and_commute,0,0.0,0.0,1000,0
-B0,0,mahalanobis,1,banking,0,0.0,0.0,1000,0
-B0,0,mahalanobis,2,credit_cards,0,0.0,0.0,1000,0
-B0,0,mahalanobis,3,home,0,0.0,0.0,1000,0
-B0,0,mahalanobis,4,kitchen_and_dining,0,0.0,0.0,1000,0
-B0,0,mahalanobis,5,meta,0,0.0,0.0,1000,0
-B0,0,mahalanobis,6,small_talk,0,0.0,0.0,1000,0
-B0,0,mahalanobis,7,travel,0,0.0,0.0,1000,0
-B0,0,mahalanobis,8,utility,0,0.0,0.0,1000,0
-B0,0,mahalanobis,9,work,0,0.0,0.0,1000,0
 bert_ce,0,msp,0,auto_and_commute,22,0.022,0.12716763005780346,1000,173
 bert_ce,0,msp,1,banking,18,0.018,0.10404624277456648,1000,173
 bert_ce,0,msp,2,credit_cards,4,0.004,0.023121387283236993,1000,173

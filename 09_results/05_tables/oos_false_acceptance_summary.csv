@@ -1,6 +1,5 @@
 model,seed,detector,n_all_oos,n_false_accepted_oos,oos_false_acceptance_rate
 B0,0,msp,1000,419,0.419
-B0,0,mahalanobis,1000,0,0.0
 bert_ce,0,msp,1000,173,0.173
 bert_ce,0,mahalanobis,1000,101,0.101
 bert_ce,1,msp,1000,160,0.16

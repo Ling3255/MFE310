@@ -7,7 +7,7 @@
     "ce_correct_dom_error": 4
   },
   "sampling": "uniform without replacement within each seed-0 pool; all rows when pool is smaller",
-  "interpretation_status": "blank for manual analysis",
+  "interpretation_status": "manually reviewed after frozen analysis; interpretations are seed-0 case explanations rather than general causal claims",
   "cases": [
     {
       "category": "ce_error_dom_correct",
@@ -29,7 +29,7 @@
       "dom_pred_domain_id": 4,
       "dom_pred_domain": "kitchen_and_dining",
       "dom_msp_score": 0.7950768495772943,
-      "interpretation": ""
+      "interpretation": "Same-domain repair: the buffet comment concerns restaurant reviews rather than a reservation. Dom preserves the correct domain and distinguishes the fine-grained intent."
     },
     {
       "category": "ce_error_dom_correct",
@@ -51,7 +51,7 @@
       "dom_pred_domain_id": 3,
       "dom_pred_domain": "home",
       "dom_msp_score": 0.8138245118337122,
-      "interpretation": ""
+      "interpretation": "Cross-domain repair: the request is a reminder to pick someone up later. CE incorrectly treats it as small talk while Dom assigns the home reminder intent."
     },
     {
       "category": "ce_error_dom_correct",
@@ -73,7 +73,7 @@
       "dom_pred_domain_id": 9,
       "dom_pred_domain": "work",
       "dom_msp_score": 0.8445821526794348,
-      "interpretation": ""
+      "interpretation": "Cross-domain repair: despite the financial wording and typos the request concerns changing an insurance policy. Dom selects the work-domain insurance_change intent rather than credit_limit_change."
     },
     {
       "category": "ce_error_dom_correct",
@@ -95,7 +95,7 @@
       "dom_pred_domain_id": 4,
       "dom_pred_domain": "kitchen_and_dining",
       "dom_msp_score": 0.7367236654611802,
-      "interpretation": ""
+      "interpretation": "Same-domain repair: the user asks which ingredients are needed for sushi. Dom distinguishes an ingredients list from a request for recipe instructions."
     },
     {
       "category": "ce_error_dom_correct",
@@ -117,7 +117,7 @@
       "dom_pred_domain_id": 9,
       "dom_pred_domain": "work",
       "dom_msp_score": 0.5565095621764935,
-      "interpretation": ""
+      "interpretation": "Same-domain repair: the employment tax form is specifically a W2 request. Dom resolves the fine-grained label instead of the broader taxes intent."
     },
     {
       "category": "ce_correct_dom_error",
@@ -139,7 +139,7 @@
       "dom_pred_domain_id": 7,
       "dom_pred_domain": "travel",
       "dom_msp_score": 0.38261961817745427,
-      "interpretation": ""
+      "interpretation": "Cross-domain regression: visa here refers to a payment card rather than a travel visa. Dom follows the more salient travel meaning and illustrates how domain emphasis can hurt ambiguous cases."
     },
     {
       "category": "ce_correct_dom_error",
@@ -161,7 +161,7 @@
       "dom_pred_domain_id": 3,
       "dom_pred_domain": "home",
       "dom_msp_score": 0.5492468388730624,
-      "interpretation": ""
+      "interpretation": "Same-domain regression: the utterance asks about calendar information rather than explicitly requesting an update. Dom confuses the calendar and calendar_update intents."
     },
     {
       "category": "ce_correct_dom_error",
@@ -183,7 +183,7 @@
       "dom_pred_domain_id": 1,
       "dom_pred_domain": "banking",
       "dom_msp_score": 0.7677081472332536,
-      "interpretation": ""
+      "interpretation": "Same-domain regression: changing the account code is a PIN change rather than an account freeze. Dom selects the wrong banking security action."
     },
     {
       "category": "ce_correct_dom_error",
@@ -205,7 +205,7 @@
       "dom_pred_domain_id": 2,
       "dom_pred_domain": "credit_cards",
       "dom_msp_score": 0.4724148713955514,
-      "interpretation": ""
+      "interpretation": "Same-domain regression: the user wants to redeem points for a flight rather than check a rewards balance. Dom confuses redemption with balance information within credit_cards."
     }
   ]
 }
