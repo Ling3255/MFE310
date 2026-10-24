@@ -34,3 +34,16 @@
 4. S05 为 6 个正式 BERT 模型分别拟合 train-only 类内残差 Ledoit–Wolf Mahalanobis，并用 IS val+OOS val 选择 MSP/Mahalanobis 阈值；B0 只使用 MSP。所有阈值满足 IS acceptance≥0.95。冻结文件为 `01_configs/04_frozen.yaml`，状态 `awaiting_supervisor_approval`，未批准时 S06 已实测拒绝执行。
 5. λ 曲线首次生成时发现 `best_val_macro_f1` 字段别名缺失；已在 M10 修正并单独重跑 S04，未重训模型。批量脚本曾因等价相对/绝对数据路径产生不同配置哈希而在训练前停止；后续保持原始相对路径配置完成矩阵，未覆盖旧结果。该路径规范化问题留待后续修正，不影响本次数据和模型内容。
 6. 正式 test、bootstrap、领域错误分析和单句冻结演示仍未运行，等待导师对 E5 冻结记录的明确确认。本地 GPU 批准不代替 E5 确认。
+
+## 2026-10-24 导师审查修订（E5 之后、E6 之前）
+
+审查依据：GitHub issue #1 与分支 `supervisor-review`。不需要重训；15 次正式训练、S04 的 λ=0.1 选择均保持有效。
+
+1. `detectors.select_threshold`：OOS 召回平局时改为取 IS 接纳率最高的阈值（原规则取最小 tau，现有冻结阈值平局数 2–38 个，IS 接纳均被压在 0.95 边界）。需重跑 S05。
+2. `evaluation.oos_metrics`：增加原计划方向 `fpr95_oos_positive`；`within_domain_error_rate` 改为直接计数，消除浮点残差。只影响 S02 指标末位和尚未运行的 S06。
+3. 数据 manifest 增加与换行无关的 `content_sha256`；S06 核验实际数据文件，并拒绝对同一冻结配置第二次 test 评估。需重跑 S01，随后重跑 S05。
+4. S05 冻结文件路径改为 POSIX 格式（原为 Windows 反斜杠，非 Windows 平台无法读取）。
+5. S08 额外输出按 CE+Dom 合计错误排序的 top-15 表，用于检查只按 CE 排序带来的均值回归偏差；原表保留。
+6. S02 支持 `--data-root`；S03 未加 `--allow-download` 时设置 `HF_HUB_OFFLINE=1`，同时阻止权重下载（不改变 config_hash）。
+7. B0 的 `pipeline.joblib` 由 scikit-learn 1.9.1 保存，而正式 `trans` 环境为 1.7.2，跨版本反序列化不受支持；须在 `trans` 环境重跑 S02，再重跑 S05。
+8. 旧冻结文件改名保留为 `01_configs/04_frozen_r1_superseded.yaml`，不得删除；修订原因即本节。

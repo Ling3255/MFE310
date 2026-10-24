@@ -80,7 +80,7 @@ def classification_metrics(
     cross_rate = float(cross.sum() / total)
     if int(correct.sum() + cross.sum() + within.sum()) != total:
         raise ValueError("classification outcomes are not mutually exclusive")
-    within_rate = 1.0 - accuracy - cross_rate
+    within_rate = float(within.sum() / total)
     domain_labels = np.unique(domains)
     lookup = np.full(int(domains.max()) + 1, -1, dtype=np.int64)
     lookup[domain_labels] = np.arange(len(domain_labels))
@@ -144,7 +144,11 @@ def _score_pair(is_scores: Any, oos_scores: Any) -> tuple[np.ndarray, np.ndarray
 
 
 def oos_metrics(is_scores: Any, oos_scores: Any, target_tpr: float = 0.95) -> dict[str, Any]:
-    """AUROC uses OOS-positive s; FPR95 uses IS-positive acceptance -s."""
+    """AUROC uses OOS-positive s; FPR95 is reported in both directions.
+
+    ``fpr95_is_positive``: OOS false acceptance when >=95% IS is accepted (OOD literature).
+    ``fpr95_oos_positive``: IS false rejection when >=95% OOS is detected (project plan).
+    """
     in_scope, out_of_scope = _score_pair(is_scores, oos_scores)
     if not 0 < target_tpr <= 1:
         raise ValueError("target_tpr must be in (0, 1]")
@@ -157,13 +161,17 @@ def oos_metrics(is_scores: Any, oos_scores: Any, target_tpr: float = 0.95) -> di
     if len(eligible) == 0:
         raise ValueError("ROC has no point reaching target_tpr")
     index = int(eligible[0])
+    oos_fpr, oos_tpr, _ = roc_curve(oos_labels, scores, drop_intermediate=False)
+    oos_index = int(np.flatnonzero(oos_tpr >= target_tpr)[0])
     return {
         "auroc_oos": float(roc_auc_score(oos_labels, scores)),
         "fpr95_is_positive": float(fpr[index]),
         "fpr95_actual_is_acceptance": float(tpr[index]),
         "fpr95_acceptance_threshold": float(thresholds[index]),
         "fpr95_score_upper_bound": float(-thresholds[index]),
-        "positive_class": "OOS for AUROC; IS for FPR95",
+        "fpr95_oos_positive": float(oos_fpr[oos_index]),
+        "fpr95_oos_positive_actual_oos_recall": float(oos_tpr[oos_index]),
+        "positive_class": "OOS for AUROC; IS for fpr95_is_positive; OOS for fpr95_oos_positive",
         "score_direction": "OOS score increases with OOS likelihood; ROC acceptance=-score",
         "target_tpr": float(target_tpr),
     }

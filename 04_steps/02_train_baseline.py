@@ -18,10 +18,11 @@ from clinc_domain_aux.data import load_datasets
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="01_configs/02_baseline.yaml")
+    parser.add_argument("--data-root", help="Override the configured CLINC data directory")
     args = parser.parse_args()
     config = load_config(args.config)
     base = load_config(config.get("base_config", "01_configs/01_base.yaml"))
-    datasets = load_datasets(base["data"]["root"], strict_counts=True)
+    datasets = load_datasets(args.data_root or base["data"]["root"], strict_counts=True)
     output = resolve_path(config["output_dir"])
     completed = train_baseline(datasets, config, output)
     validation_dir = resolve_path(config["validation_results_dir"])

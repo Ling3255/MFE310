@@ -343,7 +343,11 @@ def _top_confusions(
     id_to_domain: Mapping[int, str],
     intent_to_domain: np.ndarray,
     top_k: int,
+    rank_by: str = "ce",
 ) -> list[dict[str, Any]]:
+    """Rank by CE errors (plan) or by CE+Dom errors (selection-bias check)."""
+    if rank_by not in ("ce", "ce_plus_dom"):
+        raise ValueError("rank_by must be 'ce' or 'ce_plus_dom'")
     seeds = sorted(aligned)
     counts: dict[str, dict[int, dict[tuple[int, int], int]]] = {"ce": {}, "dom": {}}
     for model in counts:
@@ -354,11 +358,12 @@ def _top_confusions(
                 if gold_id != pred_id:
                     pair = (int(gold_id), int(pred_id))
                     counts[model][seed][pair] = counts[model][seed].get(pair, 0) + 1
-    pairs = set().union(*(set(counts["ce"][seed]) for seed in seeds))
+    ranked_models = ("ce",) if rank_by == "ce" else ("ce", "dom")
+    pairs = set().union(*(set(counts[model][seed]) for model in ranked_models for seed in seeds))
     ordered = sorted(
         pairs,
         key=lambda pair: (
-            -float(np.mean([counts["ce"][seed].get(pair, 0) for seed in seeds])),
+            -sum(float(np.mean([counts[model][seed].get(pair, 0) for seed in seeds])) for model in ranked_models),
             id_to_intent[pair[0]],
             id_to_intent[pair[1]],
         ),
@@ -672,6 +677,10 @@ def analyze_domain_predictions(
     write_csv(top_path, top_rows, fieldnames=top_fields)
     files["top_intent_confusions"] = str(top_path)
     files["top_intent_confusions_figure"] = _plot_top_confusions(top_rows, Path(figures_dir) / "top_intent_confusions.png")
+    symmetric_rows = _top_confusions(aligned, id_to_intent, id_to_domain, intent_to_domain, top_k, rank_by="ce_plus_dom")
+    symmetric_path = Path(tables_dir) / "top_intent_confusions_ce_plus_dom_ranked.csv"
+    write_csv(symmetric_path, symmetric_rows, fieldnames=top_fields)
+    files["top_intent_confusions_ce_plus_dom_ranked"] = str(symmetric_path)
 
     cases = sample_error_cases(
         ce_rows, dom_rows, label_to_id, domain_to_id, test_rows, cases_dir,

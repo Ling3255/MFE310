@@ -157,7 +157,11 @@ def select_threshold(
     oos_scores: Any,
     min_is_acceptance: float = 0.95,
 ) -> dict[str, Any]:
-    """Maximize validation OOS recall under the IS constraint, then choose minimum tau."""
+    """Maximize validation OOS recall under the IS constraint.
+
+    Ties in OOS recall keep the threshold with the highest IS acceptance, so the
+    rule does not reject extra in-scope samples for no OOS gain.
+    """
     in_scope = np.asarray(is_scores, dtype=np.float64)
     out_of_scope = np.asarray(oos_scores, dtype=np.float64)
     if in_scope.ndim != 1 or out_of_scope.ndim != 1 or len(in_scope) == 0 or len(out_of_scope) == 0:
@@ -184,7 +188,9 @@ def select_threshold(
     if not feasible:
         raise ValueError("no threshold satisfies the IS acceptance constraint")
     best_recall = max(row[2] for row in feasible)
-    tau, is_acceptance, oos_recall, oos_fa = min(row for row in feasible if row[2] == best_recall)
+    tied = [row for row in feasible if row[2] == best_recall]
+    best_acceptance = max(row[1] for row in tied)
+    tau, is_acceptance, oos_recall, oos_fa = min(row for row in tied if row[1] == best_acceptance)
     return {
         "threshold": tau,
         "tau": tau,
@@ -195,7 +201,7 @@ def select_threshold(
         "n_is": len(in_scope),
         "n_oos": len(out_of_scope),
         "n_candidates": len(candidates),
-        "n_tied_optimal_thresholds": sum(row[2] == best_recall for row in feasible),
+        "n_tied_optimal_thresholds": len(tied),
         "threshold_rule": "reject iff score >= tau; accept iff score < tau",
-        "selection_rule": "maximize OOS recall, then choose smallest feasible tau",
+        "selection_rule": "maximize OOS recall, then maximize IS acceptance, then choose smallest tau",
     }

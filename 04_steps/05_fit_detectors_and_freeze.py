@@ -23,9 +23,9 @@ from clinc_domain_aux.training import predict_records
 
 def relative(path: Path) -> str:
     try:
-        return str(path.resolve().relative_to(PROJECT_ROOT))
+        return path.resolve().relative_to(PROJECT_ROOT).as_posix()
     except ValueError:
-        return str(path.resolve())
+        return path.resolve().as_posix()
 
 
 def load_npz(path: Path) -> dict[str, np.ndarray]:

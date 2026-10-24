@@ -1,4 +1,4 @@
-# E5 freeze record
+# E5 freeze record (r1, superseded 2026-10-24 by supervisor review; see 05_change_log.md)
 
 Created: 2026-10-24T08:00:43.391001+00:00
 
