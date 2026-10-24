@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -26,6 +27,9 @@ def main() -> None:
     args = parser.parse_args()
     if args.lambda_domain < 0:
         parser.error("--lambda-domain must be non-negative")
+    if not args.allow_download:
+        # Also covers BertModel.from_pretrained; kept out of the config so config_hash is unchanged.
+        os.environ["HF_HUB_OFFLINE"] = "1"
     config = load_config(args.config)
     if args.data_root:
         config["data"]["root"] = args.data_root

@@ -14,12 +14,13 @@
 |---|---|---|---|---|
 | AUROC_OOS | `auroc_oos` | OOS | s 越大越正 | OOS 与 IS 的排序区分能力 |
 | FPR@95TPR (IS positive) | `fpr95_is_positive` | IS | a=-s，ROC 工作点 | 接纳至少 95% IS 时的 OOS 误接纳比例 |
+| FPR@95TPR (OOS positive) | `fpr95_oos_positive` | OOS | s，ROC 工作点 | 检出至少 95% OOS 时的 IS 误拒比例（原课题计划的定义） |
 | FPR95 实际 IS 接纳率 | `fpr95_actual_is_acceptance` | IS | 同一 ROC 工作点 | ties 或离散样本使目标未必恰好等于 0.95 |
 | OOS_FA@val95 | `oos_fa_at_val95` | 直接按样本计数 | 冻结的 val tau | test 上接纳的 OOS / 全部 test OOS |
 | Test IS acceptance@val95 | `is_acceptance_at_val95` | 直接按样本计数 | 同一冻结 tau | test 上接纳的 IS / 全部 test IS |
 | OOS recall@val95 | `oos_recall_at_val95` | OOS | 同一冻结 tau | test 上拒绝的 OOS / 全部 test OOS |
 
-在 IS 为正类的 ROC 上：TPR=IS acceptance，FPR=OOS false acceptance。因此 FPR95 与“检出 95% OOS 时的 IS 误拒率”是两个不同方向的工作点。本项目只将前者称为 FPR@95TPR。
+在 IS 为正类的 ROC 上：TPR=IS acceptance，FPR=OOS false acceptance。因此 FPR95 与“检出 95% OOS 时的 IS 误拒率”是两个不同方向的工作点。2026-10-24 导师审查后两者都输出：`fpr95_is_positive`（文献常用方向）与 `fpr95_oos_positive`（原课题计划方向）。报告以哪一个为主指标须在 E6 之前与导师确认并写入冻结记录，另一个作为补充；不得在看到 test 结果后再选择。
 
 AUROC 使用 OOS 正类与 OOS 分数；FPR95 同时反转标签与分数。不要只反转标签，也不要用 AUROC 的正类约定直接计算 FPR95。
 
@@ -33,6 +34,8 @@ FPR95 参考常用 OOD 接纳方向，例如 ODIN：<https://arxiv.org/abs/1706.
 4. 保存实际 TPR 和该描述性工作点，不能把这一 test 工作点写回运行阈值文件。
 5. 如果要对应内部 `s < tau` 的严格接纳规则，可取 tau 为该 s 边界向正无穷方向的相邻可表示数，确保边界样本纳入；优先直接按 ROC 定义计数，避免不一致的 <=/<。
 
+验证阈值选择规则：在 IS val 接纳率 ≥ 0.95 的候选中最大化 OOS val 召回；召回相同时取 IS 接纳率最高者，再相同时取最小 tau（2026-10-24 修订，原规则直接取最小 tau，会无谓降低 IS 接纳率）。
+
 FPR95 使用测试分数描述曲线的标准工作点，允许计算但不能用于选择模型或运行阈值。E5 的阈值只在 val 选取，两者必须分别导出、分别命名。
 
 ## 4. 手算验收例子
@@ -41,7 +44,7 @@ FPR95 使用测试分数描述曲线的标准工作点，允许计算但不能�
 
 给 20 条 IS 设置 s 分数 `0.01,0.02,...,0.20`，5 条 OOS 分数设为 `0.05,0.18,0.30,0.40,0.50`。达到 95% IS 接纳时，需要接纳前 19 条 IS（s<=0.19）；其中接纳了 2 条 OOS，所以 `FPR95=2/5=0.40`。
 
-若在另一个验证集选出的冻结阈值为 tau=0.175，则这份人工 test 中只接纳 17 条 IS 和 1 条 OOS，得到 `IS acceptance@val95=0.85`、`OOS_FA@val95=0.20`。这说明验证时满足 95% 接纳并不保证 test 也达到 95%；两个 OOS 误接纳指标不必相等。
+若在另一个验证集选出的冻结阈值为 tau=0.175，则这份人工 test 中只接纳 17 条 IS 和 1 条 OOS，得到 `IS acceptance@val95=0.85`、`OOS_FA@val95=0.20`。同一夹具下 `fpr95_oos_positive=0.80`：检出全部 5 条 OOS 需要 s≥0.05，同时误拒 16/20 条 IS。这说明验证时满足 95% 接纳并不保证 test 也达到 95%；两个 OOS 误接纳指标不必相等。
 
 测试还应覆盖：所有分数相同、目标边界有 ties、分数方向反转、样本重排不改变结果，以及 IS/OOS 某一类缺失时报错。
 

@@ -7,7 +7,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Iterator, Mapping, Sequence
 
-from .common import git_commit, resolve_path, sha256_file, utc_now, write_csv, write_json
+from .common import content_sha256, git_commit, resolve_path, sha256_file, utc_now, write_csv, write_json
 
 SPLITS = ("train", "val", "test", "oos_train", "oos_val", "oos_test")
 IN_SCOPE_SPLITS = ("train", "val", "test")
@@ -320,8 +320,8 @@ def _write_metadata(
         "generated_at": utc_now(),
         "strict_counts": strict_counts,
         "files": {
-            "data_full.json": {"sha256": sha256_file(data_path)},
-            "domains.json": {"sha256": sha256_file(domains_path)},
+            "data_full.json": {"sha256": sha256_file(data_path), "content_sha256": content_sha256(data_path)},
+            "domains.json": {"sha256": sha256_file(domains_path), "content_sha256": content_sha256(domains_path)},
         },
         "license": {
             "name": "Creative Commons Attribution 3.0 Unported (CC BY 3.0)",

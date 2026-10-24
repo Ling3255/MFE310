@@ -108,6 +108,12 @@ def sha256_file(path: str | os.PathLike[str]) -> str:
     return digest.hexdigest()
 
 
+def content_sha256(path: str | os.PathLike[str]) -> str:
+    """SHA-256 of a text file with CRLF normalized to LF, stable across git autocrlf."""
+    with resolve_path(path).open("rb") as handle:
+        return sha256_bytes(handle.read().replace(b"\r\n", b"\n"))
+
+
 def stable_hash(value: Any) -> str:
     encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")
     return sha256_bytes(encoded)

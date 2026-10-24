@@ -193,3 +193,29 @@ def test_seed_statistics_and_exact_overlap_sensitivity() -> None:
     sensitivity = train_test_overlap_sensitivity(rows, ["same"], [0, 0], num_intents=2)
     assert sensitivity["n_remaining"] == 1
     assert sensitivity["metrics"]["macro_f1"] == pytest.approx(0.5)
+
+
+def test_threshold_tie_break_keeps_highest_is_acceptance() -> None:
+    # Any tau in (2.4, 3.0] detects every OOS; the smallest feasible tau (0.94) would reject 5 IS for nothing.
+    in_scope = np.r_[np.arange(95) * 0.01, [2.0, 2.1, 2.2, 2.3, 2.4]]
+    result = select_threshold(in_scope, [3.0, 3.5, 4.0])
+    assert result["oos_recall"] == 1.0
+    assert result["is_acceptance"] == 1.0
+    assert result["threshold"] == np.nextafter(2.4, np.inf)
+
+
+def test_fpr95_oos_positive_hand_example() -> None:
+    # Detecting all 5 OOS (>=95%) needs s >= 0.05, which also rejects 16 of 20 IS (0.05..0.20).
+    in_scope, out_of_scope = manual_oos_fixture()
+    result = oos_metrics(in_scope, out_of_scope)
+    assert result["fpr95_oos_positive"] == pytest.approx(0.8)
+    assert result["fpr95_oos_positive_actual_oos_recall"] == 1.0
+    assert result["fpr95_is_positive"] == pytest.approx(0.4)
+
+
+def test_content_hash_ignores_crlf(tmp_path) -> None:
+    from clinc_domain_aux.common import content_sha256
+
+    (tmp_path / "lf.json").write_bytes(b'{"a": 1}\n{"b": 2}\n')
+    (tmp_path / "crlf.json").write_bytes(b'{"a": 1}\r\n{"b": 2}\r\n')
+    assert content_sha256(tmp_path / "lf.json") == content_sha256(tmp_path / "crlf.json")

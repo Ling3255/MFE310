@@ -14,7 +14,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "03_src"))
 
 from clinc_domain_aux.baseline import load_baseline, predict_scores
 from clinc_domain_aux.common import (
-    load_config, make_run_id, read_json, resolve_path, sha256_file, stable_hash,
+    content_sha256, load_config, make_run_id, read_json, resolve_path, sha256_file, stable_hash,
     utc_now, write_csv, write_json,
 )
 from clinc_domain_aux.data import load_datasets, load_label_maps
@@ -42,6 +42,20 @@ def require_approved_freeze(frozen: dict, base: dict) -> None:
     manifest = resolve_path(frozen["data_manifest"])
     if sha256_file(manifest) != frozen["data_manifest_sha256"]:
         raise ValueError("Data manifest changed after freezing")
+    data_root = resolve_path(base["data"]["root"])
+    for name, entry in read_json(manifest)["files"].items():
+        if "content_sha256" not in entry:
+            raise ValueError("Data manifest lacks content_sha256; rerun S01 and S05 before E6")
+        if content_sha256(data_root / name) != entry["content_sha256"]:
+            raise ValueError(f"Data file differs from the frozen manifest: {name}")
+
+
+def refuse_repeat_evaluation(frozen_path: Path) -> None:
+    """E6 runs once per frozen configuration; a second run must be a recorded revision."""
+    digest = sha256_file(frozen_path)
+    for manifest in resolve_path("09_results/02_test").glob("*/evaluation_manifest.json"):
+        if read_json(manifest).get("frozen_config_sha256") == digest:
+            raise ValueError(f"This frozen configuration was already evaluated: {manifest.parent}")
 
 
 def prediction_fields() -> list[str]:
@@ -149,6 +163,7 @@ def main() -> None:
     frozen = load_config(frozen_path)
     base = load_config(frozen["base_config"])
     require_approved_freeze(frozen, base)
+    refuse_repeat_evaluation(frozen_path)
     datasets = load_datasets(base["data"]["root"], strict_counts=True)
     label_to_id, _, intent_to_domain_names = load_label_maps(base["metadata_dir"])
     intent_domain = np.empty(len(label_to_id), dtype=np.int64)
