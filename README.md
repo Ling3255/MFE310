@@ -14,6 +14,10 @@
 
 **E3–E8 主实验已完成。** 15 次训练后选定 λ=0.1，修订冻结经导师批准后已执行一次正式 test，随后完成 1,000 次配对 bootstrap、领域错误分析、OOS 误接纳去向和案例导出。重复 S06 已在推理前被单次评估门禁拒绝。主要结果为 CE macro-F1 0.959303、Dom 0.960999；平均配对差值 +0.001696，95% 区间 [0.000504, 0.002880]，其解释限制见 `09_results/03_statistics/paired_bootstrap.json`。旧冻结以 `*_r1_superseded` 保留。
 
+## 第二阶段（E9–E11）
+
+预注册计划见 [`00_docs/06_confirmatory_plan.md`](00_docs/06_confirmatory_plan.md)。简要流程：S10 准备 MASSIVE → `bash 05_jobs/03_train_confirmatory.sh all` → 导师批准 `01_configs/05/06_confirm_*.yaml` → 每个 study 各运行一次 S11 与 S12 `--split test`（先 MASSIVE 后 CLINC）。
+
 ## 环境与复现
 
 Windows/Git Bash 可从本目录重建环境：

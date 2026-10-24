@@ -119,3 +119,17 @@
 各代码文件完成后在提交记录和本清单中更新实际状态，不提前填“完成”。今后新增正式代码一律归入上述分类；额外工具脚本也必须编号并登记。
 
 验证结果仅用于开发选择，不作为无偏性能估计。本项目领域模型的设计未使用 test 结果；小组其他成员已有测试访问应另行披露，最终结果按冻结协议下的一次性评估表述。上述约定写入 S05 冻结记录，并与主计划、指标说明保持一致。
+
+## 8. 第二阶段新增（E9–E11，2026-10-25）
+
+详见 `06_confirmatory_plan.md`。新增 7 个代码文件，物理代码文件总数由 27 增至 **34**。
+
+| 编号 | 文件 | 职责 |
+|---|---|---|
+| M12 | `03_src/clinc_domain_aux/confirmatory.py` | 运行与配置哈希校验、MASSIVE 转换、按出现意图的 macro-F1、种子层检验、两层 bootstrap、判定规则、批准门控 |
+| S10 | `04_steps/10_prepare_massive.py` | MASSIVE 1.1 en-US 版本校验与转换 |
+| S11 | `04_steps/11_predict_confirmatory.py` | 获批准后单次 test 推理 |
+| S12 | `04_steps/12_confirmatory_statistics.py` | val 健全性检查 / test 统计与判定 |
+| J03 | `05_jobs/03_train_confirmatory.sh` | E9（CLINC 种子 3–9）与 E10（MASSIVE 种子 0–9）训练 |
+| J04 | `05_jobs/04_explore_clinc.sh` | E11 可选探索，仅 val |
+| T04 | `06_tests/test_04_confirmatory.py` | 第二阶段单元测试 |

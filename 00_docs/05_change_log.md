@@ -77,3 +77,9 @@
 2. 新 `oos_false_acceptance_summary.csv` 只有 B0/MSP，不再包含虚假的 B0/Mahalanobis 零误接纳行；检测去向表和图同步更新。trans 环境测试为 **20 passed**。
 3. 9 条 seed-0 案例的 interpretation 已逐条人工复核并同时写入 CSV/JSON，区分同领域修复、跨领域修复、同领域退化和跨领域退化。解释仅限具体案例，不作为普遍因果结论。
 4. 报告口径保持：改进小幅且方向一致但证据有限；主要收益来自跨领域错误减少；OOS 结果好坏参半且没有区间估计；固定阈值迁移后的 IS 接纳率约 94.4%–95.1%，不得事后调阈值。
+
+## 2026-10-25 第二阶段预注册（导师）
+
+1. 新增 `00_docs/06_confirmatory_plan.md`：E9 CLINC 10 种子复现、E10 MASSIVE en-US 外部确认（主检验）、E11 可选探索；预注册假设、判定规则（两层 bootstrap 95% CI 与种子层 Wilcoxon 同时满足）、SESOI 0.2 pp 与报告口径。
+2. 新增 M12、S10–S12、J03–J04、T04 与 `01_configs/05`–`09`。S03 改为读取 `data.strict_counts`（默认 true），CLINC 行为与 config_hash 不变，第一阶段运行全部保持有效。
+3. 第一阶段的冻结、E6 预测与统计不受影响；E9 对 CLINC test 的第二次使用已在 `05_confirm_clinc.yaml` 中预先披露。
