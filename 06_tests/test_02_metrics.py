@@ -219,3 +219,19 @@ def test_content_hash_ignores_crlf(tmp_path) -> None:
     (tmp_path / "lf.json").write_bytes(b'{"a": 1}\n{"b": 2}\n')
     (tmp_path / "crlf.json").write_bytes(b'{"a": 1}\r\n{"b": 2}\r\n')
     assert content_sha256(tmp_path / "lf.json") == content_sha256(tmp_path / "crlf.json")
+
+
+def test_oos_false_acceptance_skips_missing_detector(tmp_path) -> None:
+    from clinc_domain_aux.domain_analysis import analyze_oos_false_acceptance
+    from clinc_domain_aux.common import read_csv
+
+    rows = [
+        {"split": "oos_test", "model": "B0", "seed": 0, "pred_intent": 0, "pred_domain_from_intent": 0,
+         "accepted_msp": True, "accepted_mahalanobis": None},
+        {"split": "oos_test", "model": "B0", "seed": 0, "pred_intent": 1, "pred_domain_from_intent": 1,
+         "accepted_msp": False, "accepted_mahalanobis": None},
+    ]
+    analyze_oos_false_acceptance(rows, {"a": 0, "b": 1}, {"d0": 0, "d1": 1}, tmp_path)
+    summary = read_csv(tmp_path / "oos_false_acceptance_summary.csv")
+    assert [(row["model"], row["detector"]) for row in summary] == [("B0", "msp")]
+    assert float(summary[0]["oos_false_acceptance_rate"]) == 0.5

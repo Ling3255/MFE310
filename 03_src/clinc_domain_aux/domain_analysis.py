@@ -726,6 +726,8 @@ def analyze_oos_false_acceptance(
         total = len(group)
         for detector in ("msp", "mahalanobis"):
             field = f"accepted_{detector}"
+            if any(row.get(field) is None for row in group):
+                continue  # detector not applicable (B0 has no Mahalanobis); never count missing as rejected
             accepted = [row for row in group if bool(row[field])]
             n_accepted = len(accepted)
             summary_rows.append({
