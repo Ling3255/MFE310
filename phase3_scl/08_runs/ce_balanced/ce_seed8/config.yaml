@@ -1,0 +1,90 @@
+experiment: clinc150_domain_auxiliary
+seed_analysis: 20261024
+data:
+  root: ../dataset/clinc_phase3/main
+  full_file: data_full.json
+  domains_file: domains.json
+  splits:
+  - train
+  - val
+  - test
+  - oos_train
+  - oos_val
+  - oos_test
+  in_scope_splits:
+  - train
+  - val
+  - test
+  oos_splits:
+  - oos_train
+  - oos_val
+  - oos_test
+  train_split: train
+  validation_split: val
+  test_split: test
+  oos_validation_split: oos_val
+  oos_test_split: oos_test
+  expected_counts: null
+  expected_per_intent: null
+  strict_counts: false
+metadata_dir: 07_metadata
+runs_dir: phase3_scl/08_runs/ce_balanced
+results_dir: phase3_scl/09_results
+model:
+  name: google-bert/bert-base-uncased
+  revision: 86b5e0934494bd15c9632b12f734a8a67f723594
+  num_intents: 150
+  num_domains: 10
+  dropout: 0.1
+  max_length: 64
+  inference_dtype: float32
+training:
+  learning_rate: 2.0e-05
+  weight_decay: 0.01
+  epochs: 5
+  patience: 2
+  effective_batch_size: 32
+  micro_batch_size: 32
+  gradient_accumulation: 1
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+  num_workers: 0
+  deterministic: true
+  amp: false
+  device: auto
+  local_gpu_approval_record: 07_metadata/local_gpu_approval.md
+  initialization_dir: ../../init
+  best_checkpoint_weights_only: true
+  keep_last_checkpoint: false
+  sampler: class_balanced
+  classes_per_batch: 8
+  samples_per_class: 4
+selection:
+  metric: macro_f1
+  tolerance: 0.002
+  bootstrap_iterations: 1000
+  bootstrap_seed: 20261024
+  bootstrap_samples_per_intent: 30
+  cases_per_category: 5
+  case_seed: 20261024
+optional_analyses:
+  domain_head_score: false
+  representation_visualization: false
+  oos_false_acceptance_destinations: true
+lambda_domain: 0.0
+seed: 8
+smoke: false
+config_hash: bc6da82d27fcb159d412092b6375e5853766dbda5dfdbdaaf968a635150f03e3
+data_hash: 6327b339b656c801b1429d163848fad84209510680e77511b9de249b3ad613ca
+data_hashes:
+  splits:
+    oos_test: f9d5e0c58cf99ef54ae110f12f58e638bd18fe5a8720aeac69964da4aa2c17d9
+    oos_train: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+    oos_val: ed45f25b33dcbb3202293a0df18c24609403db9112c24e634c6bb5e0e9ca1d88
+    test: e5ed1ed2e9f0946786aba1e09e1f3b5c0934e29a7af8f44bdbe4b5a7aca0a5b3
+    train: e8e61513130db1024eaca27026b85c00c4487afd7bf70e465f60bc4900a3b651
+    val: 57bf6e413dc205132eefa78eaeebe3a81c76736b43ceb61e0dc91a46249ea168
+  combined: 6327b339b656c801b1429d163848fad84209510680e77511b9de249b3ad613ca
+initialization_path: G:\MFE310\mfe310code\phase3_scl\08_runs\init\common_initialization_seed8.pt
+initialization_hash: c2abc2a8e5259f526836fcce60d80141e7db5e2bf800ea49eb4cc042d75629ee
+initialization_file_hash: 4d0059a39f8892ebda99b81a2bf88d788520868b6c2732e382a155b908845266
