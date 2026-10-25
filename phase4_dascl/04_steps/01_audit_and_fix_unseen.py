@@ -21,10 +21,9 @@ sys.path[:0] = [str(PROJECT_ROOT / p) for p in ("03_src", "phase3_scl/03_src", "
 
 from clinc_domain_aux.common import load_config, resolve_path, stable_hash, utc_now, write_csv, write_json
 from clinc_domain_aux.contrastive import ClassBalancedBatchSampler, DomainAwareBatchSampler
-from clinc_domain_aux.data import load_datasets
 from phase3_scl.study import load_split
 from phase4_dascl.audit import batch_composition
-from phase4_dascl.evaluation_sets import build_unseen
+from phase4_dascl.evaluation_sets import load_unseen
 
 STUDY = "phase4_dascl/01_configs/study.yaml"
 
@@ -61,14 +60,15 @@ def main() -> None:
                              **batch_composition(batches, labels, domains)})
     write_csv(metadata / "sampler_audit.csv", rows)
 
-    phase3 = study["phase3_split"]
-    main_split = load_datasets(resolve_path(phase3["main"]), strict_counts=False)
-    n25_split = load_datasets(resolve_path(phase3["n25"]), strict_counts=False)
-    unseen, origin = build_unseen(main_split, n25_split, per_intent=int(phase3["unseen_per_intent"]))
+    unseen, origin, per_intent = load_unseen(study)
     write_json(metadata / "unseen_manifest.json", {
-        "created_at": utc_now(), "count": len(unseen), "per_intent": int(phase3["unseen_per_intent"]),
+        "created_at": utc_now(), "count": len(unseen),
+        "per_intent_min": min(per_intent.values()), "per_intent_max": max(per_intent.values()),
+        "intents_below_max": {intent: n for intent, n in per_intent.items() if n < max(per_intent.values())},
         "content_hash": stable_hash([[row["sample_id"], row["text"], row["intent_id"]] for row in unseen]),
-        "definition": "phase-3 T3 minus the n25 subset; never trained on by phase-4 models; never evaluated",
+        "definition": "phase-3 T3 minus the n25 subset minus the phase-3 internal-test exclusions "
+                      "(train texts duplicated in other splits or label-conflicting); never trained on by phase-4 models; "
+                      "never evaluated",
         "origin": origin,
     })
     summary = {}

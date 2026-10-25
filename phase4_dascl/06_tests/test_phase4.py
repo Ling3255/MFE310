@@ -108,16 +108,27 @@ def record(sample_id, text, intent):
     return {"sample_id": sample_id, "text": text, "intent": intent, "intent_id": 0 if intent == "a" else 1, "domain_id": 0}
 
 
-def test_build_unseen_excludes_low_resource_training_and_checks_counts():
+def test_build_unseen_excludes_low_resource_training_and_listed_texts():
     train = [record(f"train:{i:05d}", f"{intent} text {i}", intent) for i, intent in enumerate(["a"] * 5 + ["b"] * 5)]
     main = {"train": train, "val": [], "test": [], "oos_val": [], "oos_test": []}
     n25 = {"train": [train[0], train[1], train[5], train[6]]}
-    unseen, origin = build_unseen(main, n25, per_intent=3)
-    assert [row["sample_id"] for row in unseen] == [f"unseen:{i:05d}" for i in range(6)]
-    assert origin["unseen:00000"] == "train:00002"
+    unseen, origin, counts = build_unseen(main, n25, excluded_texts=["A TEXT 4"])  # matched after normalisation
+    assert [row["sample_id"] for row in unseen] == [f"unseen:{i:05d}" for i in range(5)]
+    assert origin["unseen:00000"] == "train:00002" and counts == {"a": 2, "b": 3}
     assert all(row["split"] == "unseen" for row in unseen)
+
+
+def test_build_unseen_train_val_duplicate_must_be_excluded():
+    """Regression for the 2026-10-25 audit stop: CLINC train shares three texts with val."""
+    train = [record(f"train:{i:05d}", text, intent) for i, (text, intent) in
+             enumerate([("hey what's up", "a"), ("a other", "a"), ("b one", "b"), ("b two", "b")])]
+    main = {"train": train, "val": [record("val:00000", "hey what's up", "a")], "test": [], "oos_val": [], "oos_test": []}
     with pytest.raises(ValueError):
-        build_unseen(main, n25, per_intent=4)
+        build_unseen(main, {"train": []}, excluded_texts=[])
+    unseen, _, counts = build_unseen(main, {"train": []}, excluded_texts=["hey what's up"])
+    assert counts == {"a": 1, "b": 2} and len(unseen) == 3
+    with pytest.raises(ValueError):  # an intent may not disappear from U
+        build_unseen(main, {"train": []}, excluded_texts=["hey what's up", "a other"])
 
 
 def test_domain_centroid_separation_reflects_close_same_domain_intents():

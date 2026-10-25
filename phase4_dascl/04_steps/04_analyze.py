@@ -23,10 +23,10 @@ sys.path[:0] = [str(PROJECT_ROOT / p) for p in ("03_src", "phase3_scl/03_src", "
 
 from clinc_domain_aux.common import load_config, read_csv, read_json, resolve_path, write_csv
 from clinc_domain_aux.confirmatory import macro_f1_present, within_domain_error
-from clinc_domain_aux.data import load_datasets, load_label_maps
+from clinc_domain_aux.data import load_label_maps
 from phase3_scl.predictions import unique_test_run
 from phase3_scl.study import intent_domain_array, results_dir
-from phase4_dascl.evaluation_sets import build_unseen
+from phase4_dascl.evaluation_sets import load_unseen
 
 STUDY = "phase4_dascl/01_configs/study.yaml"
 ARMS = ("ib_ce", "ib_scl", "da_ce", "da_scl")
@@ -116,10 +116,7 @@ def write_cases(output, study, gold, ids, preds, id_to_intent, id_to_domain, dom
 
     Prediction files do not store text, so U is rebuilt from the phase-3 split for the case table.
     """
-    phase3 = study["phase3_split"]
-    unseen, _ = build_unseen(load_datasets(resolve_path(phase3["main"]), strict_counts=False),
-                             load_datasets(resolve_path(phase3["n25"]), strict_counts=False),
-                             per_intent=int(phase3["unseen_per_intent"]))
+    unseen, _, _ = load_unseen(study)
     text_of = {row["sample_id"]: row["text"] for row in unseen}
     rng = np.random.default_rng(int(study["analysis"]["case_seed"]))
     k = int(study["analysis"]["cases_per_pool"])

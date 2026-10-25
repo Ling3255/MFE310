@@ -7,7 +7,8 @@ output_dir: phase4_dascl/09_results
 phase3_split:                    # fixed phase-3 split directories (built by phase3_scl/04_steps/01_prepare_split.py)
   main: ../dataset/clinc_phase3/main
   n25: ../dataset/clinc_phase3/n25
-  unseen_per_intent: 55          # U = T3 minus the n25 subset; never trained on by phase-4 models, never evaluated
+  exclusions: phase3_scl/07_metadata/split_manifest.json   # 'excluded_from_internal_test': same rule as the phase-3 IHT
+  # U = T3 minus the n25 subset minus these exclusions (54-55 per intent); never trained on by phase-4 models, never evaluated
 
 groups:                          # 2 x 2 factorial per training size; arms: {ib, da} sampler x {ce, scl} loss
   n10:
