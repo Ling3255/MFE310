@@ -1,0 +1,89 @@
+== job phase4_train started 2026-10-25T09:08:31Z on MINGW64_NT-10.0-26200 DESKTOP-OIO6MH5 3.6.6-1cdd4371.x86_64 2026-01-15 22:20 UTC x86_64 Msys
+{
+ "created_at": "2026-10-25T09:08:31.490499+00:00",
+ "python": "3.10.20 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:13:20) [MSC v.1942 64 bit (AMD64)]",
+ "platform": "Windows-10-10.0.26100-SP0",
+ "packages": {
+  "torch": "2.6.0+cu124",
+  "transformers": "5.13.0",
+  "scikit-learn": "1.7.2",
+  "numpy": "2.2.6",
+  "pandas": "2.3.3",
+  "scipy": "1.15.3",
+  "matplotlib": "3.10.9",
+  "seaborn": "0.13.2",
+  "PyYAML": "6.0.3",
+  "pytest": "8.4.2",
+  "joblib": "1.5.3"
+ },
+ "torch": {
+  "cuda_available": true,
+  "cuda_version": "12.4",
+  "cudnn_version": 90100,
+  "devices": [
+   "NVIDIA GeForce RTX 4090"
+  ]
+ }
+}
+Sun Oct 25 17:08:32 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 591.86                 Driver Version: 591.86         CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4090      WDDM  |   00000000:01:00.0  On |                  Off |
+| 30%   36C    P8             40W /  450W |    2167MiB /  49140MiB |      8%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            5460    C+G   ...24b\bin\win64\MATLABWebUI.exe      N/A      |
+|    0   N/A  N/A            6616    C+G   ...em32\ApplicationFrameHost.exe      N/A      |
+|    0   N/A  N/A           11392    C+G   ...ntrolPanel\SystemSettings.exe      N/A      |
+|    0   N/A  N/A           13584    C+G   C:\Windows\explorer.exe               N/A      |
+|    0   N/A  N/A           15504    C+G   ....0.4283.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           15660    C+G   ...les\Tencent\Weixin\Weixin.exe      N/A      |
+|    0   N/A  N/A           15676    C+G   ...2txyewy\CrossDeviceResume.exe      N/A      |
+|    0   N/A  N/A           15772    C+G   ...ns\RadiumWMPF\WeChatAppEx.exe      N/A      |
+|    0   N/A  N/A           15944    C+G   ....0.4283.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           16136    C+G   ...de\Microsoft VS Code\Code.exe      N/A      |
+|    0   N/A  N/A           16984    C+G   ..._cw5n1h2txyewy\SearchHost.exe      N/A      |
+|    0   N/A  N/A           17008    C+G   ...y\StartMenuExperienceHost.exe      N/A      |
+|    0   N/A  N/A           17116    C+G   ...cw5n1h2txyewy\WidgetBoard.exe      N/A      |
+|    0   N/A  N/A           19876    C+G   ...les\TeamViewer\TeamViewer.exe      N/A      |
+|    0   N/A  N/A           20568    C+G   ...ogram Files\ToDesk\ToDesk.exe      N/A      |
+|    0   N/A  N/A           21440    C+G   ...\cef.win64\steamwebhelper.exe      N/A      |
+|    0   N/A  N/A           23052    C+G   ...5n1h2txyewy\TextInputHost.exe      N/A      |
+|    0   N/A  N/A           27140    C+G   ...s\MuseHub\current\MuseHub.exe      N/A      |
+|    0   N/A  N/A           27904    C+G   ....0.4283.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           29732    C+G   ...es\dggj\doubao\app\Doubao.exe      N/A      |
+|    0   N/A  N/A           32156    C+G   ...8wekyb3d8bbwe\M365Copilot.exe      N/A      |
+|    0   N/A  N/A           32940    C+G   ...t\Edge\Application\msedge.exe      N/A      |
+|    0   N/A  N/A           33900    C+G   ....0.4283.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           35120    C+G   ...2p2nqsd0c76g0\app\ChatGPT.exe      N/A      |
+|    0   N/A  N/A           35548    C+G   ...B\R2024b\bin\win64\MATLAB.exe      N/A      |
+|    0   N/A  N/A           36836    C+G   ...2p2nqsd0c76g0\app\ChatGPT.exe      N/A      |
+|    0   N/A  N/A           37604    C+G   ...\codex-computer-use-swift.exe      N/A      |
+|    0   N/A  N/A           40208    C+G   ....0.4283.62\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           40256    C+G   ...t\3.46.11.413\XnnExternal.exe      N/A      |
+|    0   N/A  N/A           41860    C+G   ...les\Tencent\Weixin\Weixin.exe      N/A      |
+|    0   N/A  N/A           42860    C+G   ...xyewy\ShellExperienceHost.exe      N/A      |
+|    0   N/A  N/A           46240    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A           47740    C+G   ...\Tencent\WeMeet\wemeetapp.exe      N/A      |
++-----------------------------------------------------------------------------------------+
+.......................................................                  [100%]
+55 passed in 5.98s
+Traceback (most recent call last):
+  File "G:\MFE310\mfe310code\phase4_dascl\04_steps\01_audit_and_fix_unseen.py", line 83, in <module>
+    main()
+  File "G:\MFE310\mfe310code\phase4_dascl\04_steps\01_audit_and_fix_unseen.py", line 67, in main
+    unseen, origin = build_unseen(main_split, n25_split, per_intent=int(phase3["unseen_per_intent"]))
+  File "G:\MFE310\mfe310code\phase4_dascl\03_src\phase4_dascl\evaluation_sets.py", line 29, in build_unseen
+    raise ValueError("U overlaps an evaluation split")  # cannot happen for CLINC train (checked in phase 3)
+ValueError: U overlaps an evaluation split
