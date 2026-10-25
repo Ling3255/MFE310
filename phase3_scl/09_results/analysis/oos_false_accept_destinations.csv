@@ -1,0 +1,11 @@
+domain,ce_balanced_mean_count,scl_mean_count
+auto_and_commute,1.5,1.0
+banking,1.2,1.0
+credit_cards,1.4,1.3
+home,0.1,0.2
+kitchen_and_dining,2.7,2.3
+meta,3.6,4.4
+small_talk,6.8,6.9
+travel,2.2,2.0
+utility,7.8,5.4
+work,2.8,2.8

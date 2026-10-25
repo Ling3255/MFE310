@@ -1,0 +1,17 @@
+intent_a,intent_b,ce_balanced_mean_errors,scl_mean_errors
+bill_balance,bill_due,0.7,0.4
+credit_limit,credit_limit_change,0.0,0.3
+calories,nutrition_info,0.6,0.8
+restaurant_reservation,cancel_reservation,0.0,0.0
+reminder,reminder_update,1.0,0.9
+todo_list,todo_list_update,0.7,1.2
+pto_request,pto_request_status,0.0,0.3
+timer,alarm,0.9,0.9
+balance,rewards_balance,0.0,0.0
+order,order_checks,0.0,0.0
+shopping_list,ingredients_list,0.1,0.0
+date,calendar,0.6,1.0
+time,timezone,0.0,0.0
+change_language,translate,0.1,0.5
+book_hotel,restaurant_reservation,0.0,0.0
+meeting_schedule,calendar_update,0.0,0.0
