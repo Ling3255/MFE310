@@ -1,0 +1,21 @@
+# B0 reference baseline on the phase-3 split: TF-IDF + logistic regression, C chosen on val macro-F1.
+# The C grid is extended to 1000 because phase 1 selected C=100 at the grid boundary.
+base_config: phase3_scl/01_configs/arm_ce_balanced.yaml
+output_dir: phase3_scl/08_runs/baseline_tfidf_lr
+validation_results_dir: phase3_scl/09_results/dev
+vectorizer:
+  analyzer: word
+  ngram_range: [1, 2]
+  lowercase: true
+  min_df: 1
+  max_df: 1.0
+  norm: l2
+  sublinear_tf: false
+  strip_accents: null
+logistic_regression:
+  solver: lbfgs
+  max_iter: 3000
+  random_state: 0
+  n_jobs: 1
+c_grid: [0.1, 1.0, 10.0, 100.0, 1000.0]
+selection_metric: macro_f1

@@ -205,3 +205,40 @@ def select_threshold(
         "threshold_rule": "reject iff score >= tau; accept iff score < tau",
         "selection_rule": "maximize OOS recall, then maximize IS acceptance, then choose smallest tau",
     }
+
+
+class KNNDetector:
+    """Cosine k-th nearest-neighbour distance to the in-scope training set (Sun et al., 2022).
+
+    Features are L2-normalized; the score is 1 - cos(x, k-th nearest training feature), so larger
+    means more OOS-like, matching the MSP and Mahalanobis convention.
+    """
+
+    def __init__(self, k: int) -> None:
+        if not isinstance(k, (int, np.integer)) or k < 1:
+            raise ValueError("k must be a positive integer")
+        self.k = int(k)
+
+    @staticmethod
+    def _normalize(values: Any) -> np.ndarray:
+        array = np.asarray(values, dtype=np.float32)
+        if array.ndim != 2 or len(array) == 0 or not np.isfinite(array).all():
+            raise ValueError("features must be a finite, non-empty two-dimensional array")
+        return array / np.maximum(np.linalg.norm(array, axis=1, keepdims=True), 1e-12)
+
+    def fit(self, features: Any) -> "KNNDetector":
+        self.bank_ = self._normalize(features)
+        if len(self.bank_) < self.k:
+            raise ValueError("k exceeds the number of fitting samples")
+        return self
+
+    def score(self, features: Any, batch_size: int = 1024) -> np.ndarray:
+        if not hasattr(self, "bank_"):
+            raise ValueError("detector has not been fitted")
+        queries = self._normalize(features)
+        scores = np.empty(len(queries), dtype=np.float64)
+        for start in range(0, len(queries), batch_size):
+            similarity = queries[start:start + batch_size] @ self.bank_.T
+            kth = np.partition(similarity, -self.k, axis=1)[:, -self.k]
+            scores[start:start + batch_size] = 1.0 - kth.astype(np.float64)
+        return scores

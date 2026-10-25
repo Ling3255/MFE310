@@ -133,3 +133,16 @@
 | J03 | `05_jobs/03_train_confirmatory.sh` | E9（CLINC 种子 3–9）与 E10（MASSIVE 种子 0–9）训练 |
 | J04 | `05_jobs/04_explore_clinc.sh` | E11 可选探索，仅 val |
 | T04 | `06_tests/test_04_confirmatory.py` | 第二阶段单元测试（10 项） |
+
+## 9. 第三阶段（E12–E16，2026-10-25）
+
+实验专属内容放在 `phase3_scl/`（见其 README）；可复用的部分放在核心包：
+
+| 编号 | 文件 | 职责 |
+|---|---|---|
+| M14 | `03_src/clinc_domain_aux/contrastive.py` | 监督对比损失、按类别采样器 |
+| M06/M07/M12 扩展 | `training.py`、`detectors.py`、`confirmatory.py` | 可选采样器与 SCL 损失、只保存权重；KNN 检测器；bootstrap 置信水平。默认行为不变 |
+| P3-M1 至 M5 | `phase3_scl/03_src/phase3_scl/*.py` | 划分、扰动、指标、study 工具、预测读取 |
+| P3-S01 至 S06 | `phase3_scl/04_steps/*.py` | 划分、开发选择、test 评估、统计、分析、演示 |
+| J1 至 J3 | `phase3_scl/05_jobs/*.sh` | 批量运行与环境记录 |
+| T | `phase3_scl/06_tests/test_phase3.py` | 第三阶段单元测试 |
