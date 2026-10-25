@@ -58,9 +58,9 @@ analysis:
   case_seed: 20261030
   cases_per_pool: 5
 
-frozen: false                  # supervisor sets true together with approval after reviewing E12-E14
+frozen: true                   # supervisor approved the complete phase-3 workflow
 supervisor_approval:
-  approved: false
-  confirmed_by: null
-  confirmed_at: null
-  evidence: null
+  approved: true
+  confirmed_by: Supervisor (complete approval relayed by the student)
+  confirmed_at: '2026-10-25T07:07:43Z'
+  evidence: The student explicitly stated in the project conversation that the supervisor had fully approved pulling and running the complete phase-3 experiment, including its final evaluation.
