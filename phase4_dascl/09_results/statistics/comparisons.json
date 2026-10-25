@@ -1,0 +1,3993 @@
+{
+  "created_at": "2026-10-25T14:03:04.283802+00:00",
+  "source_test_run": "phase4_dascl/09_results/test/phase4_test_20261025T135110920584Z_47428",
+  "primary": {
+    "H1": {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9233088694193634,
+        "da_ce": 0.9152271775491062,
+        "ib_scl": 0.9181072269984242,
+        "ib_ce": 0.91395880688173
+      },
+      "seed_contrasts": {
+        "0": 0.0022771535609744653,
+        "1": -0.00044519787761643226,
+        "2": 0.01042686628484446,
+        "3": 0.0040425683619843555,
+        "4": 0.0023655521164324123,
+        "5": 0.005169566351600041,
+        "6": 0.003798753143661515,
+        "7": 0.006024449905615792,
+        "8": 0.0006509999499166863,
+        "9": 0.005022005738217983
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.003933271753563128,
+        "std": 0.003062830569196694,
+        "median": 0.003920660752822935,
+        "n_positive": 9,
+        "t_statistic": 4.06098121220143,
+        "t_pvalue_two_sided": 0.002837766573219967,
+        "wilcoxon_pvalue_two_sided": 0.00390625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          0.0008496205294440369,
+          0.007120657920524395
+        ],
+        "level": 0.975,
+        "n_boot": 2000,
+        "seed": 20268781
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.025,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha",
+        "sesoi": 0.005,
+        "meets_sesoi": false
+      }
+    },
+    "H2": {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.046701430996846954,
+        "da_ce": 0.05480232840164928,
+        "ib_scl": 0.05251030802813485,
+        "ib_ce": 0.05572398738782439
+      },
+      "seed_contrasts": {
+        "0": -0.0002425418384671349,
+        "1": -0.0016977928692699512,
+        "2": -0.010429299054086814,
+        "3": -0.006548629638612656,
+        "4": -0.004608294930875577,
+        "5": -0.005821004123211258,
+        "6": -0.005457191365510546,
+        "7": -0.0055784622847441095,
+        "8": -0.0035168566577734664,
+        "9": -0.004972107688576283
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.004887218045112779,
+        "std": 0.0027660228110552047,
+        "median": -0.005214649527043414,
+        "n_positive": 0,
+        "t_statistic": -5.587351045212864,
+        "t_pvalue_two_sided": 0.000339733187477546,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.00773723623575067,
+          -0.002279590104292989
+        ],
+        "level": 0.975,
+        "n_boot": 2000,
+        "seed": 20261664
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.025,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      }
+    }
+  },
+  "secondary": [
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.029408197914140188,
+        "da_ce": 0.02929905408682998,
+        "ib_scl": 0.028777589134125637,
+        "ib_ce": 0.029626485568760613
+      },
+      "seed_contrasts": {
+        "0": -0.001940334707737086,
+        "1": 0.00206160562697065,
+        "2": 0.00012127091923356745,
+        "3": 0.0025466893039049233,
+        "4": 0.002182876546204221,
+        "5": 0.0006063545961678338,
+        "6": 0.0016977928692699512,
+        "7": -0.0004850836769342698,
+        "8": 0.0029105020616056257,
+        "9": -0.00012127091923356398
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.0009580402619451852,
+        "std": 0.0015660704450559035,
+        "median": 0.0011520737327188925,
+        "n_positive": 7,
+        "t_statistic": 1.9345166288372009,
+        "t_pvalue_two_sided": 0.08505423658883833,
+        "wilcoxon_pvalue_two_sided": 0.083984375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0006915474169294201,
+          0.0025106112054329366
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20263407
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "interaction"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.21035856573705178,
+        "da_ce": 0.19203187250996018,
+        "ib_scl": 0.1948207171314741,
+        "ib_ce": 0.1804780876494024
+      },
+      "seed_contrasts": {
+        "0": -0.027888446215139445,
+        "1": -0.01992031872509961,
+        "2": 0.04780876494023906,
+        "3": -0.04382470119521914,
+        "4": -0.015936254980079695,
+        "5": -0.011952191235059723,
+        "6": 0.039840637450199196,
+        "7": 0.007968127490039834,
+        "8": 0.019920318725099584,
+        "9": 0.04382470119521911
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.003984063745019917,
+        "std": 0.03263799662003854,
+        "median": -0.0019920318725099445,
+        "n_positive": 5,
+        "t_statistic": 0.3860137594912337,
+        "t_pvalue_two_sided": 0.7084530302149532,
+        "wilcoxon_pvalue_two_sided": 0.845703125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.02510956175298805,
+          0.03306772908366534
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267287
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "interaction"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "ib_scl": 0.9181072269984242,
+        "ib_ce": 0.91395880688173
+      },
+      "seed_contrasts": {
+        "0": 0.0044175227691773955,
+        "1": 0.007888389341036195,
+        "2": 0.00035108533633021466,
+        "3": 0.00509728048863356,
+        "4": 0.00019761894839620542,
+        "5": 0.00931257636488736,
+        "6": 0.0021390348901062506,
+        "7": -8.243170824906443e-05,
+        "8": 0.006380817711907016,
+        "9": 0.005782307024716049
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.004148420116694118,
+        "std": 0.0033540710704082805,
+        "median": 0.004757401628905478,
+        "n_positive": 9,
+        "t_statistic": 3.9112040218092465,
+        "t_pvalue_two_sided": 0.0035582324593372208,
+        "wilcoxon_pvalue_two_sided": 0.00390625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          0.001078160018762709,
+          0.007389019652766034
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264873
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "ib_scl": 0.05251030802813485,
+        "ib_ce": 0.05572398738782439
+      },
+      "seed_contrasts": {
+        "0": -0.004608294930875577,
+        "1": -0.006184816880911957,
+        "2": -0.002546689303904927,
+        "3": -0.002546689303904927,
+        "4": -0.0007276255154014047,
+        "5": -0.004729565850109141,
+        "6": 0.0007276255154014047,
+        "7": -0.0027892311423720617,
+        "8": -0.004123211253941307,
+        "9": -0.004608294930875577
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.0032136793596895473,
+        "std": 0.0020716868881993306,
+        "median": -0.0034562211981566844,
+        "n_positive": 1,
+        "t_statistic": -4.9054451731958215,
+        "t_pvalue_two_sided": 0.0008413065136869653,
+        "wilcoxon_pvalue_two_sided": 0.005859375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.005495391705069123,
+          -0.0009459131700218282
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20270098
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "ib_scl": 0.028777589134125637,
+        "ib_ce": 0.029626485568760613
+      },
+      "seed_contrasts": {
+        "0": 0.0002425418384671349,
+        "1": -0.0014552510308028128,
+        "2": 0.002182876546204221,
+        "3": -0.0023041474654377885,
+        "4": 0.0004850836769342698,
+        "5": -0.004729565850109141,
+        "6": -0.0029105020616056257,
+        "7": 0.0029105020616056257,
+        "8": -0.002304147465437785,
+        "9": -0.0006063545961678407
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.0008488964346349742,
+        "std": 0.002363314088809679,
+        "median": -0.0010308028134853268,
+        "n_positive": 4,
+        "t_statistic": -1.1358821257629916,
+        "t_pvalue_two_sided": 0.2853473706886929,
+        "wilcoxon_pvalue_two_sided": 0.28515625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0029593136065971387,
+          0.0012863812757700694
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20261752
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "ib_scl": 0.1948207171314741,
+        "ib_ce": 0.1804780876494024
+      },
+      "seed_contrasts": {
+        "0": 0.011952191235059778,
+        "1": 0.05976095617529881,
+        "2": -0.03585657370517928,
+        "3": 0.01195219123505975,
+        "4": 0.051792828685258974,
+        "5": -0.03585657370517931,
+        "6": -0.03585657370517928,
+        "7": 0.05577689243027889,
+        "8": 0.03187250996015939,
+        "9": 0.027888446215139445
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.014342629482071717,
+        "std": 0.0383611988842089,
+        "median": 0.01992031872509961,
+        "n_positive": 7,
+        "t_statistic": 1.1823242786579842,
+        "t_pvalue_two_sided": 0.26737087981095564,
+        "wilcoxon_pvalue_two_sided": 0.359375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.02032868525896415,
+          0.05258964143426296
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20261979
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9233088694193634,
+        "da_ce": 0.9152271775491062
+      },
+      "seed_contrasts": {
+        "0": 0.006694676330151861,
+        "1": 0.007443191463419763,
+        "2": 0.010777951621174675,
+        "3": 0.009139848850617915,
+        "4": 0.0025631710648286177,
+        "5": 0.0144821427164874,
+        "6": 0.005937788033767766,
+        "7": 0.005942018197366727,
+        "8": 0.007031817661823703,
+        "9": 0.010804312762934032
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.008081691870257247,
+        "std": 0.0033305034337141374,
+        "median": 0.007237504562621733,
+        "n_positive": 10,
+        "t_statistic": 7.673480651295572,
+        "t_pvalue_two_sided": 3.083050385377447e-05,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          0.005035895372578671,
+          0.01158194309943714
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267546
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.046701430996846954,
+        "da_ce": 0.05480232840164928
+      },
+      "seed_contrasts": {
+        "0": -0.004850836769342712,
+        "1": -0.007882609750181908,
+        "2": -0.012975988357991748,
+        "3": -0.009095318942517583,
+        "4": -0.005335920446276982,
+        "5": -0.0105505699733204,
+        "6": -0.004729565850109141,
+        "7": -0.008367693427116178,
+        "8": -0.0076400679117147735,
+        "9": -0.00958040261945186
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.00810089740480233,
+        "std": 0.002642605594990127,
+        "median": -0.008125151588649043,
+        "n_positive": 0,
+        "t_statistic": -9.693950144920553,
+        "t_pvalue_two_sided": 4.631973738723456e-06,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.010393827310211011,
+          -0.005516614115935002
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20265506
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.029408197914140188,
+        "da_ce": 0.02929905408682998
+      },
+      "seed_contrasts": {
+        "0": -0.0016977928692699512,
+        "1": 0.0006063545961678372,
+        "2": 0.0023041474654377885,
+        "3": 0.0002425418384671349,
+        "4": 0.002667960223138491,
+        "5": -0.004123211253941307,
+        "6": -0.0012127091923356745,
+        "7": 0.002425418384671356,
+        "8": 0.0006063545961678407,
+        "9": -0.0007276255154014047
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.00010914382731021106,
+        "std": 0.0021309432019241477,
+        "median": 0.00042444821731748607,
+        "n_positive": 6,
+        "t_statistic": 0.16196728591203505,
+        "t_pvalue_two_sided": 0.8749095347764386,
+        "wilcoxon_pvalue_two_sided": 0.845703125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002015219500363813,
+          0.002134671355808876
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264407
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.21035856573705178,
+        "da_ce": 0.19203187250996018
+      },
+      "seed_contrasts": {
+        "0": -0.015936254980079667,
+        "1": 0.039840637450199196,
+        "2": 0.011952191235059778,
+        "3": -0.03187250996015939,
+        "4": 0.03585657370517928,
+        "5": -0.04780876494023903,
+        "6": 0.003984063745019917,
+        "7": 0.06374501992031872,
+        "8": 0.051792828685258974,
+        "9": 0.07171314741035856
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.018326693227091635,
+        "std": 0.04098403532214514,
+        "median": 0.02390438247011953,
+        "n_positive": 7,
+        "t_statistic": 1.4140650651224762,
+        "t_pvalue_two_sided": 0.19098937525199736,
+        "wilcoxon_pvalue_two_sided": 0.193359375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.01872509960159362,
+          0.054601593625497984
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269219
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_ce": 0.9152271775491062,
+        "ib_ce": 0.91395880688173
+      },
+      "seed_contrasts": {
+        "0": 0.0037805908774716235,
+        "1": 0.0028998890876933414,
+        "2": -0.0009023066038525984,
+        "3": 0.001547152023614884,
+        "4": 0.0023418628760047966,
+        "5": 3.328609259745097e-05,
+        "6": 0.00010733864399792292,
+        "7": 0.0009163046323902302,
+        "8": 0.002973332246812843,
+        "9": -0.0010137432029695415
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.0012683706673760954,
+        "std": 0.0017005673754493572,
+        "median": 0.001231728328002557,
+        "n_positive": 8,
+        "t_statistic": 2.3585894238365213,
+        "t_pvalue_two_sided": 0.04269994472193067,
+        "wilcoxon_pvalue_two_sided": 0.048828125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0004532461973198401,
+          0.002984735923057218
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20263014
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_ce": 0.05480232840164928,
+        "ib_ce": 0.05572398738782439
+      },
+      "seed_contrasts": {
+        "0": -0.0036381275770070373,
+        "1": -0.0031530439000727606,
+        "2": 0.0016977928692699443,
+        "3": -0.00024254183846714183,
+        "4": -0.0013339801115692454,
+        "5": -0.0006063545961678407,
+        "6": 0.0,
+        "7": -0.0018190637885035152,
+        "8": -0.0013339801115692454,
+        "9": 0.0012127091923356814
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.0009216589861751161,
+        "std": 0.0017104502600511456,
+        "median": -0.000970167353868543,
+        "n_positive": 2,
+        "t_statistic": -1.7039616353344622,
+        "t_pvalue_two_sided": 0.12258584861447426,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002389037108901285,
+          0.0006669900557846233
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20268402
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_ce": 0.02929905408682998,
+        "ib_ce": 0.029626485568760613
+      },
+      "seed_contrasts": {
+        "0": 0.0,
+        "1": 0.00036381275770070234,
+        "2": -0.0008488964346349756,
+        "3": -0.001212709192335678,
+        "4": -0.000970167353868543,
+        "5": 0.00048508367693427673,
+        "6": -0.0002425418384671349,
+        "7": 0.000970167353868543,
+        "8": -0.0015765219500363803,
+        "9": -0.00024254183846713837
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.0003274314819306328,
+        "std": 0.0008146140749116534,
+        "median": -0.00024254183846713663,
+        "n_positive": 3,
+        "t_statistic": -1.271067235926854,
+        "t_pvalue_two_sided": 0.2355721791347599,
+        "wilcoxon_pvalue_two_sided": 0.3125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.001358840650012126,
+          0.0007276255154014071
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20265489
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_ce": 0.19203187250996018,
+        "ib_ce": 0.1804780876494024
+      },
+      "seed_contrasts": {
+        "0": 0.027888446215139445,
+        "1": 0.03187250996015936,
+        "2": -0.02390438247011953,
+        "3": 0.01992031872509961,
+        "4": 0.051792828685258974,
+        "5": 0.015936254980079667,
+        "6": -0.003984063745019917,
+        "7": 0.015936254980079667,
+        "8": -0.01195219123505975,
+        "9": -0.007968127490039834
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.01155378486055777,
+        "std": 0.023189091593879795,
+        "median": 0.015936254980079667,
+        "n_positive": 6,
+        "t_statistic": 1.5755802941662598,
+        "t_pvalue_two_sided": 0.149575995655073,
+        "wilcoxon_pvalue_two_sided": 0.150390625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.007579681274900399,
+          0.03228087649402389
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20266026
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9233088694193634,
+        "ib_scl": 0.9181072269984242
+      },
+      "seed_contrasts": {
+        "0": 0.006057744438446089,
+        "1": 0.002454691210076909,
+        "2": 0.009524559680991862,
+        "3": 0.0055897203855992394,
+        "4": 0.004707414992437209,
+        "5": 0.005202852444197492,
+        "6": 0.003906091787659438,
+        "7": 0.006940754538006022,
+        "8": 0.0036243321967295294,
+        "9": 0.004008262535248441
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.005201642420939223,
+        "std": 0.001999337597874771,
+        "median": 0.0049551337183173505,
+        "n_positive": 10,
+        "t_statistic": 8.227243683810602,
+        "t_pvalue_two_sided": 1.7684462562466624e-05,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          0.003309753183874528,
+          0.0073742888704032665
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262371
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.046701430996846954,
+        "ib_scl": 0.05251030802813485
+      },
+      "seed_contrasts": {
+        "0": -0.003880669415474172,
+        "1": -0.004850836769342712,
+        "2": -0.008731506184816877,
+        "3": -0.006791171477079798,
+        "4": -0.005942275042444822,
+        "5": -0.006427358719379099,
+        "6": -0.005457191365510546,
+        "7": -0.007397526073247632,
+        "8": -0.004850836769342712,
+        "9": -0.0037593984962406013
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.005808877031287897,
+        "std": 0.001574395683835773,
+        "median": -0.005699733203977684,
+        "n_positive": 0,
+        "t_statistic": -11.667512973582983,
+        "t_pvalue_two_sided": 9.778552701287017e-07,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0074220834343924355,
+          -0.004327855930147952
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264616
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.029408197914140188,
+        "ib_scl": 0.028777589134125637
+      },
+      "seed_contrasts": {
+        "0": -0.001940334707737086,
+        "1": 0.0024254183846713524,
+        "2": -0.0007276255154014082,
+        "3": 0.0013339801115692454,
+        "4": 0.001212709192335678,
+        "5": 0.0010914382731021105,
+        "6": 0.0014552510308028163,
+        "7": 0.00048508367693427326,
+        "8": 0.0013339801115692454,
+        "9": -0.00036381275770070234
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.0006306087800145525,
+        "std": 0.0012869708664292282,
+        "median": 0.0011520737327188942,
+        "n_positive": 7,
+        "t_statistic": 1.5494989897315723,
+        "t_pvalue_two_sided": 0.15567191055595125,
+        "wilcoxon_pvalue_two_sided": 0.154296875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0006306087800145518,
+          0.0018069366965801595
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20270970
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n10",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.21035856573705178,
+        "ib_scl": 0.1948207171314741
+      },
+      "seed_contrasts": {
+        "0": 0.0,
+        "1": 0.01195219123505975,
+        "2": 0.02390438247011953,
+        "3": -0.02390438247011953,
+        "4": 0.03585657370517928,
+        "5": 0.0039840637450199445,
+        "6": 0.03585657370517928,
+        "7": 0.0239043824701195,
+        "8": 0.007968127490039834,
+        "9": 0.03585657370517928
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.015537848605577687,
+        "std": 0.01937728177101835,
+        "median": 0.017928286852589626,
+        "n_positive": 8,
+        "t_statistic": 2.5357009364432903,
+        "t_pvalue_two_sided": 0.031935250508941734,
+        "wilcoxon_pvalue_two_sided": 0.04296875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.004780876494023895,
+          0.03585657370517927
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20266350
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9190603637969966,
+        "da_ce": 0.9129443874998021,
+        "ib_scl": 0.9150703010262495,
+        "ib_ce": 0.9126778906262167
+      },
+      "seed_contrasts": {
+        "0": 0.004776142372261649,
+        "1": -0.003859722184562875,
+        "2": 0.0073427076348091536,
+        "3": 0.0015163374685422948,
+        "4": 0.006830771601543106,
+        "5": 0.009383953956631053,
+        "6": 0.000657280846213526,
+        "7": 0.004536689512852243,
+        "8": 0.0027396193639812605,
+        "9": 0.0033118783993446588
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.003723565897161607,
+        "std": 0.0037929737863705813,
+        "median": 0.003924283956098451,
+        "n_positive": 9,
+        "t_statistic": 3.1044109229202412,
+        "t_pvalue_two_sided": 0.012632233149892626,
+        "wilcoxon_pvalue_two_sided": 0.01953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -9.214847932449421e-05,
+          0.007628278802864863
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267886
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "interaction"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.04813333333333333,
+        "da_ce": 0.05313333333333333,
+        "ib_scl": 0.05346666666666666,
+        "ib_ce": 0.054266666666666664
+      },
+      "seed_contrasts": {
+        "0": -0.004666666666666666,
+        "1": 0.0016666666666666635,
+        "2": -0.00233333333333334,
+        "3": -0.005666666666666667,
+        "4": -0.007666666666666669,
+        "5": -0.006666666666666668,
+        "6": -0.0026666666666666713,
+        "7": -0.007666666666666669,
+        "8": -0.004666666666666666,
+        "9": -0.0016666666666666705
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.004200000000000002,
+        "std": 0.002969806910628997,
+        "median": -0.004666666666666666,
+        "n_positive": 1,
+        "t_statistic": -4.472198554448849,
+        "t_pvalue_two_sided": 0.0015497460583429057,
+        "wilcoxon_pvalue_two_sided": 0.00390625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.00723416666666667,
+          -0.0009991666666666677
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267933
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "interaction"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.03206666666666667,
+        "da_ce": 0.03293333333333333,
+        "ib_scl": 0.030733333333333335,
+        "ib_ce": 0.03206666666666667
+      },
+      "seed_contrasts": {
+        "0": -0.0003333333333333348,
+        "1": 0.001999999999999995,
+        "2": -0.00466666666666667,
+        "3": 0.004,
+        "4": 0.0009999999999999974,
+        "5": -0.0030000000000000027,
+        "6": 0.0019999999999999983,
+        "7": 0.0030000000000000027,
+        "8": 0.002333333333333333,
+        "9": -0.00166666666666666
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.0004666666666666659,
+        "std": 0.0028073976350851126,
+        "median": 0.0014999999999999961,
+        "n_positive": 6,
+        "t_statistic": 0.5256574830378459,
+        "t_pvalue_two_sided": 0.6118303114667869,
+        "wilcoxon_pvalue_two_sided": 0.57421875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0022016666666666686,
+          0.0030683333333333305
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269343
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "interaction"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.22111553784860555,
+        "da_ce": 0.20318725099601592,
+        "ib_scl": 0.19681274900398407,
+        "ib_ce": 0.199601593625498
+      },
+      "seed_contrasts": {
+        "0": -0.011952191235059778,
+        "1": 0.0,
+        "2": 0.06374501992031872,
+        "3": 0.019920318725099584,
+        "4": -0.015936254980079695,
+        "5": 0.01992031872509961,
+        "6": 0.059760956175298835,
+        "7": 0.0,
+        "8": 0.015936254980079667,
+        "9": 0.05577689243027886
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.020717131474103583,
+        "std": 0.029624103040847147,
+        "median": 0.017928286852589626,
+        "n_positive": 6,
+        "t_statistic": 2.211487110782596,
+        "t_pvalue_two_sided": 0.054313307541010755,
+        "wilcoxon_pvalue_two_sided": 0.0546875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.015149402390438238,
+          0.045826693227091625
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269794
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "interaction"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "ib_scl": 0.9150703010262495,
+        "ib_ce": 0.9126778906262167
+      },
+      "seed_contrasts": {
+        "0": 0.0011533288453177137,
+        "1": 0.005757584808378846,
+        "2": -0.00019483265183950493,
+        "3": 0.009062686441256629,
+        "4": -0.0005131839482197531,
+        "5": 0.0020292835259629882,
+        "6": 0.00584833194688672,
+        "7": -0.0024152443384746203,
+        "8": 0.0021799921835217173,
+        "9": 0.0010161571875361153
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.002392410400032685,
+        "std": 0.0034899315950474284,
+        "median": 0.001591306185640351,
+        "n_positive": 7,
+        "t_statistic": 2.167797779393163,
+        "t_pvalue_two_sided": 0.05832227887352912,
+        "wilcoxon_pvalue_two_sided": 0.083984375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0021123546689977538,
+          0.007051994210433961
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264883
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "ib_scl": 0.05346666666666666,
+        "ib_ce": 0.054266666666666664
+      },
+      "seed_contrasts": {
+        "0": 0.0006666666666666626,
+        "1": -0.0029999999999999957,
+        "2": -0.0029999999999999957,
+        "3": -0.002333333333333333,
+        "4": 0.0030000000000000027,
+        "5": -0.001999999999999995,
+        "6": -0.0006666666666666626,
+        "7": 0.0020000000000000018,
+        "8": 0.0,
+        "9": -0.0026666666666666644
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.000799999999999998,
+        "std": 0.0021613895850289464,
+        "median": -0.0013333333333333287,
+        "n_positive": 3,
+        "t_statistic": -1.1704609597722366,
+        "t_pvalue_two_sided": 0.2718740526294424,
+        "wilcoxon_pvalue_two_sided": 0.375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.004199999999999999,
+          0.002766666666666666
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267361
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "ib_scl": 0.030733333333333335,
+        "ib_ce": 0.03206666666666667
+      },
+      "seed_contrasts": {
+        "0": -0.001666666666666667,
+        "1": -0.002333333333333333,
+        "2": 0.0036666666666666688,
+        "3": -0.006000000000000002,
+        "4": -0.002666666666666668,
+        "5": 0.00033333333333333826,
+        "6": -0.00466666666666667,
+        "7": 0.0003333333333333348,
+        "8": -0.002333333333333333,
+        "9": 0.0019999999999999983
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.0013333333333333333,
+        "std": 0.0029522956123525395,
+        "median": -0.002,
+        "n_positive": 4,
+        "t_statistic": -1.4281666767773367,
+        "t_pvalue_two_sided": 0.18701231011201,
+        "wilcoxon_pvalue_two_sided": 0.220703125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.004400833333333334,
+          0.0016333333333333332
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20263333
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "ib_scl": 0.19681274900398407,
+        "ib_ce": 0.199601593625498
+      },
+      "seed_contrasts": {
+        "0": -0.019920318725099584,
+        "1": 0.03187250996015936,
+        "2": -0.051792828685258974,
+        "3": -0.027888446215139445,
+        "4": 0.04382470119521911,
+        "5": -0.03585657370517928,
+        "6": -0.05577689243027889,
+        "7": 0.05976095617529881,
+        "8": 0.011952191235059778,
+        "9": 0.015936254980079695
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.002788844621513942,
+        "std": 0.0409345181757883,
+        "median": -0.003984063745019903,
+        "n_positive": 5,
+        "t_statistic": -0.21544411507231434,
+        "t_pvalue_two_sided": 0.8342242762363994,
+        "wilcoxon_pvalue_two_sided": 0.845703125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.036264940239043815,
+          0.03785856573705179
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20270489
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9190603637969966,
+        "da_ce": 0.9129443874998021
+      },
+      "seed_contrasts": {
+        "0": 0.005929471217579363,
+        "1": 0.0018978626238159713,
+        "2": 0.007147874982969649,
+        "3": 0.010579023909798924,
+        "4": 0.006317587653323353,
+        "5": 0.01141323748259404,
+        "6": 0.006505612793100246,
+        "7": 0.002121445174377623,
+        "8": 0.004919611547502978,
+        "9": 0.004328035586880774
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.006115976297194292,
+        "std": 0.0031206946393676216,
+        "median": 0.006123529435451358,
+        "n_positive": 10,
+        "t_statistic": 6.197471220271644,
+        "t_pvalue_two_sided": 0.00015934891254479764,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          0.0017232252627706133,
+          0.0106784996344009
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269696
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.04813333333333333,
+        "da_ce": 0.05313333333333333
+      },
+      "seed_contrasts": {
+        "0": -0.0040000000000000036,
+        "1": -0.0013333333333333322,
+        "2": -0.005333333333333336,
+        "3": -0.008,
+        "4": -0.004666666666666666,
+        "5": -0.008666666666666663,
+        "6": -0.003333333333333334,
+        "7": -0.005666666666666667,
+        "8": -0.004666666666666666,
+        "9": -0.004333333333333335
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.005,
+        "std": 0.0021314806770278746,
+        "median": -0.004666666666666666,
+        "n_positive": 0,
+        "t_statistic": -7.418030325702605,
+        "t_pvalue_two_sided": 4.0258140779003025e-05,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.008534166666666667,
+          -0.0014308333333333345
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20266992
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.03206666666666667,
+        "da_ce": 0.03293333333333333
+      },
+      "seed_contrasts": {
+        "0": -0.0020000000000000018,
+        "1": -0.00033333333333333826,
+        "2": -0.0010000000000000009,
+        "3": -0.0020000000000000018,
+        "4": -0.0016666666666666705,
+        "5": -0.0026666666666666644,
+        "6": -0.0026666666666666713,
+        "7": 0.0033333333333333375,
+        "8": 0.0,
+        "9": 0.0003333333333333348
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.0008666666666666677,
+        "std": 0.00182032421477977,
+        "median": -0.0013333333333333357,
+        "n_positive": 2,
+        "t_statistic": -1.5055783011402573,
+        "t_pvalue_two_sided": 0.16643734614715575,
+        "wilcoxon_pvalue_two_sided": 0.15625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.003567499999999999,
+          0.0018341666666666682
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267687
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.22111553784860555,
+        "da_ce": 0.20318725099601592
+      },
+      "seed_contrasts": {
+        "0": -0.03187250996015936,
+        "1": 0.03187250996015936,
+        "2": 0.01195219123505975,
+        "3": -0.007968127490039861,
+        "4": 0.027888446215139417,
+        "5": -0.015936254980079667,
+        "6": 0.0039840637450199445,
+        "7": 0.05976095617529881,
+        "8": 0.027888446215139445,
+        "9": 0.07171314741035856
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.01792828685258964,
+        "std": 0.03259744411323659,
+        "median": 0.019920318725099584,
+        "n_positive": 7,
+        "t_statistic": 1.7392228912822432,
+        "t_pvalue_two_sided": 0.11599277402952043,
+        "wilcoxon_pvalue_two_sided": 0.16796875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.022310756972111552,
+          0.0549800796812749
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262035
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_ce": 0.9129443874998021,
+        "ib_ce": 0.9126778906262167
+      },
+      "seed_contrasts": {
+        "0": -0.0008749884242168493,
+        "1": 0.004761532303028226,
+        "2": -0.0005517695453917115,
+        "3": -0.0005494619895497488,
+        "4": -0.0005144233051322944,
+        "5": -0.004482178628132494,
+        "6": 0.0023772821655541065,
+        "7": 0.0020262405051690857,
+        "8": 0.0014386201590218528,
+        "9": -0.0009658845044953068
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.0002664968735854867,
+        "std": 0.002504400247496322,
+        "median": -0.0005319426473410216,
+        "n_positive": 4,
+        "t_statistic": 0.33650256610803136,
+        "t_pvalue_two_sided": 0.7442051592125984,
+        "wilcoxon_pvalue_two_sided": 0.76953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002316144922504131,
+          0.002582044566021507
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20266225
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_ce": 0.05313333333333333,
+        "ib_ce": 0.054266666666666664
+      },
+      "seed_contrasts": {
+        "0": -0.0013333333333333322,
+        "1": -0.0029999999999999957,
+        "2": -0.0026666666666666644,
+        "3": 0.0006666666666666696,
+        "4": -0.0006666666666666626,
+        "5": 0.0020000000000000018,
+        "6": -0.003333333333333334,
+        "7": -0.002333333333333333,
+        "8": -0.0013333333333333322,
+        "9": 0.0006666666666666696
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.0011333333333333312,
+        "std": 0.0017860916708809,
+        "median": -0.0013333333333333322,
+        "n_positive": 3,
+        "t_statistic": -2.006568162179812,
+        "t_pvalue_two_sided": 0.07574624435990392,
+        "wilcoxon_pvalue_two_sided": 0.095703125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0033016666666666654,
+          0.0010675000000000003
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267585
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_ce": 0.03293333333333333,
+        "ib_ce": 0.03206666666666667
+      },
+      "seed_contrasts": {
+        "0": 0.0023333333333333366,
+        "1": -0.0016666666666666635,
+        "2": 0.002999999999999999,
+        "3": 0.0,
+        "4": 0.0013333333333333322,
+        "5": 0.002333333333333333,
+        "6": 0.0010000000000000009,
+        "7": 0.0006666666666666661,
+        "8": -0.0003333333333333313,
+        "9": 0.0
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.0008666666666666673,
+        "std": 0.001433290266364186,
+        "median": 0.0008333333333333335,
+        "n_positive": 6,
+        "t_statistic": 1.9121323175972964,
+        "t_pvalue_two_sided": 0.08816020479985637,
+        "wilcoxon_pvalue_two_sided": 0.109375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0007999999999999993,
+          0.002566666666666666
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20266413
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_ce": 0.20318725099601592,
+        "ib_ce": 0.199601593625498
+      },
+      "seed_contrasts": {
+        "0": 0.01992031872509961,
+        "1": 0.019920318725099584,
+        "2": -0.027888446215139445,
+        "3": -0.015936254980079667,
+        "4": 0.05976095617529881,
+        "5": -0.011952191235059778,
+        "6": -0.0039840637450199445,
+        "7": 0.01992031872509961,
+        "8": -0.007968127490039834,
+        "9": -0.015936254980079667
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.003585657370517928,
+        "std": 0.0261218775110984,
+        "median": -0.005976095617529889,
+        "n_positive": 4,
+        "t_statistic": 0.4340746255696744,
+        "t_pvalue_two_sided": 0.6744541913290847,
+        "wilcoxon_pvalue_two_sided": 0.7578125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.014741035856573706,
+          0.027091633466135457
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264927
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9190603637969966,
+        "ib_scl": 0.9150703010262495
+      },
+      "seed_contrasts": {
+        "0": 0.0039011539480448,
+        "1": 0.0009018101184653515,
+        "2": 0.006790938089417442,
+        "3": 0.000966875478992546,
+        "4": 0.006316348296410812,
+        "5": 0.004901775328498559,
+        "6": 0.0030345630117676325,
+        "7": 0.006562930018021329,
+        "8": 0.004178239523003113,
+        "9": 0.002345993894849352
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.003990062770747094,
+        "std": 0.0021869206135570903,
+        "median": 0.004039696735523957,
+        "n_positive": 10,
+        "t_statistic": 5.769613347820634,
+        "t_pvalue_two_sided": 0.00026956077941649734,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          0.001096959584922637,
+          0.006647130296198979
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20263810
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.04813333333333333,
+        "ib_scl": 0.05346666666666666
+      },
+      "seed_contrasts": {
+        "0": -0.005999999999999998,
+        "1": -0.0013333333333333322,
+        "2": -0.0050000000000000044,
+        "3": -0.0049999999999999975,
+        "4": -0.008333333333333331,
+        "5": -0.004666666666666666,
+        "6": -0.006000000000000005,
+        "7": -0.010000000000000002,
+        "8": -0.005999999999999998,
+        "9": -0.0010000000000000009
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": -0.005333333333333334,
+        "std": 0.002739739556875101,
+        "median": -0.005500000000000001,
+        "n_positive": 0,
+        "t_statistic": -6.155870112510925,
+        "t_pvalue_two_sided": 0.0001675299719278135,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.007800833333333335,
+          -0.002864166666666668
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267533
+      },
+      "decision": {
+        "verdict": "supported",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.03206666666666667,
+        "ib_scl": 0.030733333333333335
+      },
+      "seed_contrasts": {
+        "0": 0.0020000000000000018,
+        "1": 0.0003333333333333313,
+        "2": -0.0016666666666666705,
+        "3": 0.004,
+        "4": 0.0023333333333333296,
+        "5": -0.0006666666666666696,
+        "6": 0.002999999999999999,
+        "7": 0.0036666666666666688,
+        "8": 0.0020000000000000018,
+        "9": -0.0016666666666666635
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.0013333333333333329,
+        "std": 0.002114033065604495,
+        "median": 0.0020000000000000018,
+        "n_positive": 7,
+        "t_statistic": 1.9944674859435996,
+        "t_pvalue_two_sided": 0.07723857725008,
+        "wilcoxon_pvalue_two_sided": 0.060546875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0008,
+          0.0033666666666666662
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262529
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n10",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.22111553784860555,
+        "ib_scl": 0.19681274900398407
+      },
+      "seed_contrasts": {
+        "0": 0.007968127490039834,
+        "1": 0.019920318725099584,
+        "2": 0.03585657370517928,
+        "3": 0.003984063745019917,
+        "4": 0.04382470119521911,
+        "5": 0.007968127490039834,
+        "6": 0.05577689243027889,
+        "7": 0.01992031872509961,
+        "8": 0.007968127490039834,
+        "9": 0.039840637450199196
+      },
+      "seed_tests": {
+        "n_seeds": 10,
+        "mean": 0.02430278884462151,
+        "std": 0.018252443079446134,
+        "median": 0.019920318725099598,
+        "n_positive": 10,
+        "t_statistic": 4.21051395194752,
+        "t_pvalue_two_sided": 0.0022710790009341816,
+        "wilcoxon_pvalue_two_sided": 0.001953125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0027988047808764935,
+          0.04224103585657369
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267004
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9605915952168067,
+        "da_ce": 0.9566422684530081,
+        "ib_scl": 0.959667977679777,
+        "ib_ce": 0.9572202632716074
+      },
+      "seed_contrasts": {
+        "0": 7.840538428927069e-05,
+        "1": 0.0037305831210170393,
+        "2": 0.002242668330876829,
+        "3": -0.0006155897441193492,
+        "4": 0.0020719946860813243
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0015016123556290228,
+        "std": 0.0017571904740768785,
+        "median": 0.0020719946860813243,
+        "n_positive": 4,
+        "t_statistic": 1.9108385531193028,
+        "t_pvalue_two_sided": 0.1286215705601751,
+        "wilcoxon_pvalue_two_sided": 0.1875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0009108202972410324,
+          0.003960653683170082
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20270668
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.023793354353626,
+        "da_ce": 0.02621877273829736,
+        "ib_scl": 0.02447247150133398,
+        "ib_ce": 0.02634004365753092
+      },
+      "seed_contrasts": {
+        "0": -0.00048508367693427326,
+        "1": -0.0016977928692699477,
+        "2": -0.0016977928692699547,
+        "3": 0.00206160562697065,
+        "4": -0.0009701673538685465
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0005578462284744144,
+        "std": 0.0015520782688116573,
+        "median": -0.0009701673538685465,
+        "n_positive": 1,
+        "t_statistic": -0.8036850414868075,
+        "t_pvalue_two_sided": 0.4666231297740099,
+        "wilcoxon_pvalue_two_sided": 0.625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002644312393887946,
+          0.0014073490177055554
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264623
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.015595440213436817,
+        "da_ce": 0.017074945428086345,
+        "ib_scl": 0.015862236235750667,
+        "ib_ce": 0.01637157409653165
+      },
+      "seed_contrasts": {
+        "0": 0.0003638127577007058,
+        "1": -0.0020616056269706536,
+        "2": -0.0006063545961678372,
+        "3": -0.0014552510308028128,
+        "4": -0.001091438273102107
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.000970167353868541,
+        "std": 0.0009155753620265292,
+        "median": -0.001091438273102107,
+        "n_positive": 1,
+        "t_statistic": -2.3693955110363634,
+        "t_pvalue_two_sided": 0.0768715390978545,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0025958040261945194,
+          0.0005584525830705816
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20268875
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.1306772908366534,
+        "da_ce": 0.11792828685258963,
+        "ib_scl": 0.12031872509960159,
+        "ib_ce": 0.11633466135458168
+      },
+      "seed_contrasts": {
+        "0": 0.015936254980079667,
+        "1": 0.039840637450199196,
+        "2": -0.03187250996015936,
+        "3": -0.011952191235059764,
+        "4": 0.03187250996015936
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.00876494023904382,
+        "std": 0.030131745659265397,
+        "median": 0.015936254980079667,
+        "n_positive": 3,
+        "t_statistic": 0.6504436355879906,
+        "t_pvalue_two_sided": 0.5508762172081589,
+        "wilcoxon_pvalue_two_sided": 0.5,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.019123505976095627,
+          0.035856573705179286
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20270775
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "ib_scl": 0.959667977679777,
+        "ib_ce": 0.9572202632716074
+      },
+      "seed_contrasts": {
+        "0": 0.004621944511355114,
+        "1": 0.0022430359904189734,
+        "2": 0.004148958246985801,
+        "3": 0.0018862460260755665,
+        "4": -0.0006616127339883482
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.002447714408169421,
+        "std": 0.002100390583704164,
+        "median": 0.0022430359904189734,
+        "n_positive": 4,
+        "t_statistic": 2.605827624936348,
+        "t_pvalue_two_sided": 0.05968115014123075,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          2.7024617902815527e-05,
+          0.004900170122733227
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20261755
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "ib_scl": 0.02447247150133398,
+        "ib_ce": 0.02634004365753092
+      },
+      "seed_contrasts": {
+        "0": -0.002425418384671356,
+        "1": -0.0025466893039049233,
+        "2": -0.003031772980839193,
+        "3": -0.0016977928692699477,
+        "4": 0.0003638127577007058
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0018675721561969428,
+        "std": 0.0013356327821739873,
+        "median": -0.002425418384671356,
+        "n_positive": 1,
+        "t_statistic": -3.1266215908125465,
+        "t_pvalue_two_sided": 0.03530015116318704,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.003711496483143343,
+          -7.215619694397253e-05
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20268646
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "ib_scl": 0.015862236235750667,
+        "ib_ce": 0.01637157409653165
+      },
+      "seed_contrasts": {
+        "0": -0.0020616056269706536,
+        "1": 0.00036381275770070234,
+        "2": -0.000970167353868543,
+        "3": -0.00012127091923356745,
+        "4": 0.0002425418384671349
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0005093378607809853,
+        "std": 0.0010124487734533981,
+        "median": -0.00012127091923356745,
+        "n_positive": 2,
+        "t_statistic": -1.1249103264117197,
+        "t_pvalue_two_sided": 0.3235606038204212,
+        "wilcoxon_pvalue_two_sided": 0.625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002037351443123939,
+          0.000994421537715256
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264217
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "ib_scl": 0.12031872509960159,
+        "ib_ce": 0.11633466135458168
+      },
+      "seed_contrasts": {
+        "0": -0.007968127490039834,
+        "1": 0.003984063745019917,
+        "2": 0.027888446215139445,
+        "3": 0.019920318725099598,
+        "4": -0.02390438247011953
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.003984063745019919,
+        "std": 0.020892606537254017,
+        "median": 0.003984063745019917,
+        "n_positive": 3,
+        "t_statistic": 0.4264014327112208,
+        "t_pvalue_two_sided": 0.6917613009591068,
+        "wilcoxon_pvalue_two_sided": 0.8125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.02233067729083665,
+          0.031075697211155374
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269893
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9605915952168067,
+        "da_ce": 0.9566422684530081
+      },
+      "seed_contrasts": {
+        "0": 0.0047003498956443845,
+        "1": 0.005973619111436013,
+        "2": 0.00639162657786263,
+        "3": 0.0012706562819562173,
+        "4": 0.0014103819520929761
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.003949326763798444,
+        "std": 0.002462120018511925,
+        "median": 0.0047003498956443845,
+        "n_positive": 5,
+        "t_statistic": 3.5867313708573403,
+        "t_pvalue_two_sided": 0.02302886930637016,
+        "wilcoxon_pvalue_two_sided": 0.0625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          0.001443421922483928,
+          0.0067898980189167735
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20271009
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.023793354353626,
+        "da_ce": 0.02621877273829736
+      },
+      "seed_contrasts": {
+        "0": -0.002910502061605629,
+        "1": -0.004244482173174871,
+        "2": -0.004729565850109144,
+        "3": 0.00036381275770070234,
+        "4": -0.0006063545961678407
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0024254183846713568,
+        "std": 0.0022328344214797434,
+        "median": -0.002910502061605629,
+        "n_positive": 1,
+        "t_statistic": -2.4289308377863033,
+        "t_pvalue_two_sided": 0.07206412898684227,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.004851443123938881,
+          -4.850836769342627e-05
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20263265
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.015595440213436817,
+        "da_ce": 0.017074945428086345
+      },
+      "seed_contrasts": {
+        "0": -0.0016977928692699495,
+        "1": -0.0016977928692699512,
+        "2": -0.0015765219500363803,
+        "3": -0.001576521950036382,
+        "4": -0.0008488964346349739
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0014795052146495274,
+        "std": 0.0003576978220653081,
+        "median": -0.001576521950036382,
+        "n_positive": 0,
+        "t_statistic": -9.248796131662607,
+        "t_pvalue_two_sided": 0.0007597998656090891,
+        "wilcoxon_pvalue_two_sided": 0.0625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0027407227746786313,
+          -9.701673538685496e-05
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267857
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.1306772908366534,
+        "da_ce": 0.11792828685258963
+      },
+      "seed_contrasts": {
+        "0": 0.007968127490039834,
+        "1": 0.04382470119521911,
+        "2": -0.003984063745019917,
+        "3": 0.007968127490039834,
+        "4": 0.007968127490039834
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.012749003984063739,
+        "std": 0.01812639548378856,
+        "median": 0.007968127490039834,
+        "n_positive": 4,
+        "t_statistic": 1.5727141989855693,
+        "t_pvalue_two_sided": 0.19089036663397443,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.010378486055776898,
+          0.03747011952191233
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262069
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_ce": 0.9566422684530081,
+        "ib_ce": 0.9572202632716074
+      },
+      "seed_contrasts": {
+        "0": 0.00010342326993428852,
+        "1": -0.0033939415162630437,
+        "2": 0.0016258406923559399,
+        "3": -0.000616755148592607,
+        "4": -0.0006085413904309833
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0005779948185992811,
+        "std": 0.0018202481170875658,
+        "median": -0.0006085413904309833,
+        "n_positive": 2,
+        "t_statistic": -0.7100327108694259,
+        "t_pvalue_two_sided": 0.5168856763078052,
+        "wilcoxon_pvalue_two_sided": 0.625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002684573494843414,
+          0.0014889724889310097
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20265003
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_ce": 0.02621877273829736,
+        "ib_ce": 0.02634004365753092
+      },
+      "seed_contrasts": {
+        "0": -0.0004850836769342698,
+        "1": 0.0014552510308028128,
+        "2": -0.0018190637885035152,
+        "3": -0.0002425418384671349,
+        "4": 0.00048508367693427326
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.00012127091923356676,
+        "std": 0.0012127091923356773,
+        "median": -0.0002425418384671349,
+        "n_positive": 2,
+        "t_statistic": -0.22360679774997716,
+        "t_pvalue_two_sided": 0.8340192043895761,
+        "wilcoxon_pvalue_two_sided": 1.0,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0016498908561726913,
+          0.0014309968469561
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269858
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_ce": 0.017074945428086345,
+        "ib_ce": 0.01637157409653165
+      },
+      "seed_contrasts": {
+        "0": 0.00036381275770070234,
+        "1": 0.001940334707737086,
+        "2": 0.0002425418384671349,
+        "3": 0.0008488964346349756,
+        "4": 0.00012127091923356745
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0007033713315546933,
+        "std": 0.000744607394276438,
+        "median": 0.00036381275770070234,
+        "n_positive": 5,
+        "t_statistic": 2.112235418114764,
+        "t_pvalue_two_sided": 0.10223250430103933,
+        "wilcoxon_pvalue_two_sided": 0.0625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0003413776376424957,
+          0.001794809604656803
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267055
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_ce": 0.11792828685258963,
+        "ib_ce": 0.11633466135458168
+      },
+      "seed_contrasts": {
+        "0": -0.01195219123505975,
+        "1": -0.01593625498007968,
+        "2": 0.019920318725099598,
+        "3": 0.027888446215139445,
+        "4": -0.011952191235059778
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0015936254980079667,
+        "std": 0.020624986622382126,
+        "median": -0.01195219123505975,
+        "n_positive": 2,
+        "t_statistic": 0.17277368511627186,
+        "t_pvalue_two_sided": 0.8712193191878358,
+        "wilcoxon_pvalue_two_sided": 0.8125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.016733067729083666,
+          0.026294820717131472
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267142
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.9605915952168067,
+        "ib_scl": 0.959667977679777
+      },
+      "seed_contrasts": {
+        "0": 0.0001818286542235592,
+        "1": 0.0003366416047539955,
+        "2": 0.003868509023232769,
+        "3": -0.0012323448927119562,
+        "4": 0.001463453295650341
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0009236175370297417,
+        "std": 0.0019043879595542043,
+        "median": 0.0003366416047539955,
+        "n_positive": 4,
+        "t_statistic": 1.084480495504124,
+        "t_pvalue_two_sided": 0.33914470403737146,
+        "wilcoxon_pvalue_two_sided": 0.3125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0009999960628477894,
+          0.0030271882402961347
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20265606
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.023793354353626,
+        "ib_scl": 0.02447247150133398
+      },
+      "seed_contrasts": {
+        "0": -0.000970167353868543,
+        "1": -0.0002425418384671349,
+        "2": -0.0035168566577734664,
+        "3": 0.0018190637885035152,
+        "4": -0.00048508367693427326
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0006791171477079805,
+        "std": 0.0019109311034128484,
+        "median": -0.00048508367693427326,
+        "n_positive": 1,
+        "t_statistic": -0.794666068414887,
+        "t_pvalue_two_sided": 0.47129382869881525,
+        "wilcoxon_pvalue_two_sided": 0.4375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002644312393887946,
+          0.0014073490177055538
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269514
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.015595440213436817,
+        "ib_scl": 0.015862236235750667
+      },
+      "seed_contrasts": {
+        "0": 0.0007276255154014064,
+        "1": -0.00012127091923356745,
+        "2": -0.00036381275770070234,
+        "3": -0.000606354596167839,
+        "4": -0.0009701673538685413
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0002667960223138487,
+        "std": 0.0006382584218744002,
+        "median": -0.00036381275770070234,
+        "n_positive": 1,
+        "t_statistic": -0.9346904350565913,
+        "t_pvalue_two_sided": 0.4028630104737031,
+        "wilcoxon_pvalue_two_sided": 0.4375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0012854717438758189,
+          0.0008488964346349745
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20266964
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "unseen",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.1306772908366534,
+        "ib_scl": 0.12031872509960159
+      },
+      "seed_contrasts": {
+        "0": 0.003984063745019917,
+        "1": 0.023904382470119515,
+        "2": -0.011952191235059764,
+        "3": 0.01593625498007968,
+        "4": 0.019920318725099584
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.010358565737051786,
+        "std": 0.014529547831721485,
+        "median": 0.01593625498007968,
+        "n_positive": 4,
+        "t_statistic": 1.5941622826609105,
+        "t_pvalue_two_sided": 0.18612482340963754,
+        "wilcoxon_pvalue_two_sided": 0.1875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.005597609561752987,
+          0.02868525896414343
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20265284
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.959568211216747,
+        "da_ce": 0.9568888152504534,
+        "ib_scl": 0.9596597868215804,
+        "ib_ce": 0.9580734582750763
+      },
+      "seed_contrasts": {
+        "0": 0.0008204878887926315,
+        "1": 0.003884472747837653,
+        "2": 0.0043646202700444725,
+        "3": -0.005904878171708039,
+        "4": 0.002300634363979981
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0010930674197893397,
+        "std": 0.004153274665382935,
+        "median": 0.002300634363979981,
+        "n_positive": 4,
+        "t_statistic": 0.5884929968661026,
+        "t_pvalue_two_sided": 0.5878261908049869,
+        "wilcoxon_pvalue_two_sided": 0.625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0036637735831244267,
+          0.005442460183936927
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262959
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.023799999999999998,
+        "da_ce": 0.027866666666666668,
+        "ib_scl": 0.024733333333333333,
+        "ib_ce": 0.026533333333333332
+      },
+      "seed_contrasts": {
+        "0": -0.0036666666666666653,
+        "1": -0.003333333333333334,
+        "2": -0.004666666666666666,
+        "3": 0.0009999999999999974,
+        "4": -0.0006666666666666661
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.002266666666666667,
+        "std": 0.002349940897601941,
+        "median": -0.003333333333333334,
+        "n_positive": 1,
+        "t_statistic": -2.1568290309648748,
+        "t_pvalue_two_sided": 0.09723405369646027,
+        "wilcoxon_pvalue_two_sided": 0.1875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0059333333333333295,
+          0.0016666666666666663
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20270911
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.016533333333333334,
+        "da_ce": 0.015133333333333332,
+        "ib_scl": 0.0156,
+        "ib_ce": 0.015266666666666668
+      },
+      "seed_contrasts": {
+        "0": 0.002666666666666668,
+        "1": -0.0006666666666666661,
+        "2": 0.0003333333333333348,
+        "3": 0.004666666666666666,
+        "4": -0.001666666666666667
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0010666666666666672,
+        "std": 0.002575525836277581,
+        "median": 0.0003333333333333348,
+        "n_positive": 3,
+        "t_statistic": 0.9260785282771729,
+        "t_pvalue_two_sided": 0.4068209256521881,
+        "wilcoxon_pvalue_two_sided": 0.625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0018016666666666673,
+          0.004135
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262890
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1,
+        "ib_scl": -1,
+        "ib_ce": 1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.12828685258964143,
+        "da_ce": 0.11474103585657369,
+        "ib_scl": 0.11872509960159364,
+        "ib_ce": 0.11314741035856575
+      },
+      "seed_contrasts": {
+        "0": 0.007968127490039834,
+        "1": 0.03187250996015935,
+        "2": -0.023904382470119515,
+        "3": 0.003984063745019917,
+        "4": 0.019920318725099584
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.007968127490039834,
+        "std": 0.020892606537254006,
+        "median": 0.007968127490039834,
+        "n_positive": 4,
+        "t_statistic": 0.8528028654224413,
+        "t_pvalue_two_sided": 0.44182330768363015,
+        "wilcoxon_pvalue_two_sided": 0.4375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.02312749003984064,
+          0.03665338645418324
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264169
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "interaction"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "ib_scl": 0.9596597868215804,
+        "ib_ce": 0.9580734582750763
+      },
+      "seed_contrasts": {
+        "0": 0.0025014288573411703,
+        "1": 0.001407050041106972,
+        "2": -0.0002167348975420369,
+        "3": 0.004145492560216457,
+        "4": 9.440617139810925e-05
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0015863285465041344,
+        "std": 0.0017955319523103236,
+        "median": 0.001407050041106972,
+        "n_positive": 4,
+        "t_statistic": 1.9755362526785183,
+        "t_pvalue_two_sided": 0.11941008964691958,
+        "wilcoxon_pvalue_two_sided": 0.1875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0020671536990296943,
+          0.005070888808185834
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262724
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "ib_scl": 0.024733333333333333,
+        "ib_ce": 0.026533333333333332
+      },
+      "seed_contrasts": {
+        "0": -0.0006666666666666661,
+        "1": -0.0003333333333333313,
+        "2": -0.002333333333333333,
+        "3": -0.004666666666666666,
+        "4": -0.0010000000000000009
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0017999999999999995,
+        "std": 0.001773258143769385,
+        "median": -0.0010000000000000009,
+        "n_positive": 0,
+        "t_statistic": -2.2697892992296715,
+        "t_pvalue_two_sided": 0.08574759719942511,
+        "wilcoxon_pvalue_two_sided": 0.0625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0051333333333333335,
+          0.0013349999999999987
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20266092
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "ib_scl": 0.0156,
+        "ib_ce": 0.015266666666666668
+      },
+      "seed_contrasts": {
+        "0": -0.001666666666666667,
+        "1": -0.0010000000000000009,
+        "2": 0.002666666666666666,
+        "3": 0.0006666666666666661,
+        "4": 0.0009999999999999992
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0003333333333333327,
+        "std": 0.0017159383568311668,
+        "median": 0.0006666666666666661,
+        "n_positive": 3,
+        "t_statistic": 0.4343722427630686,
+        "t_pvalue_two_sided": 0.6864228692054355,
+        "wilcoxon_pvalue_two_sided": 1.0,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.002066666666666666,
+          0.002799999999999999
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20268744
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "ib_scl": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "ib_scl": 0.11872509960159364,
+        "ib_ce": 0.11314741035856575
+      },
+      "seed_contrasts": {
+        "0": -0.003984063745019917,
+        "1": 0.011952191235059764,
+        "2": 0.019920318725099598,
+        "3": 0.011952191235059764,
+        "4": -0.01195219123505975
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0055776892430278915,
+        "std": 0.01309296950211552,
+        "median": 0.011952191235059764,
+        "n_positive": 3,
+        "t_statistic": 0.9525793444156813,
+        "t_pvalue_two_sided": 0.39474545281001977,
+        "wilcoxon_pvalue_two_sided": 0.25,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.016733067729083666,
+          0.031075697211155384
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264241
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_ib"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.959568211216747,
+        "da_ce": 0.9568888152504534
+      },
+      "seed_contrasts": {
+        "0": 0.0033219167461338017,
+        "1": 0.005291522788944625,
+        "2": 0.004147885372502436,
+        "3": -0.0017593856114915818,
+        "4": 0.00239504053537809
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0026793959662934743,
+        "std": 0.002700747143507849,
+        "median": 0.0033219167461338017,
+        "n_positive": 4,
+        "t_statistic": 2.2183903938112346,
+        "t_pvalue_two_sided": 0.09077459390509104,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0013543274419007755,
+          0.006713976672536526
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20265144
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.023799999999999998,
+        "da_ce": 0.027866666666666668
+      },
+      "seed_contrasts": {
+        "0": -0.004333333333333331,
+        "1": -0.0036666666666666653,
+        "2": -0.006999999999999999,
+        "3": -0.0036666666666666688,
+        "4": -0.001666666666666667
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.004066666666666666,
+        "std": 0.0019206480387850575,
+        "median": -0.0036666666666666688,
+        "n_positive": 0,
+        "t_statistic": -4.734518206808631,
+        "t_pvalue_two_sided": 0.009073792166301197,
+        "wilcoxon_pvalue_two_sided": 0.0625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.007403333333333335,
+          -0.0008666666666666677
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262159
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.016533333333333334,
+        "da_ce": 0.015133333333333332
+      },
+      "seed_contrasts": {
+        "0": 0.0010000000000000009,
+        "1": -0.001666666666666667,
+        "2": 0.003000000000000001,
+        "3": 0.005333333333333332,
+        "4": -0.0006666666666666661
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0014000000000000002,
+        "std": 0.0028225284173355398,
+        "median": 0.0010000000000000009,
+        "n_positive": 3,
+        "t_statistic": 1.1091102393416774,
+        "t_pvalue_two_sided": 0.32957162981269933,
+        "wilcoxon_pvalue_two_sided": 0.4375,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0013333333333333335,
+          0.004799999999999999
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267021
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "da_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.12828685258964143,
+        "da_ce": 0.11474103585657369
+      },
+      "seed_contrasts": {
+        "0": 0.003984063745019917,
+        "1": 0.04382470119521911,
+        "2": -0.003984063745019917,
+        "3": 0.01593625498007968,
+        "4": 0.007968127490039834
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.013545816733067725,
+        "std": 0.01838722033340928,
+        "median": 0.007968127490039834,
+        "n_positive": 4,
+        "t_statistic": 1.6473053825791313,
+        "t_pvalue_two_sided": 0.1748406313637246,
+        "wilcoxon_pvalue_two_sided": 0.1875,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.008784860557768927,
+          0.03667330677290835
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20268442
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "scl_effect_under_da"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_ce": 0.9568888152504534,
+        "ib_ce": 0.9580734582750763
+      },
+      "seed_contrasts": {
+        "0": -0.0002813547836985064,
+        "1": -0.00527330763217948,
+        "2": 0.0013197543734010386,
+        "3": 0.0016848446026881403,
+        "4": -0.003373151683325304
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0011846430246228224,
+        "std": 0.0030343303890238166,
+        "median": -0.0002813547836985064,
+        "n_positive": 2,
+        "t_statistic": -0.8729907401348562,
+        "t_pvalue_two_sided": 0.4319421988882445,
+        "wilcoxon_pvalue_two_sided": 0.625,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.004726139201518534,
+          0.002102356796436514
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20269831
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_ce": 0.027866666666666668,
+        "ib_ce": 0.026533333333333332
+      },
+      "seed_contrasts": {
+        "0": 0.0013333333333333322,
+        "1": 0.004,
+        "2": 0.0,
+        "3": 0.0003333333333333348,
+        "4": 0.0010000000000000009
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0013333333333333335,
+        "std": 0.0015811388300841895,
+        "median": 0.0010000000000000009,
+        "n_positive": 4,
+        "t_statistic": 1.8856180831641274,
+        "t_pvalue_two_sided": 0.1324189222202492,
+        "wilcoxon_pvalue_two_sided": 0.125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0010000000000000002,
+          0.003933333333333332
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264012
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_ce": 0.015133333333333332,
+        "ib_ce": 0.015266666666666668
+      },
+      "seed_contrasts": {
+        "0": -0.0010000000000000009,
+        "1": 0.0013333333333333322,
+        "2": -0.0013333333333333322,
+        "3": -0.002,
+        "4": 0.002333333333333333
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.00013333333333333356,
+        "std": 0.0018648800974265815,
+        "median": -0.0010000000000000009,
+        "n_positive": 2,
+        "t_statistic": -0.1598721533954866,
+        "t_pvalue_two_sided": 0.8807300975023984,
+        "wilcoxon_pvalue_two_sided": 1.0,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0021999999999999993,
+          0.0022000000000000014
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20264312
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_ce": 1,
+        "ib_ce": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_ce": 0.11474103585657369,
+        "ib_ce": 0.11314741035856575
+      },
+      "seed_contrasts": {
+        "0": -0.007968127490039834,
+        "1": -0.01593625498007968,
+        "2": 0.01593625498007968,
+        "3": 0.01593625498007968,
+        "4": 0.0
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.0015936254980079695,
+        "std": 0.014253819776891089,
+        "median": 0.0,
+        "n_positive": 2,
+        "t_statistic": 0.2500000000000002,
+        "t_pvalue_two_sided": 0.8149020114591811,
+        "wilcoxon_pvalue_two_sided": 1.0,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.017529880478087644,
+          0.02312749003984062
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262614
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_ce"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "macro_f1",
+      "arm_means": {
+        "da_scl": 0.959568211216747,
+        "ib_scl": 0.9596597868215804
+      },
+      "seed_contrasts": {
+        "0": 0.000539133105094125,
+        "1": -0.0013888348843418274,
+        "2": 0.005684374643445511,
+        "3": -0.004220033569019899,
+        "4": -0.001072517319345323
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -9.157560483348259e-05,
+        "std": 0.003655430487472266,
+        "median": -0.001072517319345323,
+        "n_positive": 2,
+        "t_statistic": -0.056017828321480015,
+        "t_pvalue_two_sided": 0.95801407236928,
+        "wilcoxon_pvalue_two_sided": 0.8125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.003995768932849507,
+          0.00405280698388964
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20268595
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "within_domain_error",
+      "arm_means": {
+        "da_scl": 0.023799999999999998,
+        "ib_scl": 0.024733333333333333
+      },
+      "seed_contrasts": {
+        "0": -0.002333333333333333,
+        "1": 0.0006666666666666661,
+        "2": -0.004666666666666666,
+        "3": 0.0013333333333333322,
+        "4": 0.0003333333333333348
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": -0.0009333333333333332,
+        "std": 0.0025099800796022265,
+        "median": 0.0003333333333333348,
+        "n_positive": 3,
+        "t_statistic": -0.8314794192830981,
+        "t_pvalue_two_sided": 0.4524574110462448,
+        "wilcoxon_pvalue_two_sided": 0.8125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.004199999999999998,
+          0.002133333333333332
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20262273
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "cross_domain_error",
+      "arm_means": {
+        "da_scl": 0.016533333333333334,
+        "ib_scl": 0.0156
+      },
+      "seed_contrasts": {
+        "0": 0.001666666666666667,
+        "1": 0.0006666666666666661,
+        "2": -0.0009999999999999974,
+        "3": 0.002666666666666666,
+        "4": 0.0006666666666666678
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.000933333333333334,
+        "std": 0.001362187782780169,
+        "median": 0.0006666666666666678,
+        "n_positive": 4,
+        "t_statistic": 1.532091834460834,
+        "t_pvalue_two_sided": 0.20026333115433306,
+        "wilcoxon_pvalue_two_sided": 0.3125,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.0008666666666666684,
+          0.0031333333333333326
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20270054
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    },
+    {
+      "group": "n25",
+      "eval_set": "iht",
+      "weights": {
+        "da_scl": 1,
+        "ib_scl": -1
+      },
+      "metric": "fpr95_maha",
+      "arm_means": {
+        "da_scl": 0.12828685258964143,
+        "ib_scl": 0.11872509960159364
+      },
+      "seed_contrasts": {
+        "0": 0.0,
+        "1": 0.015936254980079667,
+        "2": -0.007968127490039834,
+        "3": 0.019920318725099598,
+        "4": 0.019920318725099584
+      },
+      "seed_tests": {
+        "n_seeds": 5,
+        "mean": 0.009561752988047803,
+        "std": 0.0127863000285906,
+        "median": 0.015936254980079667,
+        "n_positive": 3,
+        "t_statistic": 1.6721592342998823,
+        "t_pvalue_two_sided": 0.16981022226517767,
+        "wilcoxon_pvalue_two_sided": 0.25,
+        "wilcoxon_method": "exact sign-flip enumeration; zeros dropped, ties average-ranked"
+      },
+      "bootstrap": {
+        "ci": [
+          -0.007968127490039839,
+          0.02788844621513944
+        ],
+        "level": 0.95,
+        "n_boot": 1000,
+        "seed": 20267263
+      },
+      "decision": {
+        "verdict": "inconclusive",
+        "alpha": 0.050000000000000044,
+        "criterion": "two-level 95% CI excludes 0 AND seed-level Wilcoxon p < alpha"
+      },
+      "note": "fewer than 6 seeds: exact two-sided Wilcoxon cannot reach p < 0.05; interval and direction only",
+      "contrast": "da_effect_under_scl"
+    }
+  ],
+  "note": "Secondary comparisons are descriptive (no multiplicity correction)."
+}

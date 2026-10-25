@@ -1,0 +1,17 @@
+intent_a,intent_b,same_domain,ib_ce_mean_errors,ib_scl_mean_errors,da_ce_mean_errors,da_scl_mean_errors
+bill_balance,bill_due,True,3.9,6.1,3.6,7.0
+credit_limit,credit_limit_change,True,4.1,3.0,4.9,2.7
+calories,nutrition_info,True,3.4,3.6,3.1,3.6
+restaurant_reservation,cancel_reservation,True,1.0,1.7,1.3,1.3
+reminder,reminder_update,True,2.2,2.8,1.8,2.7
+todo_list,todo_list_update,True,11.7,14.9,11.6,12.0
+pto_request,pto_request_status,True,14.1,13.8,13.6,13.3
+timer,alarm,True,1.2,1.0,1.2,1.0
+balance,rewards_balance,False,0.7,0.0,0.9,0.0
+order,order_checks,False,2.2,1.1,2.3,2.0
+shopping_list,ingredients_list,False,0.1,0.3,0.1,0.4
+date,calendar,False,1.3,1.0,1.7,1.8
+time,timezone,False,0.0,0.0,0.1,0.0
+change_language,translate,False,3.2,3.6,3.4,3.4
+book_hotel,restaurant_reservation,False,0.1,0.2,0.5,0.3
+meeting_schedule,calendar_update,False,0.0,0.2,0.0,0.0
