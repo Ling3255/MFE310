@@ -1,0 +1,66 @@
+# Phase 3 study definition (E12-E16). Pre-registered together with 00_docs/01_experiment_plan.md.
+schema_version: 1
+study: phase3_scl
+plan: phase3_scl/00_docs/01_experiment_plan.md
+output_dir: phase3_scl/09_results
+
+split:                         # S01 builds the fixed split from CLINC only
+  clinc_data: ../dataset/data  # oos-eval/data (data_full.json, data_oos_plus.json, domains.json)
+  output_root: ../dataset/clinc_phase3
+  seed: 20261026
+  test_per_intent: 20
+  low_resource_seed: 20261027
+  low_resource_sizes: [10, 25]
+
+dev:                           # E12: validation only
+  seeds: [100, 101, 102]
+  reference: phase3_scl/01_configs/arm_ce_balanced.yaml
+  candidates:
+  - phase3_scl/01_configs/dev/arm_scl_l0p1_t0p1.yaml
+  - phase3_scl/01_configs/dev/arm_scl_l0p1_t0p3.yaml
+  - phase3_scl/01_configs/dev/arm_scl_l0p3_t0p1.yaml
+  - phase3_scl/01_configs/dev/arm_scl_l0p3_t0p3.yaml
+  - phase3_scl/01_configs/dev/arm_scl_l0p5_t0p1.yaml
+  - phase3_scl/01_configs/dev/arm_scl_l0p5_t0p3.yaml
+  f1_tolerance: 0.003          # candidate val macro-F1 may not trail the reference by more than 0.3 pp
+  knn_k_grid: [1, 10, 50]
+
+main:                          # E14: confirmatory runs
+  seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  arms:
+    ce_balanced: phase3_scl/01_configs/arm_ce_balanced.yaml          # A, principal model
+    ce_standard: phase3_scl/01_configs/arm_ce_standard.yaml          # A', sampler ablation
+    scl: phase3_scl/01_configs/generated/arm_scl_selected.yaml       # B, controlled improvement
+
+low_resource:                  # R2
+  seeds: [0, 1, 2, 3, 4]
+  sizes:
+    n10: {ce_balanced: phase3_scl/01_configs/arm_ce_balanced_n10.yaml, scl: phase3_scl/01_configs/generated/arm_scl_selected_n10.yaml}
+    n25: {ce_balanced: phase3_scl/01_configs/arm_ce_balanced_n25.yaml, scl: phase3_scl/01_configs/generated/arm_scl_selected_n25.yaml}
+
+baseline: phase3_scl/01_configs/baseline.yaml
+
+robustness:                    # R3 (inference only, main arms)
+  seed: 20261028
+  noise_rates: [0.05, 0.10]
+  strip_punctuation: true
+
+analysis:
+  alpha_primary: 0.025         # Bonferroni over H7 and H8
+  level_primary: 0.975
+  level_secondary: 0.95
+  bootstrap_iterations: 2000
+  oos_bootstrap_iterations: 1000
+  bootstrap_seed: 20261029
+  sesoi_fpr95: 0.01
+  noninferiority_margin_f1: 0.003
+  ece_bins: 15
+  case_seed: 20261030
+  cases_per_pool: 5
+
+frozen: false                  # supervisor sets true together with approval after reviewing E12-E14
+supervisor_approval:
+  approved: false
+  confirmed_by: null
+  confirmed_at: null
+  evidence: null

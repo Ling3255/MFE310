@@ -22,7 +22,8 @@ def main() -> None:
     args = parser.parse_args()
     config = load_config(args.config)
     base = load_config(config.get("base_config", "01_configs/01_base.yaml"))
-    datasets = load_datasets(args.data_root or base["data"]["root"], strict_counts=True)
+    # Phase 3 configs set data.strict_counts: false (their split differs from the official counts).
+    datasets = load_datasets(args.data_root or base["data"]["root"], strict_counts=bool(base["data"].get("strict_counts", True)))
     output = resolve_path(config["output_dir"])
     completed = train_baseline(datasets, config, output)
     validation_dir = resolve_path(config["validation_results_dir"])

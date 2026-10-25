@@ -193,6 +193,16 @@ def seed_level_tests(deltas: Sequence[float]) -> dict[str, Any]:
     }
 
 
+def _intervals(distribution: np.ndarray, level: float) -> dict[str, Any]:
+    """Percentile intervals: ``ci95`` (kept for phase 2) and ``ci`` at the requested level."""
+    if not 0 < level < 1:
+        raise ValueError("level must be in (0, 1)")
+    low95, high95 = np.quantile(distribution, [0.025, 0.975])
+    tail = round((1.0 - level) / 2.0, 12)  # avoid 0.025000000000000022 for level=0.95
+    low, high = np.quantile(distribution, [tail, 1.0 - tail])
+    return {"ci95": [float(low95), float(high95)], "ci": [float(low), float(high)], "level": float(level)}
+
+
 def two_level_bootstrap(
     gold: np.ndarray,
     reference: np.ndarray,
@@ -201,6 +211,7 @@ def two_level_bootstrap(
     *,
     n_boot: int,
     seed: int,
+    level: float = 0.95,
 ) -> dict[str, Any]:
     """Resample paired seeds and intent-stratified test rows; return mean(treatment - reference).
 
@@ -221,8 +232,7 @@ def two_level_bootstrap(
             metric(sampled_gold, treatment[s, rows]) - metric(sampled_gold, reference[s, rows]) for s in seeds
         ])
     observed = float(np.mean([metric(gold, treatment[s]) - metric(gold, reference[s]) for s in range(n_seeds)]))
-    low, high = np.quantile(distribution, [0.025, 0.975])
-    return {"observed": observed, "ci95": [float(low), float(high)], "n_boot": int(n_boot), "seed": int(seed),
+    return {"observed": observed, **_intervals(distribution, level), "n_boot": int(n_boot), "seed": int(seed),
             "distribution": distribution}
 
 
@@ -234,6 +244,7 @@ def two_level_oos_bootstrap(
     *,
     n_boot: int,
     seed: int,
+    level: float = 0.95,
 ) -> dict[str, Any]:
     """Like ``two_level_bootstrap`` for (IS scores, OOS scores) arrays of shape (n_seeds, n)."""
     ref_is, ref_oos = reference
@@ -250,8 +261,7 @@ def two_level_oos_bootstrap(
             metric(trt_is[s, rows], trt_oos[s, oos_rows]) - metric(ref_is[s, rows], ref_oos[s, oos_rows]) for s in seeds
         ])
     observed = float(np.mean([metric(trt_is[s], trt_oos[s]) - metric(ref_is[s], ref_oos[s]) for s in range(n_seeds)]))
-    low, high = np.quantile(distribution, [0.025, 0.975])
-    return {"observed": observed, "ci95": [float(low), float(high)], "n_boot": int(n_boot), "seed": int(seed),
+    return {"observed": observed, **_intervals(distribution, level), "n_boot": int(n_boot), "seed": int(seed),
             "distribution": distribution}
 
 

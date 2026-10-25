@@ -18,6 +18,10 @@
 
 预注册计划见 [`00_docs/06_confirmatory_plan.md`](00_docs/06_confirmatory_plan.md)。E9/E10 训练及获批后的单次 S11/S12 已完成。主检验 MASSIVE H1 为 inconclusive：Dom−CE macro-F1 平均差 −0.295 pp，95% 区间 [−0.941, +0.275] pp，Wilcoxon p=0.1934；H2 也为 inconclusive。CLINC 10 种子复现同样为 inconclusive：平均差 +0.016 pp，区间 [−0.104, +0.138] pp，p=1.0。完整结果在 `09_results/07_confirmatory/*/test/`；E11 可选探索未运行。
 
+## 第三阶段（E12–E16）：监督对比学习
+
+第三阶段的计划、配置、步骤、作业和结果都放在独立文件夹 [`phase3_scl/`](phase3_scl/README.md) 中。研究的是：BERT-CE 加上监督对比学习（作为唯一的受控改进），与 B0、BERT-CE 在同一个固定划分上的比较。这一阶段只使用 CLINC，不再使用官方 test。
+
 ## 环境与复现
 
 Windows/Git Bash 可从本目录重建环境：

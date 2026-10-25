@@ -11,6 +11,7 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 import torch
+import torch.nn.functional as F
 from sklearn.metrics import accuracy_score, f1_score
 from torch.nn.utils import clip_grad_norm_
 from torch.optim import AdamW
@@ -33,6 +34,7 @@ from .common import (
     utc_now,
     write_json,
 )
+from .contrastive import ClassBalancedBatchSampler, supervised_contrastive_loss
 from .domain_aux import (
     DualHeadBert,
     build_model,
@@ -135,20 +137,28 @@ def _make_loader(
     seed: int,
     sampler_generator: torch.Generator | None = None,
 ) -> tuple[DataLoader, torch.Generator]:
-    sampler = RandomSampler(dataset, generator=sampler_generator) if shuffle else None
     loader_generator = torch.Generator()
     loader_generator.manual_seed(int(seed) + 1_000_003)
+    common = {
+        "num_workers": int(training.get("num_workers", 0)),
+        "pin_memory": device.type == "cuda",
+        "generator": loader_generator,
+        "collate_fn": lambda samples: _collate(samples, tokenizer, int(training.get("max_length", 64))),
+    }
+    if shuffle and training.get("sampler") == "class_balanced":
+        # Phase 3: groups of same-intent examples per batch so SupCon always has positives.
+        labels = [int(_plain_scalar(_value(dataset[index], "intent_id"))) for index in range(len(dataset))]
+        batch_sampler = ClassBalancedBatchSampler(
+            labels, int(training["classes_per_batch"]), int(training["samples_per_class"]), sampler_generator,
+        )
+        return DataLoader(dataset, batch_sampler=batch_sampler, **common), loader_generator
+    sampler = RandomSampler(dataset, generator=sampler_generator) if shuffle else None
     loader = DataLoader(
         dataset,
         batch_size=int(training.get("micro_batch_size", 16)),
         shuffle=False,
         sampler=sampler,
-        num_workers=int(training.get("num_workers", 0)),
-        pin_memory=device.type == "cuda",
-        generator=loader_generator,
-        collate_fn=lambda samples: _collate(
-            samples, tokenizer, int(training.get("max_length", 64))
-        ),
+        **common,
     )
     return loader, loader_generator
 
@@ -240,7 +250,9 @@ def _train_epoch(
     scheduler: LambdaLR,
     accumulation: int,
     max_grad_norm: float,
+    scl: tuple[float, float] | None = None,
 ) -> tuple[dict[str, float | int], list[str]]:
+    """Train one epoch; ``scl=(weight, temperature)`` uses (1-w)*CE + w*SupCon on L2-normalized CLS."""
     model.train()
     window: list[tuple[Mapping[str, Any], Mapping[str, torch.Tensor | None]]] = []
     order: list[str] = []
@@ -248,6 +260,7 @@ def _train_epoch(
     domain_total = 0.0
     combined_total = 0.0
     domain_count = 0
+    scl_total = 0.0
     sample_total = 0
     updates = 0
 
@@ -258,6 +271,13 @@ def _train_epoch(
             intent_id=batch["intent_id"].to(device),
             domain_id=batch["domain_id"].to(device),
         )
+        if scl is not None:
+            weight, temperature = scl
+            loss_scl = supervised_contrastive_loss(
+                F.normalize(output["cls"], dim=-1), batch["intent_id"].to(device), temperature,
+            )
+            output = {**output, "loss": (1.0 - weight) * output["loss_intent"] + weight * loss_scl}
+            scl_total += float(loss_scl.detach().cpu()) * int(batch["intent_id"].numel())
         size = int(batch["intent_id"].numel())
         intent_loss = float(output["loss_intent"].detach().cpu())
         combined_loss = float(output["loss"].detach().cpu())
@@ -273,13 +293,16 @@ def _train_epoch(
             _flush_window(window, model, optimizer, scheduler, max_grad_norm)
             updates += 1
 
-    return {
+    metrics = {
         "train_loss_intent": intent_total / sample_total,
         "train_loss_domain": domain_total / domain_count if domain_count else None,
         "train_loss": combined_total / sample_total,
         "train_samples": sample_total,
         "optimizer_steps": updates,
-    }, order
+    }
+    if scl is not None:
+        metrics["train_loss_scl"] = scl_total / sample_total
+    return metrics, order
 
 
 @torch.no_grad()
@@ -448,6 +471,15 @@ def train_run(
         raise ValueError("This training module currently requires training.amp: false")
     epochs = int(training.get("epochs", 5))
     patience = int(training.get("patience", 2))
+    if training.get("sampler") == "class_balanced":
+        if int(training["classes_per_batch"]) * int(training["samples_per_class"]) != micro_batch:
+            raise ValueError("classes_per_batch * samples_per_class must equal micro_batch_size")
+    scl = None
+    if training.get("supervised_contrastive") is not None:
+        scl_values = training["supervised_contrastive"]
+        scl = (float(scl_values["weight"]), float(scl_values["temperature"]))
+        if not 0.0 <= scl[0] <= 1.0 or scl[1] <= 0 or float(lambda_domain) != 0.0:
+            raise ValueError("SupCon needs weight in [0, 1], temperature > 0 and lambda_domain = 0")
     device = resolve_device(training.get("device", "auto"))
     run_path = resolve_path(run_dir)
     run_path.mkdir(parents=True, exist_ok=True)
@@ -572,7 +604,7 @@ def train_run(
     for epoch_index in range(start_epoch, epochs):
         train_metrics, sample_order = _train_epoch(
             model, train_loader, device, optimizer, scheduler, accumulation,
-            float(training.get("max_grad_norm", 1.0)),
+            float(training.get("max_grad_norm", 1.0)), scl,
         )
         val_metrics, _ = _evaluate(model, val_loader, device, int(model_config["num_intents"]))
         epoch = epoch_index + 1
@@ -610,7 +642,11 @@ def train_run(
         )
         _save_checkpoint(last_path, checkpoint)
         if improved:
-            _save_checkpoint(run_path / "best.pt", checkpoint)
+            if training.get("best_checkpoint_weights_only", False):
+                keep = ("format_version", "epoch", "model_state", "state_hash", "config_hash", "data_hash", "initialization_hash")
+                _save_checkpoint(run_path / "best.pt", {key: checkpoint[key] for key in keep})
+            else:
+                _save_checkpoint(run_path / "best.pt", checkpoint)
         write_json(selection_path, {
             "metric": "val_macro_f1",
             "selection_rule": "strictly greater; ties keep the earlier epoch",
@@ -647,11 +683,17 @@ def train_run(
     selection = read_json(selection_path)
     selection["completed"] = True
     write_json(selection_path, selection)
+    epochs_completed = int(_load_checkpoint(last_path, device)["epoch"])
+    keep_last = bool(training.get("keep_last_checkpoint", True))
+    if not keep_last:
+        last_path.unlink()  # resume state is no longer needed once the run is complete
     artifacts = {}
     for name in (
         "config.yaml", "environment.json", "train_log.jsonl", "checkpoint_selection.json",
         "sample_order.json", "best.pt", "last.pt", "train_features.npz", "val_features.npz",
     ):
+        if name == "last.pt" and not keep_last:
+            continue
         artifacts[name] = sha256_file(run_path / name)
     completed = {
         "status": "completed",
@@ -661,7 +703,7 @@ def train_run(
         "smoke": bool(smoke),
         "best_epoch": best_epoch,
         "best_val_macro_f1": best_macro_f1,
-        "epochs_completed": int(_load_checkpoint(last_path, device)["epoch"]),
+        "epochs_completed": epochs_completed,
         "config_hash": config_hash,
         "data_hash": data_hashes["combined"],
         "data_hashes": data_hashes,

@@ -98,3 +98,10 @@
 3. E9 CLINC 10 种子复现：macro-F1 平均差 +0.000155（+0.016 pp），区间 [−0.001041, 0.001377]（[−0.104, +0.138] pp），Wilcoxon p=1.0；跨领域错误率差 −0.000644（−0.064 pp），区间跨 0且 p=0.0547，均为 inconclusive。第一阶段的小幅提升未在 10 种子复现中得到确认。
 4. H3 仅作描述：MSP AUROC 和 MSP FPR95 方向不利，Mahalanobis AUROC 方向有利，Mahalanobis FPR95 区间跨 0；这些次级 OOS 结果不改变 H1/H2 的 inconclusive 判定。
 5. 两个 study 的 evaluation manifest 均为 completed，test 预测和统计已推送。E11 可选探索未运行，不追加种子或分析以改变结论。
+
+## 2026-10-25 第三阶段：计划与代码（导师）
+
+1. 新增 `phase3_scl/`：预注册计划 `00_docs/01_experiment_plan.md`（修订 4，按课程评分标准最高档设计）、配置、步骤脚本 P3-S01 至 S06、作业 J1 至 J3、单元测试。报告中唯一的受控改进为 BERT-CE+SCL，与 B0、BERT-CE 在同一个固定划分上比较；另有采样器消融、λ/τ 敏感性分析，以及 R1（OOS）、R2（低资源）、R3（输入噪声）三项鲁棒性测试。
+2. 只使用 CLINC150：固定划分为 T3（12,000 条）、val，以及 test（从 train 留出的 3,000 条 IHT，加上从未使用过的 251 条 OOS）。官方 test 不再使用。不做层级 SCL。
+3. 核心包扩展：`contrastive.py`（SupCon 损失和按类别采样器）；`training.py` 中新增由配置键控制的选项；`detectors.py` 新增 KNN；`confirmatory.py` 支持任意置信水平；S02 的 `strict_counts` 改为从配置读取。第一、二阶段的配置与行为保持不变。
+4. 运行环境：经导师同意，使用学生本地的 Windows + RTX 4090 和 `trans` 环境；作业日志作为环境证据提交。
