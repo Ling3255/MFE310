@@ -101,6 +101,6 @@
 
 ## 2026-10-25 第三阶段计划草案（导师）
 
-1. 新增 `00_docs/07_phase3_plan.md`（修订 2，草案，导师确认后冻结）：比较 BERT 的 CE 与 CE + 监督对比学习（SCL），另设可选的层级 SCL（同一领域作为弱正例）。主假设为 SCL 改善 Mahalanobis 的 OOS 检测（H7），同时意图分类不变差（H8，非劣效）。
-2. 按导师要求只使用 CLINC150，修订 1 中的 BANKING77-OOS 方案作废。官方 test 和 oos_test 不再使用；评估改用从 train 中按固定种子留出的内部 IS test（每个意图 20 条，共 3,000 条），以及从未被使用过的 251 条 OOS 语句（`data_full` 的 `oos_train` 加上 `data_oos_plus` 独有的部分），已核实与其他划分零重叠。
-3. 文献依据已核实：Gunel et al. (ICLR 2021)；Zeng et al. (ACL 2021，在 CLINC-Full 上 SCL+CE 改善了基于 GDA 的 OOD 召回)。本次只提交计划，代码在计划确认后另开 PR。
+1. 新增 `00_docs/07_phase3_plan.md`（修订 3，草案，导师确认后冻结），按课程文件 MFE310TC Coursework 评分标准的最高档组织：报告中唯一的受控改进为 BERT-CE+SCL；三个模型（B0、BERT-CE、BERT-CE+SCL）在同一个固定划分上比较；加入采样器消融和 λ/τ 敏感性分析，可选层级 SCL；鲁棒性测试 R1（OOS）、R2（低资源）、R3（输入噪声）；校准、子群、表示几何与系统错误分析；负责任使用。
+2. 只使用 CLINC150。官方 test 不再使用；固定划分为 T3（12,000 条）、val，以及 test（从 train 留出的 IHT 3,000 条加上从未使用过的 OOS 251 条），已核实零重叠。修订 1（BANKING77-OOS）和修订 2 作废。
+3. 课程要求在学校批准的 Linux GPU 服务器上运行，第三阶段必须照此执行；仓库中的 Windows 绝对路径（`G:\...`）需要清理。第一、二阶段的领域辅助结果在报告中作为前期探索呈现。
