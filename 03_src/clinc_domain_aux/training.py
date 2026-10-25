@@ -34,7 +34,7 @@ from .common import (
     utc_now,
     write_json,
 )
-from .contrastive import ClassBalancedBatchSampler, supervised_contrastive_loss
+from .contrastive import ClassBalancedBatchSampler, DomainAwareBatchSampler, supervised_contrastive_loss
 from .domain_aux import (
     DualHeadBert,
     build_model,
@@ -150,6 +150,15 @@ def _make_loader(
         labels = [int(_plain_scalar(_value(dataset[index], "intent_id"))) for index in range(len(dataset))]
         batch_sampler = ClassBalancedBatchSampler(
             labels, int(training["classes_per_batch"]), int(training["samples_per_class"]), sampler_generator,
+        )
+        return DataLoader(dataset, batch_sampler=batch_sampler, **common), loader_generator
+    if shuffle and training.get("sampler") == "domain_aware":
+        # Phase 4: batches of domain blocks, raising same-domain hard negatives for SupCon.
+        labels = [int(_plain_scalar(_value(dataset[index], "intent_id"))) for index in range(len(dataset))]
+        domains = [int(_plain_scalar(_value(dataset[index], "domain_id"))) for index in range(len(dataset))]
+        batch_sampler = DomainAwareBatchSampler(
+            labels, domains, int(training["domains_per_batch"]), int(training["intents_per_domain"]),
+            int(training["samples_per_intent"]), sampler_generator,
         )
         return DataLoader(dataset, batch_sampler=batch_sampler, **common), loader_generator
     sampler = RandomSampler(dataset, generator=sampler_generator) if shuffle else None
@@ -474,6 +483,10 @@ def train_run(
     if training.get("sampler") == "class_balanced":
         if int(training["classes_per_batch"]) * int(training["samples_per_class"]) != micro_batch:
             raise ValueError("classes_per_batch * samples_per_class must equal micro_batch_size")
+    if training.get("sampler") == "domain_aware":
+        size = int(training["domains_per_batch"]) * int(training["intents_per_domain"]) * int(training["samples_per_intent"])
+        if size != micro_batch:
+            raise ValueError("domains_per_batch * intents_per_domain * samples_per_intent must equal micro_batch_size")
     scl = None
     if training.get("supervised_contrastive") is not None:
         scl_values = training["supervised_contrastive"]

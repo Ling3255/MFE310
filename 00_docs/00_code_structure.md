@@ -146,3 +146,14 @@
 | P3-S01 至 S06 | `phase3_scl/04_steps/*.py` | 划分、开发选择、test 评估、统计、分析、演示 |
 | J1 至 J3 | `phase3_scl/05_jobs/*.sh` | 批量运行与环境记录 |
 | T | `phase3_scl/06_tests/test_phase3.py` | 第三阶段单元测试 |
+
+## 10. 第四阶段（E17–E19，2026-10-25）
+
+| 编号 | 文件 | 职责 |
+|---|---|---|
+| M14 扩展 | `03_src/clinc_domain_aux/contrastive.py` | `DomainAwareBatchSampler` |
+| M06 扩展 | `training.py` | `training.sampler: domain_aware` 选项（默认行为不变） |
+| P4-M1 至 M4 | `phase4_dascl/03_src/phase4_dascl/*.py` | U 集、多组对比 bootstrap、领域层面几何、采样审计 |
+| P4-S01 至 S04 | `phase4_dascl/04_steps/*.py` | 采样审计与固定 U、单次评估、统计、分析 |
+| J1、J2 | `phase4_dascl/05_jobs/*.sh` | 训练（含单元测试与审计）、评估 |
+| T | `phase4_dascl/06_tests/test_phase4.py` | 第四阶段单元测试 |

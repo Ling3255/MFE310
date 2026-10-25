@@ -113,3 +113,9 @@
 3. J3 只执行一次正式评估。H7 的 SCL−CE Mahalanobis FPR95 差为 +0.005578（+0.558 pp，方向不利），97.5% 区间 [−0.009173, 0.023506]（[−0.917, +2.351] pp），Wilcoxon p=0.2031，且不满足 1 pp SESOI，判定 inconclusive。H8 的 macro-F1 差为 +0.001542（+0.154 pp），97.5% 区间 [−0.001420, 0.004650]，下界大于 −0.003，满足非劣效。没有足够证据支持 SCL 改善 Mahalanobis OOS。
 4. 次级结果只作描述：MSP 的 OOS 指标方向不利；R2 小样本有正向幅度但不作为确认性结论；R3 噪声下两臂均退化。采样器消融、校准、几何、子群和图表均已保存。
 5. 20 条修复、退化、IS 误拒和 OOS 误接纳案例已逐条人工填写 interpretation。结果按预注册口径报告，不追加种子、阈值调整或 test 评估。
+
+## 2026-10-25 第四阶段：Domain-Aware SCL（导师优化学生草案）
+
+1. 在学生草案（`phase3_scl/00_docs/02_domain_aware_sampling_plan.md`，修订 1）的基础上形成修订 2，放在 `phase4_dascl/00_docs/01_experiment_plan.md`：机制指标改为同领域错误；采用 2×2 析因设计，主检验为交互作用；10-shot 用 10 个种子；主评估改用从未评估过的 U 集（T3 去掉 n25 子集，共 8,250 条）；写定采样器规格并在训练前审计；20 个 epoch、patience 3；四组全部在本阶段重新训练。
+2. 核心包新增 `DomainAwareBatchSampler` 和 `training.sampler: domain_aware` 选项，第一至第三阶段的行为不变。新增 `phase4_dascl/`：配置、步骤 P4-S01 至 S04、作业 J1 和 J2、单元测试。
+3. 代码未在本地运行；J1 第一步会运行全部单元测试。
