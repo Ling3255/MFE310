@@ -101,6 +101,6 @@
 
 ## 2026-10-25 第三阶段计划草案（导师）
 
-1. 新增 `00_docs/07_phase3_plan.md`（草案，导师确认后冻结）：检验文献中已证实的 OOS 打分方法（Energy、MaxLogit、KNN）、OOS 训练方法（OE、K+1）与多种子集成；开发阶段只用 CLINC 的 train 和 val，确认阶段使用 BANKING77-OOS。
-2. 审查中核实：BANKING77-OOS 的 OOD-OOS test 与 CLINC `oos_test` 完全相同（1000/1000），OOD-OOS valid 由 CLINC 的 `oos_val` 与 `oos_train` 组成。因此确认性检验只使用 BANKING77 的 in-scope test 和 ID-OOS test；OOD-OOS 只作为次级结果，并披露重复使用。
-3. 第三阶段不再使用 CLINC 的 test 或 oos_test。本次只提交计划，代码在计划确认后另开 PR。
+1. 新增 `00_docs/07_phase3_plan.md`（修订 2，草案，导师确认后冻结）：比较 BERT 的 CE 与 CE + 监督对比学习（SCL），另设可选的层级 SCL（同一领域作为弱正例）。主假设为 SCL 改善 Mahalanobis 的 OOS 检测（H7），同时意图分类不变差（H8，非劣效）。
+2. 按导师要求只使用 CLINC150，修订 1 中的 BANKING77-OOS 方案作废。官方 test 和 oos_test 不再使用；评估改用从 train 中按固定种子留出的内部 IS test（每个意图 20 条，共 3,000 条），以及从未被使用过的 251 条 OOS 语句（`data_full` 的 `oos_train` 加上 `data_oos_plus` 独有的部分），已核实与其他划分零重叠。
+3. 文献依据已核实：Gunel et al. (ICLR 2021)；Zeng et al. (ACL 2021，在 CLINC-Full 上 SCL+CE 改善了基于 GDA 的 OOD 召回)。本次只提交计划，代码在计划确认后另开 PR。
