@@ -1,0 +1,86 @@
+{
+  "created_at": "2026-10-25T05:35:10.292001+00:00",
+  "split": "validation only",
+  "rule": "max mean val Mahalanobis AUROC among candidates with mean val macro-F1 >= reference - tolerance; ties: smaller weight, then smaller temperature",
+  "reference": {
+    "config": "phase3_scl/01_configs/arm_ce_balanced.yaml",
+    "mean_val_macro_f1": 0.95968554153128,
+    "mean_val_auroc_mahalanobis": 0.9784111111111112
+  },
+  "candidates": [
+    {
+      "config": "phase3_scl/01_configs/dev/arm_scl_l0p1_t0p1.yaml",
+      "weight": 0.1,
+      "temperature": 0.1,
+      "mean_val_macro_f1": 0.960446463324827,
+      "mean_val_auroc_mahalanobis": 0.9792144444444445,
+      "eligible": true
+    },
+    {
+      "config": "phase3_scl/01_configs/dev/arm_scl_l0p1_t0p3.yaml",
+      "weight": 0.1,
+      "temperature": 0.3,
+      "mean_val_macro_f1": 0.9587692282606497,
+      "mean_val_auroc_mahalanobis": 0.9782177777777777,
+      "eligible": true
+    },
+    {
+      "config": "phase3_scl/01_configs/dev/arm_scl_l0p3_t0p1.yaml",
+      "weight": 0.3,
+      "temperature": 0.1,
+      "mean_val_macro_f1": 0.9644214805598827,
+      "mean_val_auroc_mahalanobis": 0.9803255555555556,
+      "eligible": true
+    },
+    {
+      "config": "phase3_scl/01_configs/dev/arm_scl_l0p3_t0p3.yaml",
+      "weight": 0.3,
+      "temperature": 0.3,
+      "mean_val_macro_f1": 0.9588284668945467,
+      "mean_val_auroc_mahalanobis": 0.9770455555555556,
+      "eligible": true
+    },
+    {
+      "config": "phase3_scl/01_configs/dev/arm_scl_l0p5_t0p1.yaml",
+      "weight": 0.5,
+      "temperature": 0.1,
+      "mean_val_macro_f1": 0.9663829260480092,
+      "mean_val_auroc_mahalanobis": 0.9819111111111112,
+      "eligible": true
+    },
+    {
+      "config": "phase3_scl/01_configs/dev/arm_scl_l0p5_t0p3.yaml",
+      "weight": 0.5,
+      "temperature": 0.3,
+      "mean_val_macro_f1": 0.9574253141298833,
+      "mean_val_auroc_mahalanobis": 0.9760866666666667,
+      "eligible": true
+    }
+  ],
+  "knn": {
+    "k_grid": [
+      1,
+      10,
+      50
+    ],
+    "mean_val_auroc": {
+      "1": 0.9788755555555556,
+      "10": 0.9736177777777778,
+      "50": 0.9701033333333333
+    },
+    "selected_k": 1
+  },
+  "selected": {
+    "config": "phase3_scl/01_configs/dev/arm_scl_l0p5_t0p1.yaml",
+    "weight": 0.5,
+    "temperature": 0.1,
+    "mean_val_macro_f1": 0.9663829260480092,
+    "mean_val_auroc_mahalanobis": 0.9819111111111112,
+    "eligible": true,
+    "generated_configs": {
+      "arm_scl_selected.yaml": "98d3412dd164c28924ded0326bb9cfd44e5be6640909f5d1fac4a0b29ea6a225",
+      "arm_scl_selected_n10.yaml": "7f6664e1a164a1272d291cc93bd6d5d86d26861e2ea3c7e3b9b634488716c97c",
+      "arm_scl_selected_n25.yaml": "845ee69a2049eb72cea115fa8f4ea5868b8e5a43cfd15ffabb6dcd6e9596db6f"
+    }
+  }
+}

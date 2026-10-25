@@ -1,0 +1,126 @@
+{
+  "created_at": "2026-10-25T04:49:40.709503+00:00",
+  "source": {
+    "data_full.json": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0",
+    "data_oos_plus.json": "bfcca9ae515623541dc1983c94c4ed7cae9d26b42ae47d74b972e51bb6f7a21f",
+    "domains.json": "b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a"
+  },
+  "settings": {
+    "clinc_data": "../dataset/data",
+    "output_root": "../dataset/clinc_phase3",
+    "seed": 20261026,
+    "test_per_intent": 20,
+    "low_resource_seed": 20261027,
+    "low_resource_sizes": [
+      10,
+      25
+    ]
+  },
+  "split_content_sha256": {
+    "main": {
+      "data_full.json": "a93b58d6e610cc3d4418e8ef9678a159f55f091ebdb5c4c187a554d47113912a",
+      "domains.json": "6ea485932fa6c2d6a7eff3d258272712617b71153b31f4039304ad27a90ce92d"
+    },
+    "n10": {
+      "data_full.json": "6a453193bfd607e0a94f3ce65ea95f4aec0869c270d6c6f936e9095cab94e3a6",
+      "domains.json": "6ea485932fa6c2d6a7eff3d258272712617b71153b31f4039304ad27a90ce92d"
+    },
+    "n25": {
+      "data_full.json": "40f14fefc00be96462aea29db2db77901c871575528e1a8f9e9134b09a74455c",
+      "domains.json": "6ea485932fa6c2d6a7eff3d258272712617b71153b31f4039304ad27a90ce92d"
+    }
+  },
+  "counts": {
+    "main": {
+      "train": {
+        "count": 12000,
+        "intents": 150,
+        "per_intent_min": 80,
+        "per_intent_max": 80,
+        "words_mean": 8.334583333333333,
+        "words_p95": 14.0
+      },
+      "val": {
+        "count": 3000,
+        "intents": 150,
+        "per_intent_min": 20,
+        "per_intent_max": 20,
+        "words_mean": 8.319333333333333,
+        "words_p95": 15.0
+      },
+      "test": {
+        "count": 3000,
+        "intents": 150,
+        "per_intent_min": 20,
+        "per_intent_max": 20,
+        "words_mean": 8.357666666666667,
+        "words_p95": 14.0
+      },
+      "oos_train": {
+        "count": 0,
+        "intents": 0,
+        "per_intent_min": 0,
+        "per_intent_max": 0,
+        "words_mean": null,
+        "words_p95": null
+      },
+      "oos_val": {
+        "count": 100,
+        "intents": 1,
+        "per_intent_min": 100,
+        "per_intent_max": 100,
+        "words_mean": 7.16,
+        "words_p95": 11.0
+      },
+      "oos_test": {
+        "count": 251,
+        "intents": 1,
+        "per_intent_min": 251,
+        "per_intent_max": 251,
+        "words_mean": 7.318725099601593,
+        "words_p95": 12.0
+      }
+    },
+    "n10": {
+      "count": 1500,
+      "intents": 150,
+      "per_intent_min": 10,
+      "per_intent_max": 10,
+      "words_mean": 8.381333333333334,
+      "words_p95": 14.0
+    },
+    "n25": {
+      "count": 3750,
+      "intents": 150,
+      "per_intent_min": 25,
+      "per_intent_max": 25,
+      "words_mean": 8.3544,
+      "words_p95": 14.0
+    }
+  },
+  "excluded_from_internal_test": [
+    "hey what's up",
+    "turn up your volume",
+    "what is on my to do list",
+    "what's your designation",
+    "where did you grow up"
+  ],
+  "leakage_main": {
+    "train__val": 3,
+    "train__test": 0,
+    "train__oos_train": 0,
+    "train__oos_val": 0,
+    "train__oos_test": 0,
+    "val__test": 0,
+    "val__oos_train": 0,
+    "val__oos_val": 0,
+    "val__oos_test": 0,
+    "test__oos_train": 0,
+    "test__oos_val": 0,
+    "test__oos_test": 0,
+    "oos_train__oos_val": 0,
+    "oos_train__oos_test": 0,
+    "oos_val__oos_test": 0
+  },
+  "note": "test = internal held-out IS (from CLINC train); oos_test = data_full oos_train + data_oos_plus-only OOS. Neither was used for evaluation in phases 1-2; the official CLINC test is not used."
+}

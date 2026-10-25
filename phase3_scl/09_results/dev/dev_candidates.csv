@@ -1,0 +1,7 @@
+config,weight,temperature,mean_val_macro_f1,mean_val_auroc_mahalanobis,eligible
+phase3_scl/01_configs/dev/arm_scl_l0p1_t0p1.yaml,0.1,0.1,0.960446463324827,0.9792144444444445,True
+phase3_scl/01_configs/dev/arm_scl_l0p1_t0p3.yaml,0.1,0.3,0.9587692282606497,0.9782177777777777,True
+phase3_scl/01_configs/dev/arm_scl_l0p3_t0p1.yaml,0.3,0.1,0.9644214805598827,0.9803255555555556,True
+phase3_scl/01_configs/dev/arm_scl_l0p3_t0p3.yaml,0.3,0.3,0.9588284668945467,0.9770455555555556,True
+phase3_scl/01_configs/dev/arm_scl_l0p5_t0p1.yaml,0.5,0.1,0.9663829260480092,0.9819111111111112,True
+phase3_scl/01_configs/dev/arm_scl_l0p5_t0p3.yaml,0.5,0.3,0.9574253141298833,0.9760866666666667,True

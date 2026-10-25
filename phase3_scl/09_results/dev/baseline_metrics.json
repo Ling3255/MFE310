@@ -1,0 +1,10 @@
+{
+  "selected_c": 10.0,
+  "selection_metric": "macro_f1",
+  "tie_rule": "smallest C on exact macro-F1 ties",
+  "macro_f1": 0.8975458738302488,
+  "accuracy": 0.8976666666666666,
+  "cross_domain_error_rate": 0.04533333333333334,
+  "within_domain_error_rate": 0.057,
+  "domain_macro_f1": 0.9546328352909279
+}
