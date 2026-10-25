@@ -24,6 +24,10 @@
 
 第三阶段已完成 44 项测试、21 次开发训练、50 次确认/低资源训练和一次正式评估。选定 λ=0.5、τ=0.1。H7（Mahalanobis FPR95）差值为 +0.558 pp（SCL 方向不利），97.5% 区间 [−0.917, +2.351] pp，p=0.2031，判定 inconclusive；H8 macro-F1 差值 +0.154 pp，区间下界高于 −0.3 pp，满足非劣效。没有足够证据表明 SCL 改善 OOS 检测。完整结果见 `phase3_scl/09_results/statistics/main_results.md`，20 条案例已人工填写解读。
 
+## 第四阶段（E17–E19）：低资源下的 Domain-Aware 对比学习
+
+计划、配置、步骤与结果都在独立文件夹 [`phase4_dascl/`](phase4_dascl/README.md)：在每个意图只有 10 条训练数据时，采用 2×2 设计（采样器 × 损失），检验让 batch 包含更多同领域困难负例，能否让 SupCon 的收益更大。主评估使用从未用于评估的 U 集。
+
 ## 环境与复现
 
 Windows/Git Bash 可从本目录重建环境：

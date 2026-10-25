@@ -1,0 +1,55 @@
+# Phase 4 study definition (E17-E19). Pre-registered together with 00_docs/01_experiment_plan.md.
+schema_version: 1
+study: phase4_dascl
+plan: phase4_dascl/00_docs/01_experiment_plan.md
+output_dir: phase4_dascl/09_results
+
+phase3_split:                    # fixed phase-3 split directories (built by phase3_scl/04_steps/01_prepare_split.py)
+  main: ../dataset/clinc_phase3/main
+  n25: ../dataset/clinc_phase3/n25
+  unseen_per_intent: 55          # U = T3 minus the n25 subset; never trained on by phase-4 models, never evaluated
+
+groups:                          # 2 x 2 factorial per training size; arms: {ib, da} sampler x {ce, scl} loss
+  n10:
+    role: primary
+    seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    arms:
+      ib_ce: phase4_dascl/01_configs/arm_n10_ib_ce.yaml
+      ib_scl: phase4_dascl/01_configs/arm_n10_ib_scl.yaml
+      da_ce: phase4_dascl/01_configs/arm_n10_da_ce.yaml
+      da_scl: phase4_dascl/01_configs/arm_n10_da_scl.yaml
+  n25:
+    role: descriptive_replication
+    seeds: [0, 1, 2, 3, 4]
+    arms:
+      ib_ce: phase4_dascl/01_configs/arm_n25_ib_ce.yaml
+      ib_scl: phase4_dascl/01_configs/arm_n25_ib_scl.yaml
+      da_ce: phase4_dascl/01_configs/arm_n25_da_ce.yaml
+      da_scl: phase4_dascl/01_configs/arm_n25_da_scl.yaml
+
+contrasts:                       # weights over arms; the interaction is the pre-registered primary contrast
+  interaction: {da_scl: 1, da_ce: -1, ib_scl: -1, ib_ce: 1}
+  scl_effect_under_ib: {ib_scl: 1, ib_ce: -1}
+  scl_effect_under_da: {da_scl: 1, da_ce: -1}
+  da_effect_under_ce: {da_ce: 1, ib_ce: -1}
+  da_effect_under_scl: {da_scl: 1, ib_scl: -1}
+
+analysis:
+  primary_group: n10
+  primary_eval_set: unseen
+  alpha_primary: 0.025           # Bonferroni over H1 (macro-F1) and H2 (within-domain error)
+  level_primary: 0.975
+  level_secondary: 0.95
+  bootstrap_iterations: 2000           # primary tests
+  secondary_bootstrap_iterations: 1000 # descriptive comparisons (keeps the step to roughly 15-20 minutes)
+  bootstrap_seed: 20261031
+  sesoi_interaction_f1: 0.005
+  case_seed: 20261032
+  cases_per_pool: 5
+
+frozen: false                    # supervisor sets true together with approval after reviewing the training runs
+supervisor_approval:
+  approved: false
+  confirmed_by: null
+  confirmed_at: null
+  evidence: null
