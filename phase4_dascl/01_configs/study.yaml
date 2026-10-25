@@ -48,9 +48,9 @@ analysis:
   case_seed: 20261032
   cases_per_pool: 5
 
-frozen: false                    # supervisor sets true together with approval after reviewing the training runs
+frozen: true                     # supervisor approved after reviewing the training runs
 supervisor_approval:
-  approved: false
-  confirmed_by: null
-  confirmed_at: null
-  evidence: null
+  approved: true
+  confirmed_by: Supervisor (approval relayed by the student)
+  confirmed_at: '2026-10-25T13:50:32Z'
+  evidence: The student explicitly confirmed that the supervisor had reviewed and approved the phase-4 test evaluation. The report position was separately fixed as follow-up exploration before test.
