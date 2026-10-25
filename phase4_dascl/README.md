@@ -24,7 +24,8 @@ H1 interaction on macro-F1 > 0; H2 interaction on within-domain error < 0 (Bonfe
 
 ## Evaluation data (CLINC only)
 
-* **U (primary)**: phase-3 T3 minus the n25 subset — 55 per intent, 8,250 utterances; never trained on by
+* **U (primary)**: phase-3 T3 minus the n25 subset minus the five texts phase 3 excluded from its internal test
+  (train/val duplicates and label conflicts) — 54–55 per intent, about 8,245 utterances; never trained on by
   phase-4 models and never evaluated. Fixed and hashed by step 01 *before* training.
 * **IHT (replication)** and **OOS-251**: phase-3 internal test sets, used for the second time (disclosed).
 

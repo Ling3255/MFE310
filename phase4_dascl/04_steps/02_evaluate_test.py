@@ -22,13 +22,12 @@ from clinc_domain_aux.common import (
     write_csv, write_json,
 )
 from clinc_domain_aux.confirmatory import require_approval
-from clinc_domain_aux.data import load_datasets
 from clinc_domain_aux.detectors import MahalanobisDetector, select_threshold
 from clinc_domain_aux.evaluation import msp_scores
 from clinc_domain_aux.training import _data_hashes, predict_records
 from phase3_scl.metrics import representation_geometry
 from phase3_scl.study import intent_domain_array, load_features, load_split, results_dir, softmax, verified_run
-from phase4_dascl.evaluation_sets import build_unseen
+from phase4_dascl.evaluation_sets import load_unseen
 from phase4_dascl.geometry import domain_centroid_separation
 
 STUDY = "phase4_dascl/01_configs/study.yaml"
@@ -37,10 +36,7 @@ FIELDS = ["sample_id", "eval_set", "gold_intent", "pred_intent", "confidence", "
 
 def unseen_records(study: dict) -> list[dict]:
     """Rebuild U and check it against the manifest written before training."""
-    phase3 = study["phase3_split"]
-    records, _ = build_unseen(load_datasets(resolve_path(phase3["main"]), strict_counts=False),
-                              load_datasets(resolve_path(phase3["n25"]), strict_counts=False),
-                              per_intent=int(phase3["unseen_per_intent"]))
+    records, _, _ = load_unseen(study)
     manifest = read_json(resolve_path("phase4_dascl/07_metadata/unseen_manifest.json"))
     if stable_hash([[row["sample_id"], row["text"], row["intent_id"]] for row in records]) != manifest["content_hash"]:
         raise ValueError("Unseen pool U differs from the manifest fixed before training")

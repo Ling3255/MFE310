@@ -119,3 +119,9 @@
 1. 在学生草案（`phase3_scl/00_docs/02_domain_aware_sampling_plan.md`，修订 1）的基础上形成修订 2，放在 `phase4_dascl/00_docs/01_experiment_plan.md`：机制指标改为同领域错误；采用 2×2 析因设计，主检验为交互作用；10-shot 用 10 个种子；主评估改用从未评估过的 U 集（T3 去掉 n25 子集，共 8,250 条）；写定采样器规格并在训练前审计；20 个 epoch、patience 3；四组全部在本阶段重新训练。
 2. 核心包新增 `DomainAwareBatchSampler` 和 `training.sampler: domain_aware` 选项，第一至第三阶段的行为不变。新增 `phase4_dascl/`：配置、步骤 P4-S01 至 S04、作业 J1 和 J2、单元测试。
 3. 代码未在本地运行；J1 第一步会运行全部单元测试。
+
+## 2026-10-25 第四阶段修订 3：U 集排除规则（训练前）
+
+1. J1 中 P4-S01 的泄漏检查按设计停止：U 中有 3 条文本与 CLINC val 重复（`what is on my to do list`、`turn up your volume`、`hey what's up`），属于 CLINC 原有的 train–val 重复。原因是修订 2 的 U 构造漏掉了第三阶段 IHT 已经使用的排除规则（导师代码错误）。
+2. 修复：U 采用与 IHT 相同的排除列表（`phase3_scl/07_metadata/split_manifest.json` 中的 `excluded_from_internal_test`），每个意图 54–55 条；泄漏检查保持不变；新增回归测试。此时没有进行任何第四阶段训练或评估。
+3. 学生的处理正确：没有修改代码、配置或数据，也没有重跑。修复合并后，从头重新运行 J1 即可。
