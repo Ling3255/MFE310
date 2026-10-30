@@ -157,68 +157,94 @@
 - **组合拒识器**：结果是阴性的（AUROC：combo_max 0.972，combo_mean 0.968，Mahalanobis 单独 0.976；见 `candidate_separation_summary.csv`）。正文不写，以控制词数，在个人视频里讲。
 
 ---
+---
 
-# 个人视频讲稿（角色 C，≤ 5 分钟）
+# 个人视频讲稿（Yitong Ling，≤ 5 分钟，第二版）
 
-## 录制说明
+本版按作业要求的六项内容重写，替换上一版的 8 段结构。
 
-- **总时长：** 8 段，不含可删句约 690 个英文词，按每分钟 140 词计算约 4 分 55 秒。第 4 段括号里标注的可删句默认不读，时间有余再加。
-- **画面：** 每段的"画面"一栏列出要显示的文件，都在 `role_c/outputs/` 下，演示输出在 `role_c/demo_outputs/` 下。
-- **数字来源：** 讲稿中的数字都出自上面的修改稿和 `role_c/outputs/`，录制时不要改动。
-- **演示：** 第 7 段用 `demo_replay.py`。屏幕上要说清这是回放已保存的输出，不是实时推理。
-- **开场名字：** 方括号里换成你自己的名字。
+## 与评分标准的对应
 
-## 1. 项目简介（约 40 秒）
+| 段 | 作业要求 | 主要对应的评分项 | 时长 | 英文词数 |
+|---|---|---|---|---|
+| 1 | 个人信息与项目介绍 | Structure, clarity and delivery（5 分） | 30 秒 | 约 65 |
+| 2 | 数据流程与模型 | Technical explanation（5 分） | 40 秒 | 约 90 |
+| 3 | 实验结果：定量结果、鲁棒性、代表性错误 | Technical explanation（5 分） | 50 秒 | 约 115 |
+| 4 | 推理演示 | Technical explanation, demonstration（5 分） | 35 秒（含运行命令的停顿） | 约 65 |
+| 5 | 个人贡献 | Individual contribution and ownership（10 分） | 65 秒 | 约 145 |
+| 6 | 个人分析与反思 | Personal critical insight and reflection（10 分） | 75 秒 | 约 175 |
 
-**画面：** 报告标题页，然后是 Fig. 1。
+正文合计约 655 词，按每分钟 140 词约 4 分 40 秒，留出约 20 秒给演示时运行命令。标有"（可删）"的句子默认不读。
 
-> Hi, I'm [name], and this is my part of our group project on intent classification and rejection under spelling errors. A service assistant must do two things: map a supported request to one of 150 intents in CLINC150, and reject requests it does not support, the out-of-scope or OOS requests. Our team showed that BERT beats TF-IDF with logistic regression on clean text but loses that lead under moderate spelling noise, and that matched spelling augmentation recovers 6 and 11 points of accuracy under light and moderate noise. My role, role C, was the rejector itself.
+## 录制前必须处理
 
-## 2. 问题（约 20 秒）
+1. **小组编号：** 报告封面上没有。把第 1 段的 `[group number]` 换成真实编号。
+2. **演示必须是模型推理（作业第 4 项）：** `demo_replay.py` 只是回放已保存的输出，可能被认为不满足 "how the model produces predictions" 这一要求。请尽量向组员要一个模型文件 `CLINC150_Team_20261019/outputs/bert/seed42/best_model/model.safetensors`（约 440 MB）和 `BERT_Rejection_Study_20261019/outputs/seed42/distance_model.npz`，然后改用 `demo_rejector.py` 做实时推理。拿不到时才用回放，并按第 4 段的备用说法讲清楚。
+3. **使用 AI 工具的说明：** 第 5 段有一句说明角色 C 的代码是在 AI 编程助手协助下完成的。请按课程的学术诚信规定决定怎么写：如果要求披露就保留；无论如何，不要说成代码全部由自己独立手写。
+4. **数字来源：** 讲稿里的数字都来自报告（Table 5A、5B、6、8）和 `role_c/outputs/`，录制时不要改。
 
-**画面：** 一张文字幻灯片，写着问题、三种分数和"reject iff score ≥ threshold"。
+## 1. 个人信息与项目介绍（约 30 秒）
 
-> My question was: why does the system reject a request, and why choose one rejection method over another? I compared three scores under one rule: reject when the score reaches a threshold, with every threshold chosen on validation data only.
+**画面：** 一张信息卡，列出姓名、学号、组号、NLP 问题、应用场景和数据集；然后是报告标题页。
 
-## 3. 机制与互补（约 55 秒）
+> Hello, I'm Yitong Ling, student ID 2362615, from Group [group number]. Our NLP problem is intent classification with out-of-scope rejection under spelling errors. The intended application is a customer-service assistant: it must route a supported request to the right intent and refuse requests it cannot handle, even when users mistype. Our dataset is CLINC150: 150 intents across ten domains, plus 1,000 out-of-scope test requests.
 
-**画面：** `score_distributions.png`，然后是 `disagreement_cases.csv` 中的两行。
+## 2. 数据流程与模型（约 40 秒）
 
-> MSP and entropy read the classifier's output probabilities: a request is suspicious when no intent is clearly preferred. Mahalanobis instead reads BERT's 768-dimensional sentence representation and measures the distance to the nearest of the 150 intent centres. On the clean test set its AUROC is 0.976, against 0.954 for entropy and 0.945 for MSP. But they fail on different requests: in every seed, between 5 and 13 percent of OOS requests are caught by only one score of a pair. "How do I make my Android phone more secure" is accepted by both probability scores but rejected by Mahalanobis. "Order me a book of stamps" is the opposite. I tested combining entropy and Mahalanobis; it did not beat Mahalanobis alone, so I report it as a negative result.
+**画面：** 一张流程图：CLINC150 → 加拼写噪声（light / moderate）→ 分类器（TF-IDF + LR，或 BERT）→ 拒识器（打分，与阈值比较）→ 接受或拒绝。
 
-## 4. 分布拟合与阈值（约 65 秒，含可删句约 75 秒）
+> Our pipeline keeps the original split: 15,000 training, 3,000 validation and 4,500 test in-scope requests. Spelling noise deletes or swaps internal letters in longer words, at a light and a moderate level. The reference baseline is TF-IDF with logistic regression; the principal model is fine-tuned bert-base-uncased over three seeds. Out-of-scope is not trained as a class: a separate rejector scores each request and refuses it above a threshold. Our controlled improvement is spelling augmentation, compared with clean continuation from the same checkpoints, with the same samples and the same 938 updates.
 
-**画面：** `covariance_diagnostics.json`（只停 2 秒），然后是 `threshold_stability.png`。
+## 3. 实验结果（约 50 秒）
 
-> Mahalanobis needs a fitted distribution: class means from the 15,000 training requests and one shared covariance, estimated with Ledoit–Wolf shrinkage. The fitted shrinkage is about 0.04, so the estimate stays close to the sample covariance. I planned to compare five covariance estimators, but the feature files were not in our shared snapshot, so this ablation is a stated limitation rather than a result. (可删：I did not retrain models to recreate them, because the numbers would no longer match the report.)
->
-> The threshold turned out to matter as much as the score. Our first comparison picked the threshold that maximises validation OOS F1, but validation has only 100 OOS requests. When I resampled the validation set 2,000 times, entropy's test OOS recall ranged from 51 to 74 percent under that policy, against 80 to 86 percent when the threshold simply accepts 95 percent of in-scope requests. That noise is far larger than the 0.3-point gap between Mahalanobis and entropy, which is why our report does not claim one beats the other.
+**画面：** 先放 Table 5A 的柱状图（可以直接用项目简介视频里的那张），再放 Fig. 1，最后放 Table 8 中的两行。
 
-## 5. 校准不等于拒识（约 30 秒）
+> Three results matter most. First, BERT beats the baseline on clean text, 95.0 against 90.6 percent accuracy, but under moderate noise it falls to 65.3, below the baseline's 67.6. Second, the robustness evidence: against matched clean continuation, augmentation adds 6.0 and 11.5 points of accuracy under light and moderate noise, and 4.7 and 6.9 points of correct acceptance. It does not, however, meet our strict clean-retention criterion. Third, representative errors. "Set a 3 minue tiemr" is still predicted as timer but was rejected; augmentation turns it into a correct acceptance. But "can I make a trnasfer btween my accounts" becomes a wrong acceptance as freeze account: fewer rejections also let some errors through.
 
-**画面：** `calibration_vs_separation.png`，先指左图，再指右图。
+## 4. 推理演示（约 35 秒）
 
-> Temperature scaling looked like an easy improvement: it cuts calibration error from 35.6 to 0.85 percent. But at the same 95 percent acceptance it lets 16.3 points more OOS requests through MSP. It is not just rescaling confidence: it reorders requests, pushing 3 percent of in-scope and OOS pairs the wrong way and only 0.4 percent the right way. Calibration and rejection are different objectives, and Mahalanobis does not depend on temperature at all.
-
-## 6. 结果与选择（约 40 秒）
-
-**画面：** `method_choice_heatmap.png`。
-
-> To decide, I priced errors explicitly: false rejection of a valid request against false acceptance of an OOS one, across four cost ratios and three OOS rates. For both models, validation chose Mahalanobis in all 24 settings; the cost only moved its threshold, with at most 0.7 points of test regret. But if wrongly classified requests that get accepted also cost, and OOS is rare, validation switches to MSP in the high-cost settings, because it best flags the classifier's own mistakes. So my recommendation is Mahalanobis with a cost-chosen threshold, unless executing the wrong intent is the main risk.
-
-## 7. 演示（约 25 秒）
-
-**画面：** 终端运行下面的命令。
+**画面：** 终端。有模型文件时运行：
 
 ```bash
 PY=BERT_Rejection_Study_20261019/.venv/Scripts/python.exe
+$PY role_c/demo_rejector.py --text "how do i make my android phone more secure" --text "order me a book of stamps and envelopes"
+```
+
+没有模型文件时运行：
+
+```bash
 $PY role_c/demo_replay.py --text "how do i make my android phone more secure" --text "order me a book of stamps and envelopes"
 ```
 
-> This replays our saved model outputs; the model weights were not in the snapshot, so it is not live inference. For the Android question, BERT predicts sync device. MSP and entropy stay below their thresholds and accept it, but its Mahalanobis distance, 3,885, passes the threshold of 3,661, so it is rejected. The stamps request shows the reverse.
+**实时推理版：**
 
-## 8. 反思（约 20 秒）
+> Here the model takes raw text, BERT predicts an intent, and the rejector scores the same request three ways. For "how do I make my Android phone more secure", BERT predicts sync device. MSP and entropy stay under their thresholds and would accept it, but its Mahalanobis distance passes the threshold, so it is rejected. For the stamps request it is the other way round.
 
-**画面：** 一张文字幻灯片，写两条结论和一条局限。
+**回放版（没有模型文件时用）：**
 
-> Two lessons. First, how a threshold is chosen can matter more than which score is used. Second, a well-calibrated model is not automatically a good rejector. With more time, I would run the covariance ablation and confirm these choices on natural spelling errors. Thank you.
+> Our trained weights were not in the shared snapshot, so this replays the model's saved outputs for real test requests. For "how do I make my Android phone more secure", BERT predicted sync device. MSP and entropy accept it, but its Mahalanobis distance, 3,885, passes the threshold of 3,661, so it is rejected. The stamps request shows the reverse.
+
+两句的实际数字在实时推理时会显示在屏幕上，与回放的数字可能有极小差异，讲的时候以屏幕为准。
+
+## 5. 个人贡献（约 65 秒）
+
+**画面：** 依次显示 GitHub 上 PR #9 的提交列表、`role_c/` 目录树、`c0_verification.json` 的 PASS 行、`threshold_stability.png`、`method_choice_heatmap.png`、`rejector_candidates.json`。每一句话都对应屏幕上的一个文件。
+
+> My role was role C: rejector design and selection, and the evidence is in our repository under role_c, pull request 9. First, I took over the inherited rejection pipeline and verified it: 183 checks re-derive every frozen threshold and the five operating points, and all pass. Second, I built the role C analysis with an AI coding assistant: I specified each step, reviewed and ran the code, and checked every output, from a six-step runner and 18 unit tests to the demo. Third, I ran the experiments: score complementarity, a 2,000-draw threshold bootstrap, a calibration comparison and a cost-based selection over 24 settings, and I handed the chosen thresholds to role D. Fourth, decisions: I fixed the selection rules before looking at test results, and when the feature files were missing I chose not to retrain, since new models would no longer match the report.（可删：I also drafted the report's rejection sections and Figure 3.）
+
+## 6. 个人分析与反思（约 75 秒）
+
+**画面：** `calibration_vs_separation.png`，然后一张文字幻灯片，分"Limitations""Responsible use""Next steps"三栏。
+
+> How do I read these results? Mahalanobis separates out-of-scope requests best, with an AUROC of 0.976, but its F1 advantage over entropy, 0.3 points, is smaller than the noise in the threshold itself: with only 100 out-of-scope validation requests, entropy's test recall ranges from 51 to 74 percent across resamples. So choosing the threshold matters as much as choosing the score. Calibration is not rejection either: temperature scaling cuts calibration error to 0.85 percent, yet at equal acceptance it lets 16 points more out-of-scope requests through MSP. And the best score depends on cost: when executing a wrong intent is the main risk, validation prefers MSP, because it best flags the model's own mistakes. The main limitations are synthetic noise only, three seeds, and a test set we had already explored. For responsible use, a rejected request should go to clarification or a human, and sensitive actions need explicit confirmation. Next, I would set thresholds from explicit error costs and recalibrate them on noisy validation data, because false rejection rises sharply under noise, then confirm on natural typos.
+
+## 视觉素材清单
+
+| 段 | 素材 | 位置 |
+|---|---|---|
+| 1 | 信息卡；项目简介视频的标题画面 | 需要新做，或用 `role_c_video` 重新导出 |
+| 2 | 流程图 | 需要新做（一张幻灯片即可） |
+| 3 | 准确率柱状图、Fig. 1、Table 8 | 项目简介视频 21.5–35.5 秒；报告 |
+| 4 | 终端录屏 | 现场录制 |
+| 5 | PR #9 页面、目录树、各输出文件 | GitHub；`role_c/outputs/` |
+| 6 | 校准对比图；反思幻灯片 | `role_c/outputs/calibration_vs_separation.png`；需要新做 |
