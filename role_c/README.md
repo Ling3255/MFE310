@@ -46,3 +46,7 @@ not change it for reported results). Commit `role_c/outputs/` (except `cache/`) 
 | Why this method (cost) | `cost_candidates.csv`, `method_choice_by_cost.csv`, `method_choice_heatmap.png`, `candidate_separation*.csv` (incl. combinations) |
 | Hand-over to role D | `rejector_candidates.json` |
 | Evidence trail | `evidence_map.json` |
+
+Note on `evidence_map.json`: the hashes were computed on the Windows working copy, where the text outputs
+have CRLF line endings; git stores them with LF. On a macOS/Linux checkout, convert a text file's LF to
+CRLF before comparing its SHA-256 (PNG hashes compare directly).
