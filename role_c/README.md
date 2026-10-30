@@ -10,7 +10,7 @@ thresholds and the locally saved CLS features / FP32 logits of `BERT_Rejection_S
 ```bash
 PY=BERT_Rejection_Study_20261019/.venv/Scripts/python.exe
 
-$PY -m unittest discover -s role_c/tests -v          # 17 tests, synthetic data only
+$PY -m unittest discover -s role_c/tests -v          # 16 tests, synthetic data only
 $PY role_c/run_role_c_analysis.py c0                 # must print PASS; if FAIL stop and report
 $PY role_c/run_role_c_analysis.py c1                 # mechanism + complementarity
 $PY role_c/run_role_c_analysis.py c4                 # calibration vs separation (needs logits)
