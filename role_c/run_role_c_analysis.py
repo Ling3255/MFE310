@@ -7,9 +7,12 @@ never writes outside role_c/outputs. Steps (see role_c/EXPERIMENT_PLAN.md):
   c0  takeover checks: thresholds, operating-point rule and Mahalanobis scores reproduce
   c1  mechanism and complementarity of MSP / Entropy / Mahalanobis (clean data)
   c2  covariance-estimator ablation for the Mahalanobis score (original BERT)
+      [without CLS features: records the fitted LW shrinkage only, no ablation]
   c3  bootstrap stability of validation-selected thresholds
   c4  calibration (temperature scaling) versus OOS separation
-  c5  cost-driven choice of score and operating point (validation-only selection)
+      [without FP32 logits: raw versus fitted T from the historical per-row scores, no sweep]
+  c5  cost-driven choice of score and operating point (validation-only selection); includes the
+      ECDF combinations of entropy and Mahalanobis when c1's complementarity rule is met
 
 Usage (repository root):  python role_c/run_role_c_analysis.py all
 """
@@ -266,26 +269,37 @@ def step_c1(args):
 
 
 def disagreement_cases(per_category=5):
-    """Rule-based (not hand-picked) cases: first rows by row_id per category, original BERT seed 42, clean test."""
+    """Rule-based (not hand-picked) cases: first rows by row_id per category, original BERT seed 42, clean test.
+
+    Categories contrast Mahalanobis with entropy (the stronger softmax score); the MSP decision is
+    reported in ``msp_rejects`` but does not define the category. Hand-written ``interpretation``
+    text already in the file is kept (matched by row_id) when the step is re-run.
+    """
     frame = predictions("original", 42, "test")
     saved = frozen("original", 42)
     reject = {s: frame[f"{s}_score"] >= saved[f"{s}/is_acceptance_95"]["threshold"] for s in lib.SCORES}
-    softmax = reject["entropy"]
+    maha, ent, msp = reject["mahalanobis"], reject["entropy"], reject["msp"]
     categories = {
-        "oos_caught_only_by_mahalanobis": frame.is_oos & reject["mahalanobis"] & ~softmax,
-        "oos_caught_only_by_entropy": frame.is_oos & ~reject["mahalanobis"] & softmax,
-        "oos_missed_by_all_three": frame.is_oos & ~reject["mahalanobis"] & ~softmax & ~reject["msp"],
-        "is_correct_rejected_only_by_mahalanobis": frame.correct & reject["mahalanobis"] & ~softmax,
-        "is_correct_rejected_only_by_entropy": frame.correct & ~reject["mahalanobis"] & softmax,
-        "is_wrong_accepted_by_all_three": ~frame.is_oos & ~frame.correct & ~reject["mahalanobis"] & ~softmax & ~reject["msp"],
+        "oos_mahalanobis_rejects_entropy_accepts": frame.is_oos & maha & ~ent,
+        "oos_entropy_rejects_mahalanobis_accepts": frame.is_oos & ~maha & ent,
+        "oos_all_three_accept": frame.is_oos & ~maha & ~ent & ~msp,
+        "is_correct_mahalanobis_rejects_entropy_accepts": frame.correct & maha & ~ent,
+        "is_correct_entropy_rejects_mahalanobis_accepts": frame.correct & ~maha & ent,
+        "is_wrong_all_three_accept": ~frame.is_oos & ~frame.correct & ~maha & ~ent & ~msp,
     }
+    previous = OUT / "disagreement_cases.csv"
+    written = {}
+    if previous.exists():
+        old = read_csv(previous)
+        written = {int(r): str(t) for r, t in zip(old.row_id, old.interpretation) if str(t).strip()}
     rows = []
     for name, mask in categories.items():
         for _, row in frame[mask].sort_values("row_id").head(per_category).iterrows():
             rows.append({"category": name, "row_id": int(row.row_id), "text": row.text, "true_label": row.true_label,
                          "predicted_label": row.predicted_label, **{f"{s}_score": row[f"{s}_score"] for s in lib.SCORES},
                          **{f"{s}_rejects": bool(reject[s][row.name]) for s in lib.SCORES},
-                         "category_size_seed42": int(mask.sum()), "interpretation": ""})
+                         "category_size_seed42": int(mask.sum()),
+                         "interpretation": written.get(int(row.row_id), "")})
     return save_table(rows, "disagreement_cases.csv")
 
 
@@ -324,10 +338,36 @@ def plot_distributions():
 
 # ----------------------------------------------------------------------------- c2
 
+def step_c2_without_features():
+    """Fallback when the CLS features are unavailable: record the fitted LW estimator, run no ablation.
+
+    Writes covariance_diagnostics.json only; covariance_selection.json is not written, so c5 keeps LW.
+    """
+    rows = []
+    for seed in SEEDS:
+        summary = read_json(path(RS + "/seed{seed}/development_summary.json", seed=seed))
+        classes = len(summary["class_counts"])
+        rows.append({"seed": seed, "lw_shrinkage": summary["shrinkage"], "feature_dim": summary["feature_dim"],
+                     "training_rows": summary["training_rows"], "classes": classes,
+                     "residual_degrees_of_freedom": summary["training_rows"] - classes,
+                     "residual_rows_per_dimension": (summary["training_rows"] - classes) / summary["feature_dim"]})
+    shrinkage = [row["lw_shrinkage"] for row in rows]
+    write_json(OUT / "covariance_diagnostics.json", {
+        "mode": "no CLS features available: covariance ablation NOT run (report as a limitation)",
+        "estimator": "Ledoit-Wolf shared covariance of class-centred train residuals (assume_centered), "
+                     "covariance = (1 - shrinkage) * sample covariance + shrinkage * mu * I",
+        "source": RS + "/seed{seed}/development_summary.json (saved when the detector was fitted)",
+        "per_seed": rows, "lw_shrinkage_mean": float(np.mean(shrinkage)), "lw_shrinkage_sd": float(np.std(shrinkage, ddof=1)),
+        "not_available": ["identity / diagonal / OAS / empirical variants", "condition numbers", "validation AUROC per variant"]})
+    register("c2", [OUT / "covariance_diagnostics.json"])
+    print(f"c2: no CLS features; ablation not run. LW shrinkage per seed {[round(s, 4) for s in shrinkage]} "
+          "written to covariance_diagnostics.json")
+
+
 def step_c2(args):
     seeds = [seed for seed in SEEDS if local_available(seed, ("train_cls", "validation_cls", "test_cls", "train_metadata"))]
     if not seeds:
-        raise SystemExit("c2 needs local train/validation/test CLS features of the original BERT; none found")
+        return step_c2_without_features()
     (OUT / "cache").mkdir(exist_ok=True)
     rows = []
     for seed in seeds:
@@ -481,7 +521,7 @@ def plot_threshold_stability(frame, actual, model="original"):
 def step_c4(args):
     seeds = [seed for seed in SEEDS if local_available(seed, ("validation_logits", "test_logits"))]
     if not seeds:
-        raise SystemExit("c4 needs the saved FP32 validation/test logits of the original BERT; none found")
+        return step_c4_historical()
     sweep, fitted_rows, bins = [], [], []
     for seed in seeds:
         val, test = predictions("original", seed, "validation"), predictions("original", seed, "test")
@@ -534,18 +574,138 @@ def step_c4(args):
     print("c4: temperature sweep written; fitted-vs-raw deltas in calibration_summary.json")
 
 
-def plot_calibration(sweep, bins):
-    figure, axes = plt.subplots(1, 2, figsize=(9, 3.2))
+HIST = "CLINC150_Team_20261019/outputs/oos/seed{seed}"
+CALIBRATIONS = (("raw", "raw_"), ("temperature_scaled", "temperature_scaled_"))
+
+
+def historical_scores(seed, split):
+    """Per-row raw and temperature-scaled MSP/entropy of the historical (FP16) temperature-scaling run."""
+    frame = read_csv(path(HIST + f"/{split}_scores.csv", seed=seed))
+    frame["is_oos"] = frame["is_oos"].astype(str).str.lower().eq("true")
+    expected = (3000, 100) if split == "validation" else (4500, 1000)
+    if (int((~frame.is_oos).sum()), int(frame.is_oos.sum())) != expected:
+        raise ValueError(f"Unexpected IS/OOS counts in {HIST.format(seed=seed)}/{split}_scores.csv")
+    frame["correct"] = ~frame.is_oos & (frame.predicted_label_id == frame.label_id)
+    return frame
+
+
+def calibration_bin_rows(seed, name, confidence, correct):
+    edges = np.minimum((confidence * 15).astype(int), 14)
+    rows = []
+    for b in range(15):
+        mask = edges == b
+        rows.append({"seed": seed, "calibration": name, "bin": b, "count": int(mask.sum()),
+                     "mean_confidence": float(confidence[mask].mean()) if mask.any() else np.nan,
+                     "accuracy": float(correct[mask].mean()) if mask.any() else np.nan})
+    return rows
+
+
+def step_c4_historical():
+    """Fallback without FP32 logits: raw (T = 1) versus fitted T only, from the saved historical scores.
+
+    The historical run used the same checkpoints with an FP16 forward; the consistency rows compare its
+    raw MSP with this study's FP32 MSP row by row. Mahalanobis does not depend on T (FP32 scores used).
+    """
+    results, bins, flips, consistency = [], [], [], []
+    for seed in SEEDS:
+        temperature = read_json(path(HIST + "/temperature_fit.json", seed=seed))["temperature"]
+        hv, ht = historical_scores(seed, "validation"), historical_scores(seed, "test")
+        current = predictions("original", seed, "test")
+        merged = ht.merge(current, on="row_id", suffixes=("_hist", "_fp32"))
+        consistency.append({"seed": seed, "rows_matched": len(merged), "text_identical": bool((merged.text_hist == merged.text_fp32).all()),
+                            "top1_agreement": float((merged.predicted_label_id_hist == merged.predicted_label_id_fp32).mean()),
+                            "msp_max_abs_difference": float((merged.raw_msp_anomaly - merged.msp_score).abs().max()),
+                            "msp_spearman": lib.spearman(merged.raw_msp_anomaly, merged.msp_score)})
+        test_oos, val_oos = ht.is_oos.to_numpy(), hv.is_oos.to_numpy()
+        correct_is = ht.correct.to_numpy()[~test_oos]
+        for name, prefix in CALIBRATIONS:
+            confidence = 1.0 - ht[f"{prefix}msp_anomaly"].to_numpy()[~test_oos]
+            row = {"seed": seed, "calibration": name, "temperature": 1.0 if name == "raw" else temperature,
+                   "test_ece_15": lib.ece(confidence, correct_is), "test_mean_confidence": float(confidence.mean()),
+                   "test_accuracy_is": float(correct_is.mean())}
+            for score in ("msp", "entropy"):
+                values = ht[f"{prefix}{score}_anomaly"].to_numpy()
+                threshold, _ = lib.aligned_threshold(hv[f"{prefix}{score}_anomaly"].to_numpy()[~val_oos], 0.95)
+                rates = lib.decision_rates(values, threshold, test_oos, ht.correct.to_numpy())
+                row.update({f"test_auroc_{score}": lib.auroc(values, test_oos),
+                            f"test_fpr95_{score}": lib.fpr_at_95_tpr(values, test_oos),
+                            f"val95_test_false_rejection_{score}": rates["false_rejection"],
+                            f"val95_test_oos_false_acceptance_{score}": rates["oos_false_acceptance"]})
+            row["test_auroc_mahalanobis"] = lib.auroc(current.mahalanobis_score, current.is_oos)
+            results.append(row)
+            bins += calibration_bin_rows(seed, name, confidence, correct_is)
+        for score in ("msp", "entropy"):
+            raw, scaled = ht[f"raw_{score}_anomaly"].to_numpy(), ht[f"temperature_scaled_{score}_anomaly"].to_numpy()
+            lost, gained = lib.pair_flips(raw, scaled, test_oos)
+            flips.append({"seed": seed, "score": score, "temperature": temperature,
+                          "is_oos_pairs_reordered_worse": lost, "is_oos_pairs_reordered_better": gained,
+                          "auroc_change": gained - lost,
+                          "spearman_raw_vs_scaled_is": lib.spearman(raw[~test_oos], scaled[~test_oos]),
+                          "spearman_raw_vs_scaled_oos": lib.spearman(raw[test_oos], scaled[test_oos])})
+    results, bins, flips = pd.DataFrame(results), pd.DataFrame(bins), pd.DataFrame(flips)
+    value_columns = [c for c in results.columns if c.startswith(("test_", "val95_"))]
+    paired = results.pivot(index="seed", columns="calibration", values=value_columns)
+    deltas = pd.DataFrame({c: paired[(c, "temperature_scaled")] - paired[(c, "raw")] for c in value_columns})
+    failed = [r for r in consistency if not (r["text_identical"] and r["msp_spearman"] > 0.9999 and r["msp_max_abs_difference"] < 0.01)]
+    write_json(OUT / "calibration_summary.json", {
+        "mode": "historical two-point comparison (raw T = 1 versus fitted T); FP32 logits unavailable, so no temperature sweep",
+        "inputs": HIST + "/{validation,test}_scores.csv and temperature_fit.json (same checkpoints, FP16 forward)",
+        "temperature_fit": "evaluate_oos.fit_temperature on IS validation NLL, per seed (historical run)",
+        "consistency_with_fp32": {"status": "PASS" if not failed else "FAIL", "per_seed": consistency},
+        "scaled_minus_raw_mean": deltas.mean().to_dict(), "scaled_minus_raw_sd": deltas.std(ddof=1).to_dict(),
+        "pair_reordering_mean": flips.groupby("score")[["is_oos_pairs_reordered_worse", "is_oos_pairs_reordered_better",
+                                                        "auroc_change"]].mean().to_dict(orient="index"),
+        "reading": "val95_* columns: threshold set at 95% validation IS acceptance under each calibration, then applied to "
+                   "clean test; equal IS acceptance isolates the effect of re-ordering from that of re-scaling"})
+    files = [save_table(results, "calibration_vs_separation.csv"), save_table(bins, "calibration_bins.csv"),
+             save_table(flips, "calibration_rank_flips.csv"), OUT / "calibration_summary.json",
+             plot_calibration_two_point(results, bins)]
+    register("c4", files)
+    print(f"c4: historical two-point comparison written (consistency with FP32 scores: "
+          f"{'PASS' if not failed else 'FAIL'})")
+    if failed:
+        raise SystemExit(1)
+
+
+def plot_reliability(axis, bins):
     pooled = bins.dropna().assign(weighted=lambda d: d.accuracy * d["count"], conf=lambda d: d.mean_confidence * d["count"])
     pooled = pooled.groupby(["calibration", "bin"])[["weighted", "conf", "count"]].sum().reset_index()
-    axes[0].plot([0, 1], [0, 1], color=MUTED, linestyle=":", linewidth=1)
+    axis.plot([0, 1], [0, 1], color=MUTED, linestyle=":", linewidth=1)
     for name, color, label in (("raw", "#2a78d6", "raw (T = 1)"), ("temperature_scaled", "#eb6834", "temperature scaled")):
         part = pooled[(pooled.calibration == name) & (pooled["count"] > 0)]
-        axes[0].plot(part.conf / part["count"], part.weighted / part["count"], marker="o", markersize=4, linewidth=2,
-                     color=color, label=label)
-    axes[0].set(xlabel="mean confidence", ylabel="accuracy", xlim=(0, 1), ylim=(0, 1))
-    axes[0].set_title("Reliability, clean-test IS (seeds pooled)", color=INK)
-    axes[0].legend(loc="upper left", fontsize=7)
+        axis.plot(part.conf / part["count"], part.weighted / part["count"], marker="o", markersize=4, linewidth=2,
+                  color=color, label=label)
+    axis.set(xlabel="mean confidence", ylabel="accuracy", xlim=(0, 1), ylim=(0, 1))
+    axis.set_title("Reliability, clean-test IS (seeds pooled)", color=INK)
+    axis.legend(loc="upper left", fontsize=7)
+
+
+def plot_calibration_two_point(results, bins):
+    figure, axes = plt.subplots(1, 2, figsize=(9, 3.2))
+    plot_reliability(axes[0], bins)
+    mean = results.groupby("calibration")[[f"test_auroc_{s}" for s in lib.SCORES]].mean()
+    for position, score in enumerate(lib.SCORES):
+        raw, scaled = mean.loc["raw", f"test_auroc_{score}"], mean.loc["temperature_scaled", f"test_auroc_{score}"]
+        axes[1].plot([raw, scaled], [position, position], color=COLOR[score], linewidth=2)
+        axes[1].plot(raw, position, "o", markersize=8, markerfacecolor="#fcfcfb", markeredgecolor=COLOR[score], markeredgewidth=2)
+        axes[1].plot(scaled, position, "o", markersize=8, color=COLOR[score])
+        note = "unchanged by T" if score == "mahalanobis" else f"{100 * (scaled - raw):+.2f} pp"
+        axes[1].text(max(raw, scaled) + 0.002, position, note, va="center", fontsize=7, color=INK)
+    axes[1].set_yticks(range(len(lib.SCORES)), [LABEL[s] for s in lib.SCORES])
+    axes[1].set_ylim(-0.6, len(lib.SCORES) - 0.4)
+    axes[1].set_xlim(axes[1].get_xlim()[0], axes[1].get_xlim()[1] + 0.012)
+    axes[1].set(xlabel="OOS AUROC (clean test, seed mean)")
+    axes[1].set_title("Separation: hollow = raw, filled = temperature scaled", color=INK)
+    figure.suptitle("Calibration versus separation, raw versus fitted temperature "
+                    "(historical FP16 scores, T fitted per seed; Mahalanobis from FP32 features)", fontsize=8, color=MUTED)
+    figure.savefig(OUT / "calibration_vs_separation.png")
+    plt.close(figure)
+    return OUT / "calibration_vs_separation.png"
+
+
+def plot_calibration(sweep, bins):
+    figure, axes = plt.subplots(1, 2, figsize=(9, 3.2))
+    plot_reliability(axes[0], bins)
     mean = sweep.groupby("temperature")[["test_auroc_msp", "test_auroc_entropy", "test_auroc_mahalanobis"]].mean()
     mean = mean[~mean.index.isin(sweep.loc[sweep.is_fitted, "temperature"]) | mean.index.isin([1.0])]
     for score in lib.SCORES:
@@ -565,10 +725,25 @@ def plot_calibration(sweep, bins):
 
 # ----------------------------------------------------------------------------- c5
 
+def combination_due():
+    """True when c1's pre-registered complementarity rule asks for the combination extension."""
+    decision = OUT / "complementarity_decision.json"
+    return decision.exists() and bool(read_json(decision)["run_combination_extension"])
+
+
 def score_sets(model, seed):
-    """{score name: (validation scores, test scores)}; adds the c2-selected covariance variant if it is not LW."""
+    """{score name: (validation scores, test scores)}.
+
+    Adds the c2-selected covariance variant if it is not LW, and the ECDF combinations of entropy and
+    Mahalanobis (reference: clean IS validation scores of the same model and seed) if c1 asked for them.
+    """
     val, test = predictions(model, seed, "validation"), predictions(model, seed, "test")
     sets = {score: (val[f"{score}_score"].to_numpy(), test[f"{score}_score"].to_numpy()) for score in lib.SCORES}
+    if combination_due():
+        reference = [val.loc[~val.is_oos, f"{s}_score"].to_numpy() for s in ("entropy", "mahalanobis")]
+        on_val = lib.combined_scores(*reference, *(val[f"{s}_score"].to_numpy() for s in ("entropy", "mahalanobis")))
+        on_test = lib.combined_scores(*reference, *(test[f"{s}_score"].to_numpy() for s in ("entropy", "mahalanobis")))
+        sets.update({name: (on_val[name], on_test[name]) for name in on_val})
     selection = OUT / "covariance_selection.json"
     cache = OUT / "cache" / f"covariance_scores_seed{seed}.npz"
     if model == "original" and selection.exists() and cache.exists():
@@ -580,7 +755,7 @@ def score_sets(model, seed):
 
 
 def step_c5(args):
-    rows, handoff, choices = [], {}, []
+    rows, handoff, choices, separation = [], {}, [], []
     for m_index, model in enumerate(("original", "typo_mix")):
         boot_rates = {}  # (draw, candidate) -> list of per-seed rate dicts
         for seed in SEEDS:
@@ -590,6 +765,9 @@ def step_c5(args):
             is_labels = val.label_id.to_numpy()[is_mask]
             handoff.setdefault(model, {})[f"seed{seed}"] = {}
             for score, (val_scores, test_scores) in sets.items():
+                separation.append({"model": model, "seed": seed, "score": score,
+                                   "val_auroc": lib.auroc(val_scores, is_oos_val), "test_auroc": lib.auroc(test_scores, test.is_oos),
+                                   "test_fpr_at_95_is_tpr": lib.fpr_at_95_tpr(test_scores, test.is_oos)})
                 thresholds = {p: lib.policy_threshold(val_scores, is_oos_val, p) for p in lib.COST_CANDIDATE_POLICIES}
                 handoff[model][f"seed{seed}"][score] = thresholds
                 for policy, threshold in thresholds.items():
@@ -639,9 +817,17 @@ def step_c5(args):
     choices = pd.DataFrame(choices)
     write_json(OUT / "rejector_candidates.json", {
         "for": "Role D controlled evaluation; thresholds chosen on clean validation only, reject iff score >= threshold",
+        "score_definitions": {
+            "msp / entropy / mahalanobis": "the *_score columns of the model's prediction CSVs",
+            "combo_max / combo_mean": "F_ent = share of the same model+seed clean IS validation entropy scores <= x, F_maha likewise; "
+                                      "combo_max = max(F_ent, F_maha), combo_mean = (F_ent + F_maha) / 2 (role_c_lib.combined_scores)"},
         "lambdas": LAMBDAS, "pis": PIS, "thresholds": handoff,
         "choices": choices.to_dict(orient="records")})
+    separation = pd.DataFrame(separation)
     files = [save_table(pd.DataFrame(rows), "cost_candidates.csv"), save_table(choices, "method_choice_by_cost.csv"),
+             save_table(separation, "candidate_separation.csv"),
+             save_table(summarise(separation, ("model", "score"), ("val_auroc", "test_auroc", "test_fpr_at_95_is_tpr")),
+                        "candidate_separation_summary.csv"),
              OUT / "rejector_candidates.json", plot_choices(choices)]
     register("c5", files)
     print("c5: cost-driven choices written")
@@ -649,7 +835,8 @@ def step_c5(args):
 
 def short(candidate):
     score, policy = candidate.split("|")
-    name = {"msp": "MSP", "entropy": "Ent", "mahalanobis": "Maha"}.get(score, score.replace("mahalanobis_", "Maha-"))
+    name = {"msp": "MSP", "entropy": "Ent", "mahalanobis": "Maha", "combo_max": "Max(E,M)",
+            "combo_mean": "Mean(E,M)"}.get(score, score.replace("mahalanobis_", "Maha-"))
     point = "F1" if policy == "max_oos_f1" else policy.replace("aligned_is_acceptance_", "").replace("p", ".") + "%"
     return f"{name} {point}"
 

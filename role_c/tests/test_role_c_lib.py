@@ -77,6 +77,24 @@ class Metrics(unittest.TestCase):
         is_oos = np.r_[np.zeros(100, bool), np.ones(4, bool)]
         self.assertAlmostEqual(lib.fpr_at_95_tpr(scores, is_oos), 0.5)
 
+    def test_ecdf_and_combinations(self):
+        reference = np.array([1.0, 2.0, 2.0, 4.0])
+        np.testing.assert_allclose(lib.ecdf(reference, [0.5, 2.0, 3.0, 9.0]), [0.0, 0.75, 0.75, 1.0])
+        combo = lib.combined_scores(reference, 10 * reference, np.array([1.0, 4.0]), np.array([40.0, 10.0]))
+        np.testing.assert_allclose(combo["combo_max"], [1.0, 1.0])
+        np.testing.assert_allclose(combo["combo_mean"], [0.625, 0.625])
+
+    def test_pair_flips_explain_auroc_change(self):
+        rng = np.random.default_rng(5)
+        positive = np.r_[np.zeros(300, bool), np.ones(70, bool)]
+        a = rng.normal(size=370) + positive
+        b = np.round(a + rng.normal(scale=0.5, size=370), 1)  # re-ordered, with ties
+        lost, gained = lib.pair_flips(a, b, positive, chunk=16)
+        self.assertGreater(lost, 0.0)
+        self.assertGreater(gained, 0.0)
+        self.assertAlmostEqual(lib.auroc(b, positive) - lib.auroc(a, positive), gained - lost, places=12)
+        self.assertEqual(lib.pair_flips(a, 2 * a + 1, positive), (0.0, 0.0))  # monotone map: no flips
+
     def test_auroc_direction(self):
         self.assertEqual(lib.auroc(np.array([0.1, 0.2, 0.8, 0.9]), np.array([False, False, True, True])), 1.0)
         self.assertTrue(np.isnan(lib.auroc(np.array([0.1, 0.2]), np.array([True, True]))))

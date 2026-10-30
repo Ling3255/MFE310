@@ -189,6 +189,43 @@ def spearman(a, b):
     return float(pd.Series(a).corr(pd.Series(b), method="spearman"))
 
 
+def ecdf(reference, values):
+    """Empirical CDF of ``reference`` evaluated at ``values``: share of reference scores <= value."""
+    reference = np.sort(np.asarray(reference, dtype=np.float64))
+    return np.searchsorted(reference, np.asarray(values, dtype=np.float64), side="right") / len(reference)
+
+
+def combined_scores(entropy_reference, mahalanobis_reference, entropy, mahalanobis):
+    """ECDF-normalised combinations of entropy and Mahalanobis (reference = clean IS validation scores).
+
+    Returns {"combo_max": max(F_ent, F_maha), "combo_mean": (F_ent + F_maha) / 2}; larger is more OOS.
+    """
+    f_ent, f_maha = ecdf(entropy_reference, entropy), ecdf(mahalanobis_reference, mahalanobis)
+    return {"combo_max": np.maximum(f_ent, f_maha), "combo_mean": (f_ent + f_maha) / 2}
+
+
+def pair_flips(scores_a, scores_b, positive, chunk=256):
+    """How score b re-orders (negative, positive) pairs relative to score a.
+
+    Each pair is credited 1 if the positive scores higher, 0.5 on a tie, 0 otherwise (the AUROC
+    convention). Returns (lost, gained): shares of all pairs whose credit falls / rises from a to b,
+    weighted by the change, so that AUROC(b) - AUROC(a) == gained - lost.
+    """
+    a, b = np.asarray(scores_a, dtype=np.float64), np.asarray(scores_b, dtype=np.float64)
+    positive = np.asarray(positive, dtype=bool)
+    neg_a, neg_b = a[~positive], b[~positive]
+    pos_a, pos_b = a[positive], b[positive]
+    lost = gained = 0.0
+    for start in range(0, len(pos_a), chunk):
+        credit_a = np.sign(pos_a[start:start + chunk, None] - neg_a[None, :]) / 2 + 0.5
+        credit_b = np.sign(pos_b[start:start + chunk, None] - neg_b[None, :]) / 2 + 0.5
+        change = credit_b - credit_a
+        lost += float(-change[change < 0].sum())
+        gained += float(change[change > 0].sum())
+    pairs = len(pos_a) * len(neg_a)
+    return lost / pairs, gained / pairs
+
+
 def overlap_table(reject_a, reject_b, groups):
     """2x2 rejection counts per group plus Jaccard of the two rejection sets."""
     rows = []

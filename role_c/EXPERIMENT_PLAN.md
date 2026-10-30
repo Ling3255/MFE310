@@ -169,3 +169,17 @@ role_c/
     cost_candidates.csv  method_choice_by_cost.csv  method_choice_heatmap.png  rejector_candidates.json
     evidence_map.json
 ```
+
+## 14. 补充（2026-10-30）：缺少本地资产时的替代方案
+
+组员无法提供三个 seed 的 `*_cls.npy`、`*_logits_fp32.npy` 和模型权重（C0 记录 `c2_c4_possible: false`；组仓库没有 Release，也没有提交这些文件）。不重新训练模型：新模型与报告不是同一批，所有数字都会对不上。替代方案如下，代码自动判断走哪条路径，命令不变。
+
+| 步骤 | 原计划 | 替代方案 | 报告中的说法 |
+|---|---|---|---|
+| C2 | 五种协方差估计器的消融 | 只记录已拟合 LW 的收缩系数（`development_summary.json`，三个 seed 约 0.04），写入 `covariance_diagnostics.json`；不写 `covariance_selection.json`，C5 继续用 LW | 作为局限：协方差估计器未做消融 |
+| C4 | FP32 logits 上的温度扫描 | 用 `CLINC150_Team_20261019/outputs/oos/seed*/` 中已保存的逐行 raw / 温度缩放 MSP、熵分数，做 T = 1 与拟合 T 的两点对比。增加三项：等 IS 接纳率（validation 95%）下的 FR / FA 变化；IS–OOS 样本对被重新排序的比例（`calibration_rank_flips.csv`，AUROC 变化 = 变好比例 − 变差比例）；与 FP32 分数的逐行一致性检查（同一批 checkpoint，FP16 前向，Spearman 须 > 0.9999） | 只给出两个温度点，没有 T 曲线 |
+| 演示 | `demo_rejector.py` 实时推理 | `demo_replay.py`：在已保存的 validation / test 预测中查找句子，显示预测意图、三种分数、阈值和决定 | 视频中说明是“回放已保存输出，不是实时推理” |
+
+**第 9 节组合拒识器**：C1 的预设规则已满足（三个 seed 中只被一种分数拦截的 OOS 比例为 5.3%–12.7%，`complementarity_decision.json`），因此 C5 自动加入 `combo_max`、`combo_mean` 两个候选。ECDF 参照为同一模型、同一 seed 的 clean IS validation 分数；C5 的 bootstrap 中 ECDF 固定不重拟合（只重选阈值），这一点在报告中注明。分离度结果在 `candidate_separation*.csv`。
+
+**C1 案例表更正**：原类别名 `oos_caught_only_by_entropy` 等只排除了 Mahalanobis 或熵中的一方，没有排除 MSP，名字有误导。现改为 `oos_entropy_rejects_mahalanobis_accepts` 等（行不变，只改名字）；重跑 C1 会保留已写的 `interpretation`，但 test 行 4762、5335 的解释需要改，因为 MSP 也拒绝了这两句。
