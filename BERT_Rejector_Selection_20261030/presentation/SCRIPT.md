@@ -15,14 +15,14 @@
 | 7 | 个人贡献 | 我负责的部分 | 15 秒 | 约 35 |
 | 8 | 分析与反思 | 原因、局限、负责任使用、下一步 | 40 秒 | 约 85 |
 
-正文约 690 词：第 1 段配 30 秒视频，其余约 630 词按每分钟 145 词约 4 分 20 秒，全片约 4 分 50 秒。演示时边运行边讲，不要停下等输出；超时就先删第 8 段括号里的可删句。
+正文约 695 词：第 1 段配 30 秒视频，其余约 635 词按每分钟 145 词约 4 分 23 秒，全片约 4 分 53 秒。演示时边运行边讲，不要停下等输出；超时就先删第 8 段括号里的可删句。
 
 ## 每个内容只出现一次
 
 | 内容 | 所在段 |
 |---|---|
 | 数据划分、噪声规则、准确率与拼写增强的提升 | 2 |
-| 三种分数的算法、Mahalanobis 的拟合、两种阈值策略 | 3 |
+| 三种分数的算法、Mahalanobis 的拟合、训练 / 验证 / 测试各自的用途、两种阈值策略 | 3 |
 | AUROC、F1 差值、噪声下的召回与正确接纳、温度缩放（报告的 F1 下降与补充的同接纳率比较）、bootstrap | 4 |
 | 代价公式、24 个设置的选择结果、MSP 的条件性例外、选择规则（组合分数的阴性结果只写在 `docs/FINDINGS.md`，视频不讲） | 5 |
 | Android 与 stamps 两句 | 6 |
@@ -51,9 +51,9 @@
 
 ## 3. 系统凭什么拒绝请求（约 60 秒）
 
-**画面：** 三栏示意图，每栏一种分数及其计算方式；然后放 `outputs/score_distributions.png`；最后一张阈值规则图：验证集 3,000 条 IS + 100 条 OOS，测试集锁住。
+**画面：** 三栏示意图，每栏一种分数及其计算方式；然后放 `outputs/score_distributions.png`；最后一张数据用途图，三栏：训练集（15,000 条）→ 拟合分类器和 Mahalanobis 分布；验证集（3,000 条 IS + 100 条 OOS）→ 选阈值和方法；测试集 → 只用于报告结果。
 
-> Each request gets a score; larger means more likely out of scope. MSP is one minus the highest class probability; entropy measures how spread the 150 probabilities are. Both read only the classifier's output. Mahalanobis reads BERT's 768-dimensional sentence vector instead: from the 15,000 training requests I estimate the 150 intent centres and one shared covariance, shrunk by Ledoit–Wolf, and the score is the squared distance to the nearest centre. A request is rejected when its score reaches a threshold, and the test set is never used to fit a detector or choose a threshold. Validation contains only 100 out-of-scope requests, so I use two policies: maximising out-of-scope F1, which depends on those 100, or accepting 95 percent of in-scope requests, which does not. So the system rejects a request when its output is uncertain, or when its representation lies far from every known intent.
+> Each request gets a score: a larger score means more likely out of scope, and the system rejects the request once its score reaches a threshold. MSP is one minus the highest class probability; entropy measures how spread the 150 probabilities are. Both read only the classifier's output. Mahalanobis reads BERT's 768-dimensional sentence vector instead: it uses the 150 intent centres and one shared covariance, shrunk by Ledoit–Wolf, and scores the squared distance to the nearest centre. The classifier and this distribution are fitted on training data only; thresholds and method choices use validation only, and the test set takes no part in these choices. Validation has only 100 out-of-scope requests, so I compare two threshold policies: maximising out-of-scope F1, which depends on those 100, and accepting 95 percent of in-scope requests, which mainly constrains the acceptance of normal requests. So the system rejects a request when its output is uncertain, or when its representation lies far from every known intent.
 
 ## 4. 比较：分离能力、噪声、校准与稳定性（约 60 秒）
 
@@ -99,7 +99,7 @@
 
 **画面：** 一张文字幻灯片，分"Why""Limitations""Next"三栏。
 
-> Why do the scores disagree? Mahalanobis asks whether a sentence resembles a known intent; softmax asks how confident the classifier is. A confident wrong intent fools softmax; familiar wording fools distance. Temperature scaling fails because it reorders requests, not just rescales them. The limits are synthetic noise, three seeds and a test set we had already inspected. Responsibly, a rejected request should go to clarification or a human. Next, I would recalibrate thresholds on noisy validation data and confirm them on natural typos.（可删：and check whether a cost-chosen threshold still holds when the out-of-scope rate shifts.）
+> Why do the scores disagree? A confidently predicted wrong intent fools the probability scores, while familiar wording fools the distance. Temperature scaling fails because it reorders requests, not just rescales them. The limits are synthetic noise, three seeds and a test set we had already inspected. Responsibly, a rejected request should go to clarification or a human. Next, I would recalibrate thresholds on noisy validation data and confirm them on natural typos.（可删：and check whether a cost-chosen threshold still holds when the out-of-scope rate shifts.）
 
 ## 视觉素材清单
 
