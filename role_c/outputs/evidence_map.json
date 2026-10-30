@@ -1,0 +1,39 @@
+{
+  "c0": {
+    "created_at": "2026-10-30T11:44:08.246964+08:00",
+    "files": {
+      "role_c/outputs/c0_verification.json": "cc2577a41babd0dcc586f930cce5c2a303097080c71119288dad4312cfc08787",
+      "role_c/outputs/input_hashes.json": "0a1193add6f3d3c088c4c1d18149d6b8256f2adf28afa96cd1d7112df02eee0d"
+    }
+  },
+  "c1": {
+    "created_at": "2026-10-30T11:50:51.407953+08:00",
+    "files": {
+      "role_c/outputs/separation_clean.csv": "d7a02e61c514a0e0e45dae335398fe54165cfe018f65af818eeddf185def2c6f",
+      "role_c/outputs/separation_clean_summary.csv": "196b9a91e3d44c93cbb781ae98ae3f7e2eb6f55ca0c90b0fd4fc40577425d58b",
+      "role_c/outputs/score_correlations.csv": "7dda47692445c8c7f7d109a079c13c080f8b002ca115dce497ef49728922d715",
+      "role_c/outputs/rejection_overlap.csv": "0f529a65f9ab612898116f2e0f7c0a60b120d3b368f5319b7361a0ddb46d01e3",
+      "role_c/outputs/complementarity_decision.json": "5157aabacc744812af0408d17d458cc03593df67b27b15805c3ba783447975d2",
+      "role_c/outputs/disagreement_cases.csv": "33b46ed6a3112da2c3aeefeb8e4f1c55aba8db81a93348a349e0054b9e79bb89",
+      "role_c/outputs/score_distributions.png": "77f4f37f7d7f649952d64bf13a14ecd85c0c0138bfddd6f585f921c5e489a931"
+    }
+  },
+  "c3": {
+    "created_at": "2026-10-30T11:51:58.480791+08:00",
+    "files": {
+      "role_c/outputs/threshold_bootstrap_distribution.csv": "17c51d60038562d725bdf756fc91e58f6d6b5a178f97dd2321dcafa541431b73",
+      "role_c/outputs/threshold_frozen_test.csv": "46e8e311f1f732298638d25b4ecd29d254d3e9ebfb85245d6dd72cb005c83c77",
+      "role_c/outputs/threshold_stability_summary.json": "b19025e2889941087de2818102f187a4a0b1a710154410ce76e31473c1cea69a",
+      "role_c/outputs/threshold_stability.png": "18a7b24e620325b7614d3eb22cafd7b20c034e373a19eace9cdb2c7433bf02ee"
+    }
+  },
+  "c5": {
+    "created_at": "2026-10-30T11:53:07.452650+08:00",
+    "files": {
+      "role_c/outputs/cost_candidates.csv": "1f2457acdd993803b91565e2ec2f9f1cb79fb03e1ba37209824c9f25f36be0c8",
+      "role_c/outputs/method_choice_by_cost.csv": "cae7a672c930a9ae7e525494c6bfa919e72877a61cadae1594a3f77b0f75b66d",
+      "role_c/outputs/rejector_candidates.json": "25311aea64f133b4dcb2ba427083921d60feddbb7d96772919d52a50cb99b102",
+      "role_c/outputs/method_choice_heatmap.png": "ef48e4a7b73b3d803e674e2deb9b9efcf4cb41d95a58a6f06505489667fc9079"
+    }
+  }
+}
