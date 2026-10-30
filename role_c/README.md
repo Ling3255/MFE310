@@ -15,7 +15,7 @@ outputs (no temperature sweep), and the demo is `demo_replay.py` (replays saved 
 ```bash
 PY=BERT_Rejection_Study_20261019/.venv/Scripts/python.exe
 
-$PY -m unittest discover -s role_c/tests -v          # 19 tests, synthetic data only
+$PY -m unittest discover -s role_c/tests -v          # 18 tests, synthetic data only
 $PY role_c/run_role_c_analysis.py c0                 # must print PASS; if FAIL stop and report
 $PY role_c/run_role_c_analysis.py c1                 # mechanism + complementarity (keeps written interpretations)
 $PY role_c/run_role_c_analysis.py c4                 # calibration vs separation (FP32 sweep, or historical fallback)
