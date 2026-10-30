@@ -155,3 +155,70 @@
 - **第 VI 节局限**：可以加半句 "the covariance estimator was not ablated and temperature was compared at two points only"（约 15 词）。原因是 CLS 特征和 FP32 logits 不在快照里，见 `role_c/outputs/covariance_diagnostics.json`。
 - **附录 B**：可以注明 Fig. 3a 用的是历史 FP16 分数。图注里已有这一点，所以不加也可以。
 - **组合拒识器**：结果是阴性的（AUROC：combo_max 0.972，combo_mean 0.968，Mahalanobis 单独 0.976；见 `candidate_separation_summary.csv`）。正文不写，以控制词数，在个人视频里讲。
+
+---
+
+# 个人视频讲稿（角色 C，≤ 5 分钟）
+
+## 录制说明
+
+- **总时长：** 8 段，不含可删句约 690 个英文词，按每分钟 140 词计算约 4 分 55 秒。第 4 段括号里标注的可删句默认不读，时间有余再加。
+- **画面：** 每段的"画面"一栏列出要显示的文件，都在 `role_c/outputs/` 下，演示输出在 `role_c/demo_outputs/` 下。
+- **数字来源：** 讲稿中的数字都出自上面的修改稿和 `role_c/outputs/`，录制时不要改动。
+- **演示：** 第 7 段用 `demo_replay.py`。屏幕上要说清这是回放已保存的输出，不是实时推理。
+- **开场名字：** 方括号里换成你自己的名字。
+
+## 1. 项目简介（约 40 秒）
+
+**画面：** 报告标题页，然后是 Fig. 1。
+
+> Hi, I'm [name], and this is my part of our group project on intent classification and rejection under spelling errors. A service assistant must do two things: map a supported request to one of 150 intents in CLINC150, and reject requests it does not support, the out-of-scope or OOS requests. Our team showed that BERT beats TF-IDF with logistic regression on clean text but loses that lead under moderate spelling noise, and that matched spelling augmentation recovers 6 and 11 points of accuracy under light and moderate noise. My role, role C, was the rejector itself.
+
+## 2. 问题（约 20 秒）
+
+**画面：** 一张文字幻灯片，写着问题、三种分数和"reject iff score ≥ threshold"。
+
+> My question was: why does the system reject a request, and why choose one rejection method over another? I compared three scores under one rule: reject when the score reaches a threshold, with every threshold chosen on validation data only.
+
+## 3. 机制与互补（约 55 秒）
+
+**画面：** `score_distributions.png`，然后是 `disagreement_cases.csv` 中的两行。
+
+> MSP and entropy read the classifier's output probabilities: a request is suspicious when no intent is clearly preferred. Mahalanobis instead reads BERT's 768-dimensional sentence representation and measures the distance to the nearest of the 150 intent centres. On the clean test set its AUROC is 0.976, against 0.954 for entropy and 0.945 for MSP. But they fail on different requests: in every seed, between 5 and 13 percent of OOS requests are caught by only one score of a pair. "How do I make my Android phone more secure" is accepted by both probability scores but rejected by Mahalanobis. "Order me a book of stamps" is the opposite. I tested combining entropy and Mahalanobis; it did not beat Mahalanobis alone, so I report it as a negative result.
+
+## 4. 分布拟合与阈值（约 65 秒，含可删句约 75 秒）
+
+**画面：** `covariance_diagnostics.json`（只停 2 秒），然后是 `threshold_stability.png`。
+
+> Mahalanobis needs a fitted distribution: class means from the 15,000 training requests and one shared covariance, estimated with Ledoit–Wolf shrinkage. The fitted shrinkage is about 0.04, so the estimate stays close to the sample covariance. I planned to compare five covariance estimators, but the feature files were not in our shared snapshot, so this ablation is a stated limitation rather than a result. (可删：I did not retrain models to recreate them, because the numbers would no longer match the report.)
+>
+> The threshold turned out to matter as much as the score. Our first comparison picked the threshold that maximises validation OOS F1, but validation has only 100 OOS requests. When I resampled the validation set 2,000 times, entropy's test OOS recall ranged from 51 to 74 percent under that policy, against 80 to 86 percent when the threshold simply accepts 95 percent of in-scope requests. That noise is far larger than the 0.3-point gap between Mahalanobis and entropy, which is why our report does not claim one beats the other.
+
+## 5. 校准不等于拒识（约 30 秒）
+
+**画面：** `calibration_vs_separation.png`，先指左图，再指右图。
+
+> Temperature scaling looked like an easy improvement: it cuts calibration error from 35.6 to 0.85 percent. But at the same 95 percent acceptance it lets 16.3 points more OOS requests through MSP. It is not just rescaling confidence: it reorders requests, pushing 3 percent of in-scope and OOS pairs the wrong way and only 0.4 percent the right way. Calibration and rejection are different objectives, and Mahalanobis does not depend on temperature at all.
+
+## 6. 结果与选择（约 40 秒）
+
+**画面：** `method_choice_heatmap.png`。
+
+> To decide, I priced errors explicitly: false rejection of a valid request against false acceptance of an OOS one, across four cost ratios and three OOS rates. For both models, validation chose Mahalanobis in all 24 settings; the cost only moved its threshold, with at most 0.7 points of test regret. But if wrongly classified requests that get accepted also cost, and OOS is rare, validation switches to MSP in the high-cost settings, because it best flags the classifier's own mistakes. So my recommendation is Mahalanobis with a cost-chosen threshold, unless executing the wrong intent is the main risk.
+
+## 7. 演示（约 25 秒）
+
+**画面：** 终端运行下面的命令。
+
+```bash
+PY=BERT_Rejection_Study_20261019/.venv/Scripts/python.exe
+$PY role_c/demo_replay.py --text "how do i make my android phone more secure" --text "order me a book of stamps and envelopes"
+```
+
+> This replays our saved model outputs; the model weights were not in the snapshot, so it is not live inference. For the Android question, BERT predicts sync device. MSP and entropy stay below their thresholds and accept it, but its Mahalanobis distance, 3,885, passes the threshold of 3,661, so it is rejected. The stamps request shows the reverse.
+
+## 8. 反思（约 20 秒）
+
+**画面：** 一张文字幻灯片，写两条结论和一条局限。
+
+> Two lessons. First, how a threshold is chosen can matter more than which score is used. Second, a well-calibrated model is not automatically a good rejector. With more time, I would run the covariance ablation and confirm these choices on natural spelling errors. Thank you.
