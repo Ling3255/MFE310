@@ -167,7 +167,7 @@
 
 | 段 | 作业要求 | 主要对应的评分项 | 时长 | 英文词数 |
 |---|---|---|---|---|
-| 1 | 个人信息与项目介绍 | Structure, clarity and delivery（5 分） | 30 秒 | 约 65 |
+| 1 | 个人信息与项目介绍（不含组号） | Structure, clarity and delivery（5 分） | 30 秒 | 约 60 |
 | 2 | 数据流程与模型 | Technical explanation（5 分） | 40 秒 | 约 90 |
 | 3 | 实验结果：定量结果、鲁棒性、代表性错误 | Technical explanation（5 分） | 50 秒 | 约 115 |
 | 4 | 推理演示 | Technical explanation, demonstration（5 分） | 35 秒（含运行命令的停顿） | 约 65 |
@@ -178,16 +178,15 @@
 
 ## 录制前必须处理
 
-1. **小组编号：** 报告封面上没有。把第 1 段的 `[group number]` 换成真实编号。
-2. **演示必须是模型推理（作业第 4 项）：** `demo_replay.py` 只是回放已保存的输出，可能被认为不满足 "how the model produces predictions" 这一要求。请尽量向组员要一个模型文件 `CLINC150_Team_20261019/outputs/bert/seed42/best_model/model.safetensors`（约 440 MB）和 `BERT_Rejection_Study_20261019/outputs/seed42/distance_model.npz`，然后改用 `demo_rejector.py` 做实时推理。拿不到时才用回放，并按第 4 段的备用说法讲清楚。
-3. **使用 AI 工具的说明：** 第 5 段有一句说明角色 C 的代码是在 AI 编程助手协助下完成的。请按课程的学术诚信规定决定怎么写：如果要求披露就保留；无论如何，不要说成代码全部由自己独立手写。
-4. **数字来源：** 讲稿里的数字都来自报告（Table 5A、5B、6、8）和 `role_c/outputs/`，录制时不要改。
+1. **演示必须是模型推理（作业第 4 项）：** `demo_replay.py` 只是回放已保存的输出，可能被认为不满足 "how the model produces predictions" 这一要求。请尽量向组员要一个模型文件 `CLINC150_Team_20261019/outputs/bert/seed42/best_model/model.safetensors`（约 440 MB）和 `BERT_Rejection_Study_20261019/outputs/seed42/distance_model.npz`，然后改用 `demo_rejector.py` 做实时推理。拿不到时才用回放，并按第 4 段的备用说法讲清楚。
+2. **使用 AI 工具的说明：** 第 5 段有一句说明角色 C 的代码是在 AI 编程助手协助下完成的。请按课程的学术诚信规定决定怎么写：如果要求披露就保留；无论如何，不要说成代码全部由自己独立手写。
+3. **数字来源：** 讲稿里的数字都来自报告（Table 5A、5B、6、8）和 `role_c/outputs/`，录制时不要改。
 
 ## 1. 个人信息与项目介绍（约 30 秒）
 
-**画面：** 一张信息卡，列出姓名、学号、组号、NLP 问题、应用场景和数据集；然后是报告标题页。
+**画面：** 一张信息卡，列出姓名、学号、NLP 问题、应用场景和数据集；然后是报告标题页。
 
-> Hello, I'm Yitong Ling, student ID 2362615, from Group [group number]. Our NLP problem is intent classification with out-of-scope rejection under spelling errors. The intended application is a customer-service assistant: it must route a supported request to the right intent and refuse requests it cannot handle, even when users mistype. Our dataset is CLINC150: 150 intents across ten domains, plus 1,000 out-of-scope test requests.
+> Hello, I'm Yitong Ling, student ID 2362615. Our NLP problem is intent classification with out-of-scope rejection under spelling errors. The intended application is a customer-service assistant: it must route a supported request to the right intent and refuse requests it cannot handle, even when users mistype. Our dataset is CLINC150: 150 intents across ten domains, plus 1,000 out-of-scope test requests.
 
 ## 2. 数据流程与模型（约 40 秒）
 
