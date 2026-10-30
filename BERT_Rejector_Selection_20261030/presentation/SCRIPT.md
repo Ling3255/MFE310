@@ -99,7 +99,7 @@
 
 **画面：** 一张文字幻灯片，分"Why""Limitations""Next"三栏。
 
-> Why do the scores disagree? A confidently predicted wrong intent fools the probability scores, while familiar wording fools the distance. Temperature scaling fails because it reorders requests, not just rescales them. The limits are synthetic noise, three seeds and a test set we had already inspected. Responsibly, a rejected request should go to clarification or a human. Next, I would recalibrate thresholds on noisy validation data and confirm them on natural typos.（可删：and check whether a cost-chosen threshold still holds when the out-of-scope rate shifts.）
+> Why do the scores disagree? A confidently predicted wrong intent fools the probability scores, while familiar wording fools the distance. Temperature scaling fails because it reorders requests, not just rescales them. The limits are synthetic noise, three seeds and a test set we had already inspected. Responsibly, a rejected request should go to clarification or a human. Future work should evaluate the cost-based method and threshold selection on naturally occurring spelling errors, with more seeds and a fresh, untouched evaluation split.（可删：and check whether a cost-chosen threshold still holds when the out-of-scope rate shifts.）
 
 ## 视觉素材清单
 
