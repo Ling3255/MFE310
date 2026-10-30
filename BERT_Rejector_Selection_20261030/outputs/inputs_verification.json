@@ -28,7 +28,7 @@
       "test_logits": false
     }
   },
-  "c2_c4_possible": false,
+  "covariance_calibration_possible": false,
   "checks": [
     {
       "check": "frozen_threshold_recomputed",

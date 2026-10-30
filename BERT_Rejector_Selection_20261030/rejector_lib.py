@@ -1,4 +1,4 @@
-"""Pure functions for the role C rejection analysis (no file I/O).
+"""Pure functions for rejector design and selection (no file I/O).
 
 Score convention everywhere: larger means more OOS, and a row is rejected iff
 ``score >= threshold``. Thresholds for the two original policies come from the

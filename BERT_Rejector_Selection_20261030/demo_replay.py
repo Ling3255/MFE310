@@ -1,14 +1,12 @@
-"""Role C presentation demo without model weights: replay saved model outputs for real CLINC sentences.
+"""Replay saved model outputs for real CLINC sentences without model weights.
 
-The checkpoints are not in the repository, so this demo does NOT run BERT. It looks a sentence up in the
-saved per-row predictions of the original BERT (validation + clean test, one seed) and shows the
-predicted intent, the three saved rejection scores and the accept/reject decision under the frozen
-validation thresholds. Say this on screen: "replay of saved outputs, no live inference".
+This demo does NOT run BERT. It looks up saved predictions and frozen validation
+thresholds. Always label the display "replay of saved outputs, no live inference".
 
-  python role_c/demo_replay.py --text "how do i make my android phone more secure"
-  python role_c/demo_replay.py --row-id 4508 --row-id 12            # clean-test rows (--split validation for others)
-  python role_c/demo_replay.py --cases                 # the rule-based cases of role_c/outputs/disagreement_cases.csv
-  python role_c/demo_replay.py --interactive           # type (part of) a sentence; empty line ends
+  python BERT_Rejector_Selection_20261030/demo_replay.py --text "how do i make my android phone more secure"
+  python BERT_Rejector_Selection_20261030/demo_replay.py --row-id 4508 --split test
+  python BERT_Rejector_Selection_20261030/demo_replay.py --cases
+  python BERT_Rejector_Selection_20261030/demo_replay.py --interactive
 """
 from __future__ import annotations
 
@@ -67,7 +65,7 @@ def main():
     parser.add_argument("--text", action="append", default=[], help="sentence (or part of one) to look up")
     parser.add_argument("--row-id", type=int, action="append", default=[], help="row_id within --split")
     parser.add_argument("--split", default="test", choices=("validation", "test"), help="split for --row-id")
-    parser.add_argument("--cases", action="store_true", help="replay role_c/outputs/disagreement_cases.csv (seed 42)")
+    parser.add_argument("--cases", action="store_true", help="replay outputs/disagreement_cases.csv (seed 42)")
     parser.add_argument("--interactive", action="store_true")
     parser.add_argument("--seed", type=int, default=42, choices=(42, 43, 44))
     parser.add_argument("--policy", default="is_acceptance_95", choices=("is_acceptance_95", "max_oos_f1"))
@@ -103,8 +101,8 @@ def main():
             break
         run(find(rows, text), f"\"{text}\"")
     if results:
-        out = Path(__file__).resolve().parent / "demo_outputs"
-        out.mkdir(exist_ok=True)
+        out = Path(__file__).resolve().parent / "outputs/demo"
+        out.mkdir(parents=True, exist_ok=True)
         target = out / f"replay_seed{args.seed}_{datetime.now():%Y%m%d_%H%M%S}.csv"
         with target.open("w", newline="", encoding="utf-8") as stream:
             writer = csv.DictWriter(stream, fieldnames=list(results[0]))

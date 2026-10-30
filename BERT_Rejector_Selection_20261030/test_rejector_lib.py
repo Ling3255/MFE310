@@ -1,6 +1,7 @@
-"""Unit tests for role_c_lib (synthetic data only; no project outputs are read).
+"""Unit tests for rejector_lib using synthetic data only.
 
-Run from the repository root:  python -m unittest discover -s role_c/tests -v
+Run from the repository root:
+  python -m unittest BERT_Rejector_Selection_20261030/test_rejector_lib.py -v
 """
 from __future__ import annotations
 
@@ -8,14 +9,15 @@ import sys
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
+HERE = Path(__file__).resolve().parent
 sys.dont_write_bytecode = True
-sys.path[:0] = [str(ROOT / "CLINC150_Team_20261019" / "src"), str(ROOT / "role_c"),
+sys.path[:0] = [str(ROOT / "CLINC150_Team_20261019" / "src"), str(HERE),
                 str(ROOT / "BERT_Rejection_Study_20261019")]
 
 import numpy as np
 
-import role_c_lib as lib
+import rejector_lib as lib
 from distance_model import SharedMahalanobisDetector
 
 

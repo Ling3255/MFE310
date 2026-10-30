@@ -1,8 +1,9 @@
 {
-  "for": "Role D controlled evaluation; thresholds chosen on clean validation only, reject iff score >= threshold",
+  "for": "Controlled noise and reference-mixture evaluation; thresholds chosen on clean validation only",
+  "decision_rule": "reject iff score >= threshold",
   "score_definitions": {
     "msp / entropy / mahalanobis": "the *_score columns of the model's prediction CSVs",
-    "combo_max / combo_mean": "F_ent = share of the same model+seed clean IS validation entropy scores <= x, F_maha likewise; combo_max = max(F_ent, F_maha), combo_mean = (F_ent + F_maha) / 2 (role_c_lib.combined_scores)"
+    "combo_max / combo_mean": "F_ent = share of the same model+seed clean IS validation entropy scores <= x, F_maha likewise; combo_max = max(F_ent, F_maha), combo_mean = (F_ent + F_maha) / 2 (rejector_lib.combined_scores)"
   },
   "lambdas": [
     1,

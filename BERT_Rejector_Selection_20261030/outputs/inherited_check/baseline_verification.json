@@ -1,12 +1,12 @@
 {
   "created_at": "2026-10-30T03:27:54.901964+00:00",
   "snapshot_verification": {
-    "status": "PASS_WITH_EXPECTED_ROLE_C_ADDITION",
+    "status": "PASS_WITH_EXPECTED_ANALYSIS_ADDITION",
     "missing_files": [],
     "extra_files": [
-      "role_c/EXPERIMENT_PLAN.md"
+      "BERT_Rejector_Selection_20261030/docs/PLAN.md"
     ],
-    "note": "Original snapshot contents are intact. The newly added role_c directory is intentionally outside the original manifest."
+    "note": "Original snapshot contents are intact. The analysis directory is intentionally outside the original manifest."
   },
   "result_verification": {
     "status": "PASS",

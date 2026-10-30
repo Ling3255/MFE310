@@ -1,11 +1,11 @@
-"""Role C presentation demo: utterance -> predicted intent, three rejection scores and decisions.
+"""Run frozen BERT inference and show three rejection scores and decisions.
 
-Uses the frozen original BERT (default seed 42), its saved train-fitted Mahalanobis detector
-(distance_model.npz) and the frozen validation thresholds (default policy is_acceptance_95).
-Inference only: no fitting, no threshold tuning. Output is printed and saved to role_c/demo_outputs/.
+Uses the original BERT (default seed 42), its train-fitted Mahalanobis detector
+and frozen validation thresholds. Inference only: no fitting or threshold tuning.
+Output is printed and saved to outputs/demo/.
 
-  python role_c/demo_rejector.py --text "what is my account balance" --text "who won the game last night"
-  python role_c/demo_rejector.py --interactive        # preload, then type sentences (empty line ends)
+  python BERT_Rejector_Selection_20261030/demo_rejector.py --text "what is my account balance"
+  python BERT_Rejector_Selection_20261030/demo_rejector.py --interactive
 """
 from __future__ import annotations
 
@@ -100,8 +100,8 @@ def main():
         show(new)
         rows += new
     if rows:
-        out = Path(__file__).resolve().parent / "demo_outputs"
-        out.mkdir(exist_ok=True)
+        out = Path(__file__).resolve().parent / "outputs/demo"
+        out.mkdir(parents=True, exist_ok=True)
         target = out / f"demo_seed{args.seed}_{datetime.now():%Y%m%d_%H%M%S}.csv"
         with target.open("w", newline="", encoding="utf-8") as stream:
             writer = csv.DictWriter(stream, fieldnames=list(rows[0]))

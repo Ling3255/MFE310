@@ -1,20 +1,19 @@
-"""Role C analysis: why the system rejects a request and why a rejector is chosen.
+"""Rejector design and selection using saved predictions and frozen thresholds.
 
-Reads saved predictions, frozen thresholds and (for c0/c2/c4) the locally saved CLS
-features and FP32 logits of the original BERT. Never trains, never runs a model,
-never writes outside role_c/outputs. Steps (see role_c/EXPERIMENT_PLAN.md):
+No model is trained and no upstream experiment directory is modified. Local CLS
+features and FP32 logits are used only when present; otherwise the documented
+historical fallbacks record the limitation without inventing missing results.
 
-  c0  takeover checks: thresholds, operating-point rule and Mahalanobis scores reproduce
-  c1  mechanism and complementarity of MSP / Entropy / Mahalanobis (clean data)
-  c2  covariance-estimator ablation for the Mahalanobis score (original BERT)
-      [without CLS features: records the fitted LW shrinkage only, no ablation]
-  c3  bootstrap stability of validation-selected thresholds
-  c4  calibration (temperature scaling) versus OOS separation
-      [without FP32 logits: raw versus fitted T from the historical per-row scores, no sweep]
-  c5  cost-driven choice of score and operating point (validation-only selection); includes the
-      ECDF combinations of entropy and Mahalanobis when c1's complementarity rule is met
+Stages (see docs/PLAN.md):
+  verify       reproduce frozen thresholds, operating points and available scores
+  mechanism    compare MSP, entropy and Mahalanobis mechanisms and complementarity
+  calibration  compare temperature scaling with OOS separation
+  covariance   run the covariance ablation, or record why it is unavailable
+  thresholds   bootstrap validation-selected threshold stability
+  cost         select scores and operating points using validation error costs
 
-Usage (repository root):  python role_c/run_role_c_analysis.py all
+Usage (repository root):
+  python BERT_Rejector_Selection_20261030/run_rejector_selection.py --stage all
 """
 from __future__ import annotations
 
@@ -42,7 +41,7 @@ import numpy as np
 import pandas as pd
 
 from evaluate_oos import anomaly_scores, fit_temperature
-import role_c_lib as lib
+import rejector_lib as lib
 
 SEEDS = (42, 43, 44)
 RS = "BERT_Rejection_Study_20261019/outputs"
@@ -141,9 +140,9 @@ def summarise(frame, keys, values):
     return out.reset_index()
 
 
-# ----------------------------------------------------------------------------- c0
+# ----------------------------------------------------------------------------- verify
 
-def step_c0(args):
+def step_verify(args):
     checks, hashes = [], {}
 
     def check(name, ok, **detail):
@@ -203,18 +202,18 @@ def step_c0(args):
     failed = [c for c in checks if c["status"] == "FAIL"]
     result = {"status": "PASS" if not failed else "FAIL", "checks_run": len(checks), "failed": len(failed),
               "local_feature_files": features,
-              "c2_c4_possible": all(all(v.values()) for v in features.values()), "checks": checks}
-    write_json(OUT / "c0_verification.json", result)
-    write_json(OUT / "input_hashes.json", hashes)
-    register("c0", [OUT / "c0_verification.json", OUT / "input_hashes.json"])
-    print(f"c0: {result['status']} ({len(checks)} checks, {len(failed)} failed); local features: {result['c2_c4_possible']}")
+              "covariance_calibration_possible": all(all(v.values()) for v in features.values()), "checks": checks}
+    write_json(OUT / "inputs_verification.json", result)
+    write_json(HERE / "INPUTS_FROZEN.json", hashes)
+    register("verify", [OUT / "inputs_verification.json", HERE / "INPUTS_FROZEN.json"])
+    print(f"verify: {result['status']} ({len(checks)} checks, {len(failed)} failed); local features: {result['covariance_calibration_possible']}")
     if failed:
-        raise SystemExit("c0 failed: stop and report c0_verification.json; do not continue")
+        raise SystemExit("verify failed: stop and report outputs/inputs_verification.json; do not continue")
 
 
-# ----------------------------------------------------------------------------- c1
+# ----------------------------------------------------------------------------- mechanism
 
-def step_c1(args):
+def step_mechanism(args):
     separation, correlations, overlaps, decisions = [], [], [], []
     for model, seed in itertools.product(MODELS, SEEDS):
         saved = frozen(model, seed)
@@ -264,8 +263,8 @@ def step_c1(args):
     files.append(OUT / "complementarity_decision.json")
     files.append(disagreement_cases())
     files.append(plot_distributions())
-    register("c1", files)
-    print("c1: separation, correlations, overlap and complementarity decision written")
+    register("mechanism", files)
+    print("mechanism: separation, correlations, overlap and complementarity decision written")
 
 
 def disagreement_cases(per_category=5):
@@ -336,12 +335,12 @@ def plot_distributions():
     return OUT / "score_distributions.png"
 
 
-# ----------------------------------------------------------------------------- c2
+# ----------------------------------------------------------------------------- covariance
 
-def step_c2_without_features():
+def step_covariance_without_features():
     """Fallback when the CLS features are unavailable: record the fitted LW estimator, run no ablation.
 
-    Writes covariance_diagnostics.json only; covariance_selection.json is not written, so c5 keeps LW.
+    Writes covariance_diagnostics.json only; covariance_selection.json is not written, so cost keeps LW.
     """
     rows = []
     for seed in SEEDS:
@@ -359,15 +358,15 @@ def step_c2_without_features():
         "source": RS + "/seed{seed}/development_summary.json (saved when the detector was fitted)",
         "per_seed": rows, "lw_shrinkage_mean": float(np.mean(shrinkage)), "lw_shrinkage_sd": float(np.std(shrinkage, ddof=1)),
         "not_available": ["identity / diagonal / OAS / empirical variants", "condition numbers", "validation AUROC per variant"]})
-    register("c2", [OUT / "covariance_diagnostics.json"])
-    print(f"c2: no CLS features; ablation not run. LW shrinkage per seed {[round(s, 4) for s in shrinkage]} "
+    register("covariance", [OUT / "covariance_diagnostics.json"])
+    print(f"covariance: no CLS features; ablation not run. LW shrinkage per seed {[round(s, 4) for s in shrinkage]} "
           "written to covariance_diagnostics.json")
 
 
-def step_c2(args):
+def step_covariance(args):
     seeds = [seed for seed in SEEDS if local_available(seed, ("train_cls", "validation_cls", "test_cls", "train_metadata"))]
     if not seeds:
-        return step_c2_without_features()
+        return step_covariance_without_features()
     (OUT / "cache").mkdir(exist_ok=True)
     rows = []
     for seed in seeds:
@@ -393,7 +392,7 @@ def step_c2(args):
                 rates = lib.decision_rates(test_scores, threshold, test.is_oos, test.correct)
                 row.update({f"test_{policy}_{k}": rates[k] for k in ("oos_recall", "is_acceptance", "oos_f1")})
             rows.append(row)
-            print(f"c2: seed {seed} {variant}: val AUROC {row['val_auroc']:.4f}, test AUROC {row['test_auroc']:.4f}")
+            print(f"covariance: seed {seed} {variant}: val AUROC {row['val_auroc']:.4f}, test AUROC {row['test_auroc']:.4f}")
         np.savez_compressed(OUT / "cache" / f"covariance_scores_seed{seed}.npz", **cache)
     frame = pd.DataFrame(rows)
     summary = summarise(frame, ("variant",), [c for c in frame.columns if c.startswith(("val_", "test_"))])
@@ -406,8 +405,8 @@ def step_c2(args):
         "current_method": "lw", "note": "Test columns are reported only; they did not influence the selection."})
     files = [save_table(frame, "covariance_ablation.csv"), save_table(summary, "covariance_ablation_summary.csv"),
              OUT / "covariance_selection.json", plot_covariance(frame)]
-    register("c2", files)
-    print(f"c2: selected covariance variant by validation AUROC: {selected}")
+    register("covariance", files)
+    print(f"covariance: selected covariance variant by validation AUROC: {selected}")
 
 
 def plot_covariance(frame):
@@ -431,9 +430,9 @@ def plot_covariance(frame):
     return OUT / "covariance_ablation.png"
 
 
-# ----------------------------------------------------------------------------- c3
+# ----------------------------------------------------------------------------- thresholds
 
-def step_c3(args):
+def step_thresholds(args):
     rows, actual = [], []
     for m_index, model in enumerate(("original", "typo_mix")):
         for seed in SEEDS:
@@ -462,7 +461,7 @@ def step_c3(args):
                                      np.searchsorted(sorted_val_is, threshold, "left") / len(sorted_val_is),
                                      np.searchsorted(test_is, threshold, "left") / len(test_is),
                                      1 - np.searchsorted(test_oos, threshold, "left") / len(test_oos)))
-                print(f"c3: {model} seed {seed} {score} done")
+                print(f"thresholds: {model} seed {seed} {score} done")
     frame = pd.DataFrame(rows, columns=["model", "seed", "score", "policy", "draw", "threshold",
                                         "original_val_is_acceptance", "test_is_acceptance", "test_oos_recall"])
     actual = pd.DataFrame(actual)
@@ -484,8 +483,8 @@ def step_c3(args):
         "summary": summary})
     files = [save_table(frame.round(8), "threshold_bootstrap_distribution.csv"), save_table(actual, "threshold_frozen_test.csv"),
              OUT / "threshold_stability_summary.json", plot_threshold_stability(frame, actual)]
-    register("c3", files)
-    print("c3: threshold bootstrap written")
+    register("thresholds", files)
+    print("thresholds: threshold bootstrap written")
 
 
 def plot_threshold_stability(frame, actual, model="original"):
@@ -516,12 +515,12 @@ def plot_threshold_stability(frame, actual, model="original"):
     return OUT / "threshold_stability.png"
 
 
-# ----------------------------------------------------------------------------- c4
+# ----------------------------------------------------------------------------- calibration
 
-def step_c4(args):
+def step_calibration(args):
     seeds = [seed for seed in SEEDS if local_available(seed, ("validation_logits", "test_logits"))]
     if not seeds:
-        return step_c4_historical()
+        return step_calibration_historical()
     sweep, fitted_rows, bins = [], [], []
     for seed in seeds:
         val, test = predictions("original", seed, "validation"), predictions("original", seed, "test")
@@ -570,8 +569,8 @@ def step_c4(args):
         "fitted_vs_raw": deltas, "historical_fp16_reference": reference})
     files = [save_table(sweep, "calibration_vs_separation.csv"), save_table(bins, "calibration_bins.csv"),
              OUT / "calibration_summary.json", plot_calibration(sweep, bins)]
-    register("c4", files)
-    print("c4: temperature sweep written; fitted-vs-raw deltas in calibration_summary.json")
+    register("calibration", files)
+    print("calibration: temperature sweep written; fitted-vs-raw deltas in calibration_summary.json")
 
 
 HIST = "CLINC150_Team_20261019/outputs/oos/seed{seed}"
@@ -600,7 +599,7 @@ def calibration_bin_rows(seed, name, confidence, correct):
     return rows
 
 
-def step_c4_historical():
+def step_calibration_historical():
     """Fallback without FP32 logits: raw (T = 1) versus fitted T only, from the saved historical scores.
 
     The historical run used the same checkpoints with an FP16 forward; the consistency rows compare its
@@ -660,8 +659,8 @@ def step_c4_historical():
     files = [save_table(results, "calibration_vs_separation.csv"), save_table(bins, "calibration_bins.csv"),
              save_table(flips, "calibration_rank_flips.csv"), OUT / "calibration_summary.json",
              plot_calibration_two_point(results, bins)]
-    register("c4", files)
-    print(f"c4: historical two-point comparison written (consistency with FP32 scores: "
+    register("calibration", files)
+    print(f"calibration: historical two-point comparison written (consistency with FP32 scores: "
           f"{'PASS' if not failed else 'FAIL'})")
     if failed:
         raise SystemExit(1)
@@ -723,10 +722,10 @@ def plot_calibration(sweep, bins):
     return OUT / "calibration_vs_separation.png"
 
 
-# ----------------------------------------------------------------------------- c5
+# ----------------------------------------------------------------------------- cost
 
 def combination_due():
-    """True when c1's pre-registered complementarity rule asks for the combination extension."""
+    """True when mechanism's pre-registered complementarity rule asks for the combination extension."""
     decision = OUT / "complementarity_decision.json"
     return decision.exists() and bool(read_json(decision)["run_combination_extension"])
 
@@ -734,8 +733,8 @@ def combination_due():
 def score_sets(model, seed):
     """{score name: (validation scores, test scores)}.
 
-    Adds the c2-selected covariance variant if it is not LW, and the ECDF combinations of entropy and
-    Mahalanobis (reference: clean IS validation scores of the same model and seed) if c1 asked for them.
+    Adds the covariance-selected covariance variant if it is not LW, and the ECDF combinations of entropy and
+    Mahalanobis (reference: clean IS validation scores of the same model and seed) if mechanism asked for them.
     """
     val, test = predictions(model, seed, "validation"), predictions(model, seed, "test")
     sets = {score: (val[f"{score}_score"].to_numpy(), test[f"{score}_score"].to_numpy()) for score in lib.SCORES}
@@ -754,7 +753,7 @@ def score_sets(model, seed):
     return val, test, sets
 
 
-def step_c5(args):
+def step_cost(args):
     rows, handoff, choices, separation = [], {}, [], []
     for m_index, model in enumerate(("original", "typo_mix")):
         boot_rates = {}  # (draw, candidate) -> list of per-seed rate dicts
@@ -790,7 +789,7 @@ def step_c5(args):
                         threshold = lib.policy_threshold(scores, labels, policy)
                         boot_rates.setdefault((draw, f"{score}|{policy}"), []).append(
                             lib.decision_rates(scores, threshold, labels, correct))
-            print(f"c5: {model} seed {seed} done")
+            print(f"cost: {model} seed {seed} done")
         frame = pd.DataFrame([r for r in rows if r["model"] == model])
         means = frame.groupby("candidate")[[c for c in frame.columns if c.startswith(("val_", "test_"))]].mean()
         candidates = list(dict.fromkeys(frame.candidate))
@@ -816,11 +815,12 @@ def step_c5(args):
                             "bootstrap_most_frequent": max(set(picks), key=picks.count) if picks else ""})
     choices = pd.DataFrame(choices)
     write_json(OUT / "rejector_candidates.json", {
-        "for": "Role D controlled evaluation; thresholds chosen on clean validation only, reject iff score >= threshold",
+        "for": "Controlled noise and reference-mixture evaluation; thresholds chosen on clean validation only",
+        "decision_rule": "reject iff score >= threshold",
         "score_definitions": {
             "msp / entropy / mahalanobis": "the *_score columns of the model's prediction CSVs",
             "combo_max / combo_mean": "F_ent = share of the same model+seed clean IS validation entropy scores <= x, F_maha likewise; "
-                                      "combo_max = max(F_ent, F_maha), combo_mean = (F_ent + F_maha) / 2 (role_c_lib.combined_scores)"},
+                                      "combo_max = max(F_ent, F_maha), combo_mean = (F_ent + F_maha) / 2 (rejector_lib.combined_scores)"},
         "lambdas": LAMBDAS, "pis": PIS, "thresholds": handoff,
         "choices": choices.to_dict(orient="records")})
     separation = pd.DataFrame(separation)
@@ -829,8 +829,8 @@ def step_c5(args):
              save_table(summarise(separation, ("model", "score"), ("val_auroc", "test_auroc", "test_fpr_at_95_is_tpr")),
                         "candidate_separation_summary.csv"),
              OUT / "rejector_candidates.json", plot_choices(choices)]
-    register("c5", files)
-    print("c5: cost-driven choices written")
+    register("cost", files)
+    print("cost: cost-driven choices written")
 
 
 def short(candidate):
@@ -868,16 +868,50 @@ def plot_choices(choices):
 
 # ----------------------------------------------------------------------------- main
 
-STEPS = {"c0": step_c0, "c1": step_c1, "c2": step_c2, "c3": step_c3, "c4": step_c4, "c5": step_c5}
+STEPS = {
+    "verify": step_verify,
+    "mechanism": step_mechanism,
+    "calibration": step_calibration,
+    "covariance": step_covariance,
+    "thresholds": step_thresholds,
+    "cost": step_cost,
+}
+
+
+def protocol():
+    return {
+        "date": "2026-10-30",
+        "kind": "post_hoc_exploratory_analysis",
+        "question": "Why does the system reject a request, and how should a rejection method be selected?",
+        "seeds": list(SEEDS),
+        "models": list(MODELS),
+        "scores": list(lib.SCORES),
+        "decision_rule": "reject iff score >= threshold; larger scores mean more OOS",
+        "selection_data": "validation only; test oracle values are descriptive references",
+        "threshold_policies": list(lib.COST_CANDIDATE_POLICIES),
+        "bootstrap_draws": 2000,
+        "cost": {
+            "lambdas": list(LAMBDAS),
+            "pis": list(PIS),
+            "primary": "(1-pi)*FR + lambda*pi*FA",
+            "secondary": "primary + lambda*(1-pi)*WA",
+        },
+        "training": False,
+        "new_test_inference": False,
+        "missing_assets": "Covariance ablation and full temperature sweep require unavailable CLS/FP32 arrays",
+        "test_exposure": "Earlier test results were inspected before this analysis; findings are exploratory",
+        "organisation": "Retrospective layout and naming change only; numerical methods are unchanged",
+    }
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("step", choices=(*STEPS, "all"))
-    parser.add_argument("--bootstrap", type=int, default=2000, help="Bootstrap draws for c3 and c5 (default 2000)")
+    parser.add_argument("--stage", required=True, choices=(*STEPS, "all"))
+    parser.add_argument("--bootstrap", type=int, default=2000, help="Bootstrap draws for thresholds and cost (default 2000)")
     args = parser.parse_args()
     OUT.mkdir(exist_ok=True)
-    for name in (STEPS if args.step == "all" else (args.step,)):
+    write_json(HERE / "PROTOCOL.json", protocol())
+    for name in (STEPS if args.stage == "all" else (args.stage,)):
         started = time.monotonic()
         STEPS[name](args)
         print(f"{name} finished in {time.monotonic() - started:.0f}s", flush=True)
