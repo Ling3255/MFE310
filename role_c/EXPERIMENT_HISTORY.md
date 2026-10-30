@@ -180,40 +180,37 @@ Domain-Aware Sampling 增加同领域、不同 Intent 的困难负例。主评�
 
 ### 6.2 C0：接管与核验（已完成）
 
-已执行：
+已执行快照完整性检查、657 个拒识设置的结果复算和 183 项新门禁检查。冻结阈值可由验证集预测重算，五个工作点规则可复现。Mahalanobis 单元测试 8/8 通过，最新角色 C 测试 18/18 通过。当前快照没有可用的 CLS/FP32 特征文件，因此 `c2_c4_possible=false`，但预测和阈值核验本身为 PASS。
 
-- 快照完整性检查：原文件无缺失，`role_c/` 为预期新增目录；
-- 结果复算：657 个拒识设置、195 次预测文件访问、3,930 项聚合指标检查；
-- Mahalanobis 单元测试：8/8 通过。
+产物：`role_c/outputs/c0_verification.json`、`input_hashes.json`。
 
-产物：
+### 6.3 C1：机制与互补性（已完成）
 
-- `role_c/baseline_verification.json`
-- `role_c/existing_method_summary.csv`
+已比较三种分数的机制、相关性和拒识集合。Entropy 与 Mahalanobis 仅一方拦截 OOS 的比例为 5.3%–6.6%，MSP 与 Mahalanobis 为 8.8%–12.7%，满足预设的组合扩展条件。
 
-### 6.3 C1：检测器分歧与错误互补性（待执行）
+已生成 30 条固定规则案例，覆盖只被 Mahalanobis 拦截、只被 Entropy 拦截、三者共同漏掉、误拒和错误接纳。解释已逐条人工填写；其中 4762 和 5335 已更正为 Entropy 与 MSP 都拒绝，而 Mahalanobis 接纳。
 
-计划比较 MSP、Entropy、Mahalanobis 的分数相关性、拒识集合 Jaccard、各自独有误拒/误接纳及分歧样本的 Intent、Domain、句长和噪声分布。
+### 6.4 C2：分布拟合（资产受限，已完成可执行部分）
 
-目标是回答：不同方法是否能在不同错误上互补，而不是只比较平均指标。
+原始快照没有三个 seed 的 CLS 和 FP32 logits，无法重新拟合五种协方差变体。已记录原 Ledoit–Wolf 收缩系数：seed 42 为 0.04060、seed 43 为 0.04272、seed 44 为 0.04182，均值 0.04171。未执行 identity/diagonal/OAS/empirical 消融，作为资产限制披露，不虚构比较结果。
 
-### 6.4 C2：阈值稳定性（待执行）
+### 6.5 C3：阈值稳定性（已完成）
 
-计划对 IS validation 和 OOS validation 联合重采样，每次按原规则重新选择阈值，分析阈值、IS acceptance 和 OOS recall 的分布。不得用分析结果重调 test 阈值。
+已对两种阈值策略分别进行 2,000 次 validation 重采样。Entropy 在 `is_acceptance_95` 下的 test 接纳率 95% 区间为 94.0%–96.3%，说明该工作点相对稳定。其他方法和策略也保存了接纳率与 OOS recall 区间，用于解释 validation 到 test 的波动，未用分析结果调整阈值。
 
-目标是解释 validation 工作点迁移到 test 后接纳率变化的原因。
+### 6.6 C4：校准与拒识分离（已完成）
 
-### 6.5 C3：按业务错误成本选择方法（待执行）
+已复核温度缩放结果：ECE 从约 35.6% 降至 0.85%，但 MSP AUROC 下降 2.58 pp，Entropy AUROC 下降 2.04 pp。结论是概率校准与 OOS 分离是不同目标，不能按 ECE 选择拒识方法。历史两点对比与 FP32 分数一致性检查为 PASS；由于缺少 FP32 logits，未执行完整温度曲线扫描。
 
-计划使用：
+### 6.7 C5：成本驱动选择与组合候选（已完成）
 
-\[
-Cost = IS\_FalseRejection + \lambda \times OOS\_FalseAcceptance
-\]
+使用 λ={1,2,5,10}、π={0.05,0.1818,0.30}，在 validation 上选择成本最低的候选，再评估 test 成本和 bootstrap 选中频率。原先三种分数的选择均为 Mahalanobis，但工作点随成本变化：λπ 越大，IS 接纳率越低，从 max-F1 逐步降到 90%，与 test 上最优选择的差距最多约 0.7 pp。
 
-其中 λ 固定为 1、2、5、10，在五种接纳率目标下比较不同方法，形成“业务目标 → 推荐方法”的决策表。
+由于 C1 已证明互补性，C5 新增 `combo_max` 和 `combo_mean`，以 validation ECDF 统一 Entropy 与 Mahalanobis 的尺度，并加入成本候选。核心结论是：**分数选择在 clean 数据上相对稳定，真正需要按业务成本决定的是阈值。**
 
-目标不是宣布 Mahalanobis 全局最优，而是根据误拒与误接纳的相对代价选择方法。
+### 6.8 演示（已完成）
+
+已用 `demo_replay.py` 回放固定案例及句子 `how do i make my android phone more secure`，展示预测意图、三种分数、阈值和接纳/拒绝决定。该演示是对保存输出的回放，不是实时 BERT 推理。
 
 ## 7. 当前总论
 
@@ -225,7 +222,7 @@ Cost = IS\_FalseRejection + \lambda \times OOS\_FalseAcceptance
 ## 8. 证据与解释边界
 
 - 所有已完成数字必须能回溯到保存的预测、配置、阈值和统计脚本。
-- 后续 C1–C3 当前均为计划，不写成已完成结果。
+- C2 的协方差消融和 C4 的完整温度曲线因缺少 CLS/FP32 资产而未执行；其余 C0–C5 分析和演示已完成，不把未执行部分写成结果。
 - 早期 test 已参与过探索，后续分析不声称独立确认。
 - 区间估计不包含全部训练、调参和历史 test 暴露的不确定性。
 - 不把统计支持写成实际显著提升，不把 inconclusive 写成方法等价。
