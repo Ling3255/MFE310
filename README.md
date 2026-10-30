@@ -3,6 +3,8 @@
 本目录包含 TF-IDF + LR、BERT-CE 与 BERT-Dom 的完整实验框架。正式代码只放在本目录；原始数据保留在 `../dataset/`，通过配置或 `DATA_ROOT` 读取。
 
 - [完整实验实施计划](CLINC150_domain_auxiliary_implementation_plan.md)
+- [第一、第二阶段实验概览](00_docs/07_phase1_2_overview.md)
+- [第一至第四阶段实验历程](00_docs/08_experiment_history.md)
 - [代码结构与职责](00_docs/00_code_structure.md)
 - [指标定义](00_docs/03_metric_definitions.md)
 - [冻结状态](00_docs/01_freeze_record.md)
